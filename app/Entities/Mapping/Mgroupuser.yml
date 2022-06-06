@@ -1,0 +1,31 @@
+App\Entities\Mgroupuser:
+  table: 'm_groupusers'
+  primaryKey: 'Id'
+  props: 
+    Id: 
+        type: 'int'
+        isEntity: false
+    Musers: 
+        type: App\Entities\Muser
+        isEntity: true
+        relationType: 'many_to_one'
+        mappedBy: 'Mgroupuser'
+    GroupName: 
+        type: 'string'
+        isEntity: false
+    Description: 
+        type: 'string'
+        isEntity: false
+    Created: 
+        type: 'DateTime'
+        isEntity: false
+    CreatedBy: 
+        type: 'string'
+        isEntity: false
+    Modified: 
+        type: 'DateTime'
+        isEntity: false
+    ModifiedBy: 
+        type: 'string'
+        isEntity: false
+    
