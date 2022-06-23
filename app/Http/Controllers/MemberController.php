@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class MemberController extends Controller
 {
     /**
-     *
+     * Create member
      *
      * @param Request $request
      * @return ResponseFactory
@@ -81,7 +81,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Undocumented function
+     * Update a member
      *
      * @param Request $request
      * @param mixed $id
