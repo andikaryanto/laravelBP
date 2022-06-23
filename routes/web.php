@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\JustTest;
+use App\Http\Controllers\LogicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/logic', [LogicController::class, 'index']);
