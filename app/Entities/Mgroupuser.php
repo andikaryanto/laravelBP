@@ -55,9 +55,9 @@ class Mgroupuser extends BaseEntity
 
     /**
      * @param EntityList $Musers
-     * @return $this
+     * @return Mgroupuser
      */
-    protected function setMusers(EntityList $Musers)
+    protected function setMusers(EntityList $Musers): Mgroupuser
     {
         $this->Musers = $Musers;
         return $this;

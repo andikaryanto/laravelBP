@@ -56,13 +56,14 @@ class JustTest extends BaseController
     public function test(
         Request $request
     ) {
-        $param = [
-            'limit' => [
-                'page' => 2,
-                'size' => 5
-            ]
-        ];
-        $userEntity = $this->muserRepository->collect($param);
-        return (new SuccessResponse('ok', [], new MuserCollection($userEntity)))->send();
+        // $param = [
+        //     'limit' => [
+        //         'page' => 2,
+        //         'size' => 5
+        //     ]
+        // ];
+        $userEntity = $this->muserRepository->find(3);
+
+        return (new SuccessResponse('Success', [], new MuserViewModel($userEntity)))->send();
     }
 }
