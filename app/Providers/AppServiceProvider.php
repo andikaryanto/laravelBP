@@ -2,10 +2,16 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
+use LaravelCommon\Http\Request\Request as RequestRequest;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public $bindings = [
+        Request::class => RequestRequest::class,
+    ];
+
     /**
      * Register any application services.
      *

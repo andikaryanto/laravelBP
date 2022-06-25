@@ -9,8 +9,8 @@ use App\ViewModels\UserCollection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use LaravelCommon\Http\Request\Request;
 use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\SuccessResponse;
 
@@ -55,7 +55,7 @@ class JustTest extends BaseController
     public function test(
         Request $request
     ) {
-        
+        $token = $request->getToken();
         $userEntity = $this->userRepository->collect();
         return (new BadRequestResponse('ok', [], new UserCollection($userEntity)));
     }
