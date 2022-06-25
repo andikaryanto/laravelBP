@@ -2,8 +2,8 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Response;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use LaravelCommon\App\Http\Middleware\ControllerReturn;
 
 class Kernel extends HttpKernel
 {
@@ -46,7 +46,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             //custom middleware
-            'response' => Response::class
+            'controller-return' => ControllerReturn::class
         ],
     ];
 
