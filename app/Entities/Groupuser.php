@@ -4,7 +4,7 @@ namespace App\Entities;
 
 use LaravelOrm\Entities\EntityList;
 
-class Mgroupuser extends BaseEntity
+class Groupuser extends BaseEntity
 {
     /**
      * @var int
@@ -14,7 +14,7 @@ class Mgroupuser extends BaseEntity
     /**
      * @var EntityList
      */
-    private ?EntityList $Musers  = null;
+    private ?EntityList $Users  = null;
 
     /**
      * @var string
@@ -48,18 +48,18 @@ class Mgroupuser extends BaseEntity
     /**
      * @return ?EntityList
      */
-    protected function getMusers(): ?EntityList
+    protected function getUsers(): ?EntityList
     {
-        return $this->Musers;
+        return $this->Users;
     }
 
     /**
-     * @param EntityList $Musers
+     * @param EntityList $Users
      * @return $this
      */
-    protected function setMusers(EntityList $Musers)
+    protected function setUsers(EntityList $Users)
     {
-        $this->Musers = $Musers;
+        $this->Users = $Users;
         return $this;
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Entities;
 
-class Muser extends BaseEntity
+class User extends BaseEntity
 {
     /**
      * @var int
@@ -10,9 +10,9 @@ class Muser extends BaseEntity
     private int $Id = 0;
 
     /**
-     * @var Mgroupuser
+     * @var Groupuser
      */
-    private ?Mgroupuser $Mgroupuser  = null;
+    private ?Groupuser $Groupuser  = null;
 
     /**
      * @var string
@@ -54,20 +54,20 @@ class Muser extends BaseEntity
     }
 
     /**
-     * @return ?Mgroupuser
+     * @return ?Groupuser
      */
-    protected function getMgroupuser(): ?Mgroupuser
+    protected function getGroupuser(): ?Groupuser
     {
-        return $this->Mgroupuser;
+        return $this->Groupuser;
     }
 
     /**
-     * @param Mgroupuser $Mgroupuser
+     * @param Groupuser $Groupuser
      * @return $this
      */
-    protected function setMgroupuser(Mgroupuser $Mgroupuser)
+    protected function setGroupuser(Groupuser $Groupuser)
     {
-        $this->Mgroupuser = $Mgroupuser;
+        $this->Groupuser = $Groupuser;
         return $this;
     }
 

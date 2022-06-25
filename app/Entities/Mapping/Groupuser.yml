@@ -1,27 +1,20 @@
-App\Entities\Muser:
-  table: 'm_users'
+App\Entities\Groupuser:
+  table: 'groupusers'
   primaryKey: 'Id'
   props: 
     Id: 
         type: 'int'
         isEntity: false
-    Mgroupuser: 
-        type: App\Entities\Mgroupuser
+    Musers: 
+        type: App\Entities\User
         isEntity: true
-        foreignKey: 'M_Groupuser_Id'
-        relationType: 'one_to_many'
-        inversedBy: 'Musers'
-    Username: 
+        relationType: 'many_to_one'
+        mappedBy: 'Groupuser'
+    GroupName: 
         type: 'string'
         isEntity: false
-    Password: 
+    Description: 
         type: 'string'
-        isEntity: false
-    IsLoggedIn: 
-        type: 'bool'
-        isEntity: false
-    IsActive: 
-        type: 'bool'
         isEntity: false
     Created: 
         type: 'DateTime'
@@ -35,5 +28,4 @@ App\Entities\Muser:
     ModifiedBy: 
         type: 'string'
         isEntity: false
-        
     
