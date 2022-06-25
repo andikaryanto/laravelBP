@@ -11,6 +11,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\SuccessResponse;
 
 class JustTest extends BaseController
@@ -56,6 +57,6 @@ class JustTest extends BaseController
     ) {
         
         $userEntity = $this->userRepository->collect();
-        return (new SuccessResponse('ok', [], new UserCollection($userEntity)))->send();
+        return (new BadRequestResponse('ok', [], new UserCollection($userEntity)));
     }
 }
