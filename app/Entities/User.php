@@ -7,139 +7,162 @@ class User extends BaseEntity
     /**
      * @var int
      */
-    private int $Id = 0;
+    private int $id = 0;
 
     /**
      * @var Groupuser
      */
-    private ?Groupuser $Groupuser  = null;
+    private ?Groupuser $groupuser  = null;
 
     /**
      * @var string
      */
-    private ?string $Username  = null;
+    private ?string $username  = null;
 
     /**
      * @var string
      */
-    private ?string $Password  = null;
+    private ?string $email  = null;
+
+    /**
+     * @var string
+     */
+    private ?string $password  = null;
+
+    /**
+     * @var string
+     */
+    private ?string $photo  = null;
 
     /**
      * @var bool
      */
-    private ?bool $IsLoggedIn  = null;
-
-    /**
-     * @var bool
-     */
-    private ?bool $IsActive  = null;
+    private ?bool $isActive  = null;
 
 
     /**
      * @return ?int
      */
-    protected function getId(): ?int
+    public function getId(): ?int
     {
-        return $this->Id;
+        return $this->id;
     }
 
     /**
-     * @param int $Id
-     * @return $this
+     * @param int $id
+     * @return User
      */
-    protected function setId(int $Id)
+    public function setId(int $id): User
     {
-        $this->Id = $Id;
+        $this->id = $id;
         return $this;
     }
 
     /**
      * @return ?Groupuser
      */
-    protected function getGroupuser(): ?Groupuser
+    public function getGroupuser(): ?Groupuser
     {
-        return $this->Groupuser;
+        return $this->groupuser;
     }
 
     /**
-     * @param Groupuser $Groupuser
-     * @return $this
+     * @param Groupuser $groupuser
+     * @return User
      */
-    protected function setGroupuser(Groupuser $Groupuser)
+    public function setGroupuser(Groupuser $groupuser): User
     {
-        $this->Groupuser = $Groupuser;
+        $this->groupuser = $groupuser;
         return $this;
     }
 
     /**
      * @return ?string
      */
-    protected function getUsername(): ?string
+    public function getUsername(): ?string
     {
-        return $this->Username;
+        return $this->username;
     }
 
     /**
-     * @param string $Username
-     * @return $this
+     * @param string $username
+     * @return User
      */
-    protected function setUsername(string $Username)
+    public function setUsername(string $username): User
     {
-        $this->Username = $Username;
+        $this->username = $username;
         return $this;
     }
 
     /**
      * @return ?string
      */
-    protected function getPassword(): ?string
+    public function getEmail(): ?string
     {
-        return $this->Password;
+        return $this->email;
     }
 
     /**
-     * @param string $Password
-     * @return $this
+     * @param string $username
+     * @return User
      */
-    protected function setPassword(string $Password)
+    public function setEmail(string $email): User
     {
-        $this->Password = $Password;
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     * @return User
+     */
+    public function setPassword(string $password): User
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param string $photo
+     * @return User
+     */
+    public function setPhoto(string $photo): User
+    {
+        $this->photo = $photo;
         return $this;
     }
 
     /**
      * @return ?bool
      */
-    protected function getIsLoggedIn(): ?bool
+    public function getIsActive(): ?bool
     {
-        return $this->IsLoggedIn;
+        return $this->isActive;
     }
 
     /**
-     * @param bool $IsLoggedIn
-     * @return $this
+     * @param bool $isActive
+     * @return User
      */
-    protected function setIsLoggedIn(bool $IsLoggedIn)
+    public function setIsActive(bool $isActive): User
     {
-        $this->IsLoggedIn = $IsLoggedIn;
-        return $this;
-    }
-
-    /**
-     * @return ?bool
-     */
-    protected function getIsActive(): ?bool
-    {
-        return $this->IsActive;
-    }
-
-    /**
-     * @param bool $IsActive
-     * @return $this
-     */
-    protected function setIsActive(bool $IsActive)
-    {
-        $this->IsActive = $IsActive;
+        $this->isActive = $isActive;
         return $this;
     }
 }

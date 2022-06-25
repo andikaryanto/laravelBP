@@ -2,30 +2,37 @@
 namespace App\Services;
 
 use App\Entities\Muser;
-use App\Repositories\MgroupuserRepository;
-use App\Repositories\MuserRepository;
+use App\Repositories\GroupuserRepository;
+use App\Repositories\UserRepository;
 
 class UserService {
 
     /**
      * Undocumented variable
      *
-     * @var MuserRepository
+     * @var UserRepository
      */
-    protected MuserRepository $muserRepository;
+    protected UserRepository $userRepository;
+
+    /**
+     * Undocumented variable
+     *
+     * @var GroupuserRepository
+     */
+    protected GroupuserRepository $groupuserRepository;
 
     /**
      *
      *
-     * @param MuserRepository $muserRepository
-     * @param MgroupuserRepository $mgroupuserRepository
+     * @param UserRepository $userRepository
+     * @param GroupuserRepository $groupuserRepository
      */
     public function __construct(
-        MuserRepository $muserRepository,
-        MgroupuserRepository $mgroupuserRepository
+        UserRepository $userRepository,
+        GroupuserRepository $groupuserRepository
     )
     {
-        $this->muserRepository = $muserRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -41,7 +48,7 @@ class UserService {
                 ['Username', '=', 'test' ]
             ]
         ];
-        return $this->muserRepository->findOne($param);
+        return $this->userRepository->findOne($param);
     }
 
 }

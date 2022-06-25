@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Entities\Muser;
+use App\Entities\User;
 use LaravelOrm\Repository\Repository;
 
-class MuserRepository extends Repository implements MuserRepositoryInterface
+class UserRepository extends Repository implements UserRepositoryInterface
 {
  /**
     * Constrcutor
     */
     public function __construct()
     {
-        parent::__construct(Muser::class);
+        parent::__construct(User::class);
     }
 }

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\MgroupuserRepository;
-use App\Repositories\MuserRepository;
+use App\Repositories\GroupuserRepository;
+use App\Repositories\UserRepository;
 use App\Services\UserService;
-use App\ViewModels\Mgroupuser\MgroupuserViewModel;
-use App\ViewModels\Muser\MuserCollection;
-use App\ViewModels\Muser\MuserViewModel;
+use App\ViewModels\UserCollection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -21,15 +19,15 @@ class JustTest extends BaseController
 
     /**
      *
-     * @param MgroupuserRepository $mgroupuserRepository
+     * @param GroupuserRepository $groupuserRepository
      */
-    protected MgroupuserRepository $mgroupuserRepository;
+    protected GroupuserRepository $groupuserRepository;
 
     /**
      *
-     * @param MgroupuserRepository $mgroupuserRepository
+     * @param UserRepository $userRepository
      */
-    protected MuserRepository $muserRepository;
+    protected UserRepository $userRepository;
 
     /**
      *
@@ -39,30 +37,25 @@ class JustTest extends BaseController
 
     /**
      *
-     * @param MgroupuserRepository $mgroupuserRepository
-     * @param MuserRepository $muserRepository
+     * @param GroupuserRepository $groupuserRepository
+     * @param UserRepository $userRepository
      * @param UserService $serService
      */
     public function __construct(
-        MgroupuserRepository $mgroupuserRepository,
-        MuserRepository $muserRepository,
+        GroupuserRepository $groupuserRepository,
+        UserRepository $userRepository,
         UserService $serService
     ) {
-        $this->mgroupuserRepository = $mgroupuserRepository;
-        $this->muserRepository = $muserRepository;
+        $this->groupuserRepository = $groupuserRepository;
+        $this->userRepository = $userRepository;
         $this->userService = $serService;
     }
 
     public function test(
         Request $request
     ) {
-        $param = [
-            'limit' => [
-                'page' => 2,
-                'size' => 5
-            ]
-        ];
-        $userEntity = $this->muserRepository->collect($param);
-        return (new SuccessResponse('ok', [], new MuserCollection($userEntity)))->send();
+        
+        $userEntity = $this->userRepository->collect();
+        return (new SuccessResponse('ok', [], new UserCollection($userEntity)))->send();
     }
 }

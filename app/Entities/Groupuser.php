@@ -9,93 +9,93 @@ class Groupuser extends BaseEntity
     /**
      * @var int
      */
-    private int $Id = 0;
+    private int $id = 0;
 
     /**
      * @var EntityList
      */
-    private ?EntityList $Users  = null;
+    private ?EntityList $users  = null;
 
     /**
      * @var string
      */
-    private ?string $GroupName  = null;
+    private ?string $groupname  = null;
 
     /**
      * @var string
      */
-    private ?string $Description  = null;
+    private ?string $description  = null;
 
 
     /**
      * @return ?int
      */
-    protected function getId(): ?int
+    public function getId(): ?int
     {
-        return $this->Id;
+        return $this->id;
     }
 
     /**
      * @param int $Id
      * @return $this
      */
-    protected function setId(int $Id)
+    public function setId(int $id)
     {
-        $this->Id = $Id;
+        $this->id = $id;
         return $this;
     }
 
     /**
      * @return ?EntityList
      */
-    protected function getUsers(): ?EntityList
+    public function getUsers(): ?EntityList
     {
-        return $this->Users;
+        return $this->users;
     }
 
     /**
      * @param EntityList $Users
-     * @return $this
+     * @return Groupuser
      */
-    protected function setUsers(EntityList $Users)
+    public function setUsers(EntityList $users): Groupuser
     {
-        $this->Users = $Users;
+        $this->users = $users;
         return $this;
     }
 
     /**
      * @return ?string
      */
-    protected function getGroupName(): ?string
+    public function getGroupname(): ?string
     {
-        return $this->GroupName;
+        return $this->groupname;
     }
 
     /**
-     * @param string $GroupName
-     * @return $this
+     * @param string $groupname
+     * @return Groupuser
      */
-    protected function setGroupName(string $GroupName)
+    public function setGroupname(string $groupname): Groupuser
     {
-        $this->GroupName = $GroupName;
+        $this->groupname = $groupname;
         return $this;
     }
 
     /**
      * @return ?string
      */
-    protected function getDescription(): ?string
+    public function getDescription(): ?string
     {
-        return $this->Description;
+        return $this->description;
     }
 
     /**
-     * @param string $Description
-     * @return $this
+     * @param string $description
+     * @return Groupuser
      */
-    protected function setDescription(string $Description)
+    public function setDescription(string $description): Groupuser
     {
-        $this->Description = $Description;
+        $this->description = $description;
         return $this;
     }
 }

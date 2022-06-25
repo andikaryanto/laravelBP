@@ -18,9 +18,9 @@ class CreateGroupusers extends Migration
         Schema::create('groupusers', function (SchemaBlueprint $table) {
             $table->id();
             $table->string('group_name');
-            $table->string('description');
-            $table->string('created_by');
-            $table->string('modified_by');
+            $table->string('description')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

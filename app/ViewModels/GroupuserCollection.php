@@ -1,17 +1,17 @@
 <?php
 
-namespace App\ViewModels\Mgroupuser;
+namespace App\ViewModels;
 
 use LaravelCommon\ViewModels\AbstractCollection;
 use LaravelOrm\Interfaces\IEntity;
 
-class MgroupuserCollection extends AbstractCollection
+class GroupuserCollection extends AbstractCollection
 {
     /**
      * @inheritdoc
      */
     public function shape(IEntity $entity)
     {
-        $this->addItem(new MgroupuserViewModel($entity));
+        $this->addItem(new GroupuserViewModel($entity));
     }
 }

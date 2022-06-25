@@ -15,14 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('groupuser_id');
+            $table->unsignedBigInteger('groupuser_id')->nullable();
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('photo');
-            $table->boolean('is_active');
-            $table->string('created_by');
-            $table->string('modified_by');
+            $table->string('photo')->nullable();
+            $table->boolean('is_active')->default(false);
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
 
             $table->foreign('groupuser_id')

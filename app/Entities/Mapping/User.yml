@@ -1,39 +1,59 @@
 App\Entities\User:
-  table: 'users'
-  primaryKey: 'Id'
+  table: users
+  primaryKey: id
   props: 
-    Id: 
-        type: 'int'
+    id: 
+        type: int
         isEntity: false
-    Groupuser: 
+        field: id
+    groupuser: 
         type: App\Entities\Groupuser
         isEntity: true
-        foreignKey: 'Groupuser_Id'
-        relationType: 'one_to_many'
-        inversedBy: 'Users'
-    Username: 
-        type: 'string'
+        foreignKey: groupuser_id
+        relationType: one_to_many
+        inversedBy: users
+        field: groupuser_id
+    tokens: 
+        type: App\Entities\User\Token
+        isEntity: true
+        relationType: many_to_one
+        mappedBy: user
+        field: tokens
+    username: 
+        type: string
         isEntity: false
-    Password: 
-        type: 'string'
+        field: username
+    email: 
+        type: string
         isEntity: false
-    IsLoggedIn: 
-        type: 'bool'
+        field: email
+    password: 
+        type: string
         isEntity: false
-    IsActive: 
-        type: 'bool'
+        field: password
+    photo: 
+        type: string
         isEntity: false
-    Created: 
-        type: 'DateTime'
+        field: photo
+    isActive: 
+        type: bool
         isEntity: false
-    CreatedBy: 
-        type: 'string'
+        field: is_active
+    createdAt: 
+        type: DateTime
         isEntity: false
-    Modified: 
-        type: 'DateTime'
+        field: created_at
+    createdBy: 
+        type: string
         isEntity: false
-    ModifiedBy: 
-        type: 'string'
+        field: created_by
+    updatedAt: 
+        type: DateTime
         isEntity: false
+        field: updated_at
+    updatedBy: 
+        type: string
+        isEntity: false
+        field: updated_by
         
     

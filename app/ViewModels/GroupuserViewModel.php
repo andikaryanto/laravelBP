@@ -1,13 +1,13 @@
 <?php
 
-namespace App\ViewModels\Mgroupuser;
+namespace App\ViewModels;
 
-use App\Entities\Mgroupuser;
+use App\Entities\Groupuser;
 use LaravelCommon\ViewModels\AbstractViewModel;
 use LaravelOrm\Entities\EntityList;
 use stdClass;
 
-class MgroupuserViewModel extends AbstractViewModel
+class GroupuserViewModel extends AbstractViewModel
 {
     /**
      * @var bool $autoAddResource;
@@ -15,7 +15,7 @@ class MgroupuserViewModel extends AbstractViewModel
     protected $isAutoAddResource = true;
 
     /**
-     * @var Mgroupuser
+     * @var Groupuser
      */
     protected $entity;
 
@@ -34,8 +34,8 @@ class MgroupuserViewModel extends AbstractViewModel
     public function toArray()
     {
         return [
-            'Id' => $this->entity->getId(),
-            'GroupName' => $this->entity->getGroupName()
+            'id' => $this->entity->getId(),
+            'groupname' => $this->entity->getGroupname()
         ];
     }
 }

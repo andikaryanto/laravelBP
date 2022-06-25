@@ -1,17 +1,18 @@
 <?php
 
-namespace App\ViewModels\Muser;
+namespace App\ViewModels;
 
+use App\ViewModels\UserViewModel;
 use LaravelCommon\ViewModels\AbstractCollection;
 use LaravelOrm\Interfaces\IEntity;
 
-class MuserCollection extends AbstractCollection
+class UserCollection extends AbstractCollection
 {
     /**
      * @inheritdoc
      */
     public function shape(IEntity $entity)
     {
-        $this->addItem(new MuserViewModel($entity));
+        $this->addItem(new UserViewModel($entity));
     }
 }

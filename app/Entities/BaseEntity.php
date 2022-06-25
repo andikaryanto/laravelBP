@@ -7,52 +7,52 @@ use DateTime;
 
 class BaseEntity extends Entity
 {
-    private ?string $CreatedBy = null;
-    private ?string $ModifiedBy = null;
-    private ?DateTime $Created = null;
-    private ?DateTime $Modified = null;
+    private ?string $createdBy = null;
+    private ?string $updatedBy = null;
+    private ?DateTime $createdAt = null;
+    private ?DateTime $updatedAt = null;
 
     public function getCreatedBy()
     {
-        return $this->CreatedBy;
+        return $this->createdBy;
     }
 
-    public function setCreatedBy(?string $CreatedBy)
+    public function setCreatedBy(?string $createdBy)
     {
-        $this->CreatedBy = $CreatedBy;
+        $this->createdBy = $createdBy;
         return $this;
     }
 
-    public function getModifiedBy()
+    public function getUpdatedBy()
     {
-        return $this->ModifiedBy;
+        return $this->updatedBy;
     }
 
-    public function setModifiedBy(?string $ModifiedBy)
+    public function setUpdatedBy(?string $updatedBy)
     {
-        $this->ModifiedBy = $ModifiedBy;
+        $this->updatedBy = $updatedBy;
         return $this;
     }
 
-    public function getCreated()
+    public function getCreatedAt()
     {
-        return $this->Created;
+        return $this->createdAt;
     }
 
-    public function setCreated(?DateTime $Created)
+    public function setCreatedAt(?DateTime $createdAt)
     {
-        $this->Created = $Created;
+        $this->createdAt = $createdAt;
         return $this;
     }
 
-    public function getModified()
+    public function getUpdatedAt()
     {
-        return $this->Modified;
+        return $this->updatedAt;
     }
 
-    public function setModified(?DateTime $Modified)
+    public function setUpdatedAt(?DateTime $updatedAt)
     {
-        $this->Modified = $Modified;
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 }
