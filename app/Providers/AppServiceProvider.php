@@ -2,33 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\ServiceProvider;
-use LaravelCommon\Http\Request\Request as RequestRequest;
+use LaravelCommon\App\Providers\AppServiceProvider as ProvidersAppServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class AppServiceProvider extends ProvidersAppServiceProvider
 {
-    public $bindings = [
-        Request::class => RequestRequest::class,
-    ];
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
+   
 }

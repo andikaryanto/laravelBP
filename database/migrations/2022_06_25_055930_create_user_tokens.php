@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use LaravelCommon\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUserTokens extends Migration
@@ -18,8 +18,7 @@ class CreateUserTokens extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('token');
             $table->dateTime('expired_at');
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->auditable();
             $table->timestamps();
         });
     }

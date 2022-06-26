@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint as SchemaBlueprint;
 use Illuminate\Support\Facades\Schema;
 use LaravelCommon\Database\Schema\Blueprint;
 
@@ -15,12 +14,11 @@ class CreateGroupusers extends Migration
     public function up()
     {
         
-        Schema::create('groupusers', function (SchemaBlueprint $table) {
+        Schema::create('groupusers', function (Blueprint $table) {
             $table->id();
             $table->string('group_name');
             $table->string('description')->nullable();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->auditable();
             $table->timestamps();
         });
     }

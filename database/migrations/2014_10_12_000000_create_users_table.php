@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use LaravelCommon\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
@@ -21,8 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('photo')->nullable();
             $table->boolean('is_active')->default(false);
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->auditable();
             $table->timestamps();
 
             $table->foreign('groupuser_id')
