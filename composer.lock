@@ -12,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelcommon.git",
-                "reference": "68067e149c8716de0eb7ccb7faaccec3151dddde"
+                "reference": "9e07ebe52931539a6cfdf17b417cad659969491c"
             },
             "require": {
                 "php": ">=7.4"
@@ -37,7 +37,7 @@
                 }
             ],
             "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
-            "time": "2022-06-25T17:34:56+00:00"
+            "time": "2022-06-26T04:47:54+00:00"
         },
         {
             "name": "andikaryanto11/laravelorm",
