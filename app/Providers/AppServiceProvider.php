@@ -2,9 +2,30 @@
 
 namespace App\Providers;
 
-use LaravelCommon\App\Providers\AppServiceProvider as ProvidersAppServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ProvidersAppServiceProvider
+class AppServiceProvider extends ServiceProvider
 {
-   
+    public $bindings = [];
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+
+    }
 }
