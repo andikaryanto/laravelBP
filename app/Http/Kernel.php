@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use LaravelCommon\App\Http\Middleware\ControllerAfter;
+use LaravelCommon\App\Http\Middleware\ControllerBefore;
 use LaravelCommon\App\Http\Middleware\ControllerReturn;
 
 class Kernel extends HttpKernel
@@ -46,7 +48,8 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             //custom middleware
-            'controller-return' => ControllerReturn::class
+            'controller-before' => ControllerBefore::class,
+            'controller-after' => ControllerAfter::class
         ],
     ];
 
@@ -67,6 +70,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'controller-return' => ControllerReturn::class
         
     ];
 }

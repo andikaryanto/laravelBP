@@ -3,6 +3,7 @@
 use App\Http\Controllers\JustTest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use LaravelCommon\Http\Request\Request as RequestRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/justtest', [JustTest::class, 'test']);
+Route::post('/test', function(RequestRequest $request){
+    $a = $request->name;
+    return 'asdasd';
+});

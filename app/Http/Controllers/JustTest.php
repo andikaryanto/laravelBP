@@ -55,7 +55,7 @@ class JustTest extends BaseController
     public function test(
         Request $request
     ) {
-        $token = $request->getToken();
+        // $token = $request->getToken();
         $userEntity = $this->userRepository->collect();
         return (new BadRequestResponse('ok', [], new UserCollection($userEntity)));
     }
