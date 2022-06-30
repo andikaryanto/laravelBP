@@ -2,12 +2,15 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "andikaryanto11/laravelcommon": "dev-main",
-        "andikaryanto11/laravelorm": "dev-main",
+        "andikaryanto11/laravelcommon": "dev-package",
+        "andikaryanto11/laravelorm": "dev-package",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
@@ -50,7 +53,13 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [],
+            "providers": [
+                "LaravelCommon\\App\\Providers\\CommonAppServiceProvider"
+            ],
+            "aliases": {
+                "LaraveCommon": "LaravelCommon\\App\\Providers\\Facade"
+            }
         }
     },
     "config": {
@@ -62,7 +71,8 @@
         {
             "url": "https://github.com/andikaryanto11/laravelorm.git",
             "type": "git"
-        },{
+        },
+        {
             "url": "https://github.com/andikaryanto11/laravelcommon.git",
             "type": "git"
         }
