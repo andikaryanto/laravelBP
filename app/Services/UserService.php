@@ -45,7 +45,7 @@ class UserService {
     public function generateToken(string $username, string $password){
         $param = [
             'where' => [
-                ['Username', '=', 'test' ]
+                ['Username', '=', 'test']
             ]
         ];
         return $this->userRepository->findOne($param);

@@ -21,7 +21,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/justtest', [JustTest::class, 'test']);
-Route::post('/test', function(RequestRequest $request){
-    $a = $request->name;
-    return 'asdasd';
-});
