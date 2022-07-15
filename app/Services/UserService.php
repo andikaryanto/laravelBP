@@ -2,8 +2,8 @@
 namespace App\Services;
 
 use App\Entities\Muser;
-use App\Repositories\GroupuserRepository;
-use App\Repositories\UserRepository;
+use LaravelCommon\App\Repositories\GroupuserRepository;
+use LaravelCommon\App\Repositories\UserRepository;
 
 class UserService {
 
@@ -45,7 +45,7 @@ class UserService {
     public function generateToken(string $username, string $password){
         $param = [
             'where' => [
-                ['Username', '=', 'test' ]
+                ['Username', '=', 'test']
             ]
         ];
         return $this->userRepository->findOne($param);

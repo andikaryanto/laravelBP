@@ -48,8 +48,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             //custom middleware
-            'controller-before' => ControllerBefore::class,
-            'controller-after' => ControllerAfter::class
+            // 'controller-after' => ControllerAfter::class
         ],
     ];
 

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use LaravelCommon\Database\Schema\Blueprint;
+use LaravelCommon\System\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreatePasswordResetsTable extends Migration

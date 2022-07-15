@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -165,6 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
+        LaravelCommon\App\Providers\CommonAppServiceProvider::class,
 
         /*
          * Application Service Providers...
