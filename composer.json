@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "andikaryanto11/laravelcommon": "dev-main",
+        "andikaryanto11/laravelgraphql": "dev-main",
         "andikaryanto11/laravelorm": "dev-main",
         "firebase/php-jwt": "^6.2",
         "fruitcake/laravel-cors": "^2.0",
@@ -54,13 +55,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [],
-            "providers": [
-                "LaravelCommon\\App\\Providers\\CommonAppServiceProvider"
-            ],
-            "aliases": {
-                "LaraveCommon": "LaravelCommon\\App\\Providers\\Facade"
-            }
+            "dont-discover": []
         }
     },
     "config": {
@@ -75,6 +70,10 @@
         },
         {
             "url": "https://github.com/andikaryanto11/laravelcommon.git",
+            "type": "git"
+        },
+        {
+            "url": "https://github.com/andikaryanto11/laravelgraphql.git",
             "type": "git"
         }
     ],

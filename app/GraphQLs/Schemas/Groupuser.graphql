@@ -1,0 +1,16 @@
+"""
+Groupuser type
+"""
+type Groupuser {
+    id: ID
+    groupname: String
+    description: String
+}
+
+"""
+Groupuser input
+"""
+input GroupuserInput {
+    groupname: String!
+    description: String
+}

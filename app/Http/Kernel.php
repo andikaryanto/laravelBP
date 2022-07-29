@@ -3,8 +3,6 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use LaravelCommon\App\Http\Middleware\ControllerAfter;
-use LaravelCommon\App\Http\Middleware\ControllerBefore;
 use LaravelCommon\App\Http\Middleware\ControllerReturn;
 
 class Kernel extends HttpKernel
