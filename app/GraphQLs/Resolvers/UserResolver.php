@@ -39,13 +39,12 @@ class UserResolver extends AbstractResolver
     }
 
     /**
-     * @query
+     * Get all users
      * 
-     * @args
-     * 
-     * @type [User]
-     * 
-     * @desc Get all users data
+     * #query
+     * #args
+     * #type [User]
+     * #desc Get all users data
      *
      */
     final public function users()
@@ -54,29 +53,25 @@ class UserResolver extends AbstractResolver
     }
 
     /**
-     * @query
-     * 
-     * @args Int id
-     * 
-     * @type User
-     * 
-     * @desc Get a user data by id
+     * #query
+     * #args Int id
+     * #type User
+     * #desc Get a user data by id
      * 
      */
     final public function user($id){
         $user = $this->userRepository->find($id);
+        if(empty($user))
+            return null;
         return (new UserViewModel($user));
     }
 
 
     /**
-     * @mutation
-     * 
-     * @args String username, String password
-     * 
-     * @type Token
-     * 
-     * @desc Generate user token
+     * #mutation
+     * #args String username, String password
+     * #type Token
+     * #desc Generate user token
      * 
      */
     final public function generateToken($username, $password){

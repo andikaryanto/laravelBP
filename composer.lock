@@ -56,7 +56,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelgraphql.git",
-                "reference": "7854ee2159778507b22ae78bd22cff65171d2c70"
+                "reference": "fdafc1fef8af0fed06b96f521e48c7a5d75f6d9a"
             },
             "require": {
                 "andikaryanto11/laravelcommon": "dev-main",
@@ -89,7 +89,7 @@
                 }
             ],
             "description": "Graphql package for Laravel",
-            "time": "2022-07-27T17:57:05+00:00"
+            "time": "2022-07-31T16:45:47+00:00"
         },
         {
             "name": "andikaryanto11/laravelorm",

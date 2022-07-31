@@ -43,13 +43,11 @@ class GroupuserResolver extends AbstractResolver
     }
 
     /**
-     * @query
      * 
-     * @args
-     * 
-     * @type [Groupuser]
-     * 
-     * @desc Get all groupuser data
+     * #query
+     * #desc Get all groupuser data
+     * #args
+     * #type [Groupuser]
      *
      */
     final public function groupusers()
@@ -60,13 +58,10 @@ class GroupuserResolver extends AbstractResolver
 
 
     /**
-     * @mutation
-     * 
-     * @args GroupuserInput groupuser
-     * 
-     * @type Groupuser
-     * 
-     * @desc Create new groupuser
+     * #mutation
+     * #args GroupuserInput groupuser
+     * #type Groupuser
+     * #desc Create new groupuser
      *
      */
     final public function createGroupuser($groupuserInput)
