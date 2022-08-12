@@ -56,7 +56,8 @@ class JustTest extends BaseController
         Request $request
     ) {
         // $token = $request->getToken();
-        $userEntity = $this->userRepository->collect();
-        return (new SuccessResponse('ok', [], new UserCollection($userEntity)));
+        $g = $this->groupuserRepository->find(1);
+        $users = $g->getUsers(); 
+        return (new SuccessResponse('ok', [], new UserCollection($users)));
     }
 }

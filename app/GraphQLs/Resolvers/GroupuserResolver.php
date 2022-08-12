@@ -3,6 +3,7 @@
 namespace App\GraphQLs\Resolvers;
 
 use Exception;
+use LaravelCommon\App\Entities\Groupuser;
 use LaravelCommon\App\Repositories\GroupuserRepository;
 use LaravelCommon\App\ViewModels\GroupuserCollection;
 use LaravelCommon\App\ViewModels\GroupuserViewModel;
@@ -66,7 +67,7 @@ class GroupuserResolver extends AbstractResolver
      */
     final public function createGroupuser($groupuserInput)
     {
-        $groupuser = $this->groupuserRepository->newEntity();
+        $groupuser = new Groupuser();
         $groupuser->setGroupname($groupuserInput['groupname']);
         $groupuser->setDescription($groupuserInput['description']);
         $this->entityManager->persist($groupuser);
