@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae8040e15fd5e17c8eaeb1132142f3c8",
+    "content-hash": "61fb563d96cb823834fe25951d49b6b6",
     "packages": [
         {
             "name": "andikaryanto11/laravelcommon",
-            "version": "dev-mapping_entity",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelcommon.git",
-                "reference": "0c1b11e90fae694a72bbf84fb9ee535f7e2a3d66"
+                "reference": "b50f542f5d507b67446df9cee21b523f28175473"
             },
             "require": {
                 "php": ">=7.4"
@@ -20,6 +20,7 @@
             "require-dev": {
                 "squizlabs/php_codesniffer": "4.0.x-dev"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -47,7 +48,7 @@
                 }
             ],
             "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
-            "time": "2022-08-12T16:32:55+00:00"
+            "time": "2022-08-12T23:38:59+00:00"
         },
         {
             "name": "andikaryanto11/laravelgraphql",
@@ -95,7 +96,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelorm.git",
-                "reference": "ea2c98ab93414ee7dc76d30aa79ea12cffd12c97"
+                "reference": "33e366bb0a46ad809f454866a74a1a41e19a2f30"
             },
             "require": {
                 "php": "^7.4",
@@ -126,7 +127,7 @@
                 "laravel",
                 "laravelorm"
             ],
-            "time": "2022-08-12T16:33:42+00:00"
+            "time": "2022-08-12T23:39:11+00:00"
         },
         {
             "name": "asm89/stack-cors",
