@@ -30,9 +30,8 @@ class WarehouseController extends Controller
      * @return void
      */
     public function index(){
-        $warehouses = $this->warehouseRepository->collect();
-        $warehouseCollection = new WarehouseCollection($warehouses);
-        return (new SuccessResponse('OK', [], $warehouseCollection));
+        $warehouses = $this->warehouseRepository->gather();
+        return (new SuccessResponse('OK', [], $warehouses));
     }
 
 }

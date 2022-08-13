@@ -4,9 +4,11 @@ namespace App\Repositories;
 
 use App\Entities\Warehouse;
 use App\Repositories\WarehouseRepositoryInterface;
-use LaravelOrm\Repository\Repository;
+use App\ViewModels\WarehouseCollection;
+use App\ViewModels\WarehouseViewModel;
+use LaravelCommon\App\Repositories\BaseRepository;
 
-class WarehouseRepository extends Repository implements WarehouseRepositoryInterface
+class WarehouseRepository extends BaseRepository implements WarehouseRepositoryInterface
 {
     /**
     * Constrcutor
@@ -14,5 +16,25 @@ class WarehouseRepository extends Repository implements WarehouseRepositoryInter
     public function __construct()
     {
         parent::__construct(Warehouse::class);
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @return string
+     */
+    public function collectionClass(): string
+    {
+        return WarehouseCollection::class;
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @return stirng
+     */
+    public function viewModelClass(): string
+    {
+        return WarehouseViewModel::class;
     }
 }
