@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\WarehouseRepository;
-use App\ViewModels\WarehouseCollection;
+use App\ViewModels\WarehouseViewModel;
+use Exception;
+use Illuminate\Http\Request;
+use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
 
 class WarehouseController extends Controller
@@ -16,22 +19,80 @@ class WarehouseController extends Controller
     protected WarehouseRepository $warehouseRepository;
 
 
+    /**
+     * Undocumented function
+     *
+     * @param WarehouseRepository $warehouseRepository
+     */
     public function __construct(
         WarehouseRepository $warehouseRepository
-    )
-    {
+    ) {
         $this->warehouseRepository = $warehouseRepository;
     }
 
 
     /**
-     * Undocumented function
+     * Get all paged warehouse
      *
      * @return void
      */
-    public function index(){
+    public function getAll()
+    {
         $warehouses = $this->warehouseRepository->gather();
         return (new SuccessResponse('OK', [], $warehouses));
     }
 
+    public function get(Request $request)
+    {
+        $resource = $request->getResource();
+        return new SuccessResponse('OK', [], new WarehouseViewModel($resource));
+    }
+
+    /**
+     * Save new ware house, see unit-test middleware, persistence happens there
+     *
+     * @return SuccessResponse|ServerErrorResponse
+     */
+    public function store(Request $request)
+    {
+        try {
+            $resource = $request->getResource();
+
+            return new SuccessResponse('OK', [], new WarehouseViewModel($resource));
+        } catch (Exception $e) {
+            return new ServerErrorResponse($e->getMessage());
+        }
+    }
+
+    /**
+     * patch a column of entity
+     *
+     * @return SuccessResponse|ServerErrorResponse
+     */
+    public function patch(Request $request)
+    {
+        try {
+            $resource = $request->getResource();
+
+            return new SuccessResponse('OK', [], new WarehouseViewModel($resource));
+        } catch (Exception $e) {
+            return new ServerErrorResponse($e->getMessage());
+        }
+    }
+
+    /**
+     * patch a column of entity
+     *
+     * @return SuccessResponse|ServerErrorResponse
+     */
+    public function delete(Request $request)
+    {
+        try {
+            $resource = $request->getResource();
+
+            return new SuccessResponse('OK', [], new WarehouseViewModel($resource));
+        } catch (Exception $e) {
+            return new ServerErrorResponse($e->getMessage());
+        }
+    }
 }

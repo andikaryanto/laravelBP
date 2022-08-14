@@ -24,7 +24,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/justtest', [JustTest::class, 'test']);
 
 Route::prefix('warehouse')->group(function () {
-    Route::middleware(['token-valid', 'check-scope:warehouser'])->group(function () {
-        Route::get('/list', [WarehouseController::class, 'index']);
+    Route::middleware(['check-token', 'check-scope:warehouser'])->group(function () {
+        Route::get('/list', [WarehouseController::class, 'getAll']);
+
+        Route::post('/store', [WarehouseController::class, 'store'])->middleware(['hydrator.warehouse', 'entity-unit']);
+        Route::get('/{id}', [WarehouseController::class, 'get'])->middleware('hydrator.warehouse');
+        Route::patch('/{id}', [WarehouseController::class, 'patch'])->middleware(['hydrator.warehouse', 'entity-unit']);
+        Route::delete('/{id}', [WarehouseController::class, 'delete'])->middleware(['hydrator.warehouse', 'entity-unit']);
     });
-});
+}); 

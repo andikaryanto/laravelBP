@@ -2,10 +2,11 @@
 
 namespace App\Http;
 
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\Hydrators\WarehouseHydrator;
+use LaravelCommon\App\Http\Kernel as AppHttpKernel;
 use LaravelCommon\App\Http\Middleware\ControllerReturn;
 
-class Kernel extends HttpKernel
+class Kernel extends AppHttpKernel
 {
     /**
      * The application's global HTTP middleware stack.
@@ -67,7 +68,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'controller-return' => ControllerReturn::class
+        // 'controller-return' => ControllerReturn::class,
+        'hydrator.warehouse' => WarehouseHydrator::class
         
     ];
 }
