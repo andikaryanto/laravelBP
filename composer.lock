@@ -12,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelcommon.git",
-                "reference": "902020e56c52fd3bd9d101d71ef926c533fab984"
+                "reference": "db381e03b95641ac387de5bf5a7ed631a5f8dfc7"
             },
             "require": {
                 "php": ">=7.4"
@@ -47,7 +47,7 @@
                 }
             ],
             "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
-            "time": "2022-08-14T17:39:53+00:00"
+            "time": "2022-08-15T07:47:41+00:00"
         },
         {
             "name": "andikaryanto11/laravelgraphql",
@@ -95,7 +95,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelorm.git",
-                "reference": "20e6d859f6e0e3fcd982d1610ee8a20c5e3ba353"
+                "reference": "a5834bc36593a21f52e4c2e6f8940cdf7dcd36c4"
             },
             "require": {
                 "php": "^7.4",
@@ -126,7 +126,7 @@
                 "laravel",
                 "laravelorm"
             ],
-            "time": "2022-08-14T17:17:04+00:00"
+            "time": "2022-08-15T07:46:35+00:00"
         },
         {
             "name": "asm89/stack-cors",
