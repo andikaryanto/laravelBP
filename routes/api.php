@@ -27,9 +27,24 @@ Route::prefix('warehouse')->group(function () {
     Route::middleware(['check-token', 'check-scope:warehouser'])->group(function () {
         Route::get('/list', [WarehouseController::class, 'getAll']);
 
-        Route::post('/store', [WarehouseController::class, 'store'])->middleware(['hydrator.warehouse', 'entity-unit']);
+        Route::post('/store', [WarehouseController::class, 'store'])
+            ->middleware(
+                [
+                    'hydrator.warehouse', 
+                    'resource-validation', 
+                    'entity-unit'
+                ]
+            );
+
         Route::get('/{id}', [WarehouseController::class, 'get'])->middleware('hydrator.warehouse');
-        Route::patch('/{id}', [WarehouseController::class, 'patch'])->middleware(['hydrator.warehouse', 'entity-unit']);
+        Route::patch('/{id}', [WarehouseController::class, 'patch'])
+        ->middleware(
+            [
+                'hydrator.warehouse', 
+                'resource-validation', 
+                'entity-unit'
+            ]
+        );
         Route::delete('/{id}', [WarehouseController::class, 'delete'])->middleware(['hydrator.warehouse', 'entity-unit']);
     });
 }); 

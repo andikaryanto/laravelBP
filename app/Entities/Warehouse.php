@@ -7,16 +7,16 @@ class Warehouse extends BaseEntity {
     /**
      * Undocumented variable
      *
-     * @var string
+     * @var ?string
      */
-    private string $name;
+    private ?string $name = null;
 
     /**
      * Undocumented variable
      *
      * @var string|null
      */
-    private ?string $description;
+    private ?string $description = null;
 
 
     /**
@@ -24,7 +24,7 @@ class Warehouse extends BaseEntity {
      *
      * @return  string
      */ 
-    protected function getName(): string
+    protected function getName(): ?string
     {
         return $this->name;
     }
@@ -60,7 +60,7 @@ class Warehouse extends BaseEntity {
      *
      * @return  self
      */ 
-    protected function setDescription($description): Warehouse
+    protected function setDescription(?string $description): Warehouse
     {
         $this->description = $description;
 

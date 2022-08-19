@@ -6,6 +6,7 @@ use App\Repositories\WarehouseRepository;
 use App\ViewModels\WarehouseViewModel;
 use Exception;
 use Illuminate\Http\Request;
+use LaravelCommon\App\Consts\ResponseConst;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
 
@@ -39,13 +40,13 @@ class WarehouseController extends Controller
     public function getAll()
     {
         $warehouses = $this->warehouseRepository->gather();
-        return (new SuccessResponse('OK', [], $warehouses));
+        return (new SuccessResponse('OK', ResponseConst::OK, $warehouses));
     }
 
     public function get(Request $request)
     {
         $resource = $request->getResource();
-        return new SuccessResponse('OK', [], new WarehouseViewModel($resource));
+        return new SuccessResponse('OK', ResponseConst::OK, new WarehouseViewModel($resource));
     }
 
     /**
@@ -58,7 +59,7 @@ class WarehouseController extends Controller
         try {
             $resource = $request->getResource();
 
-            return new SuccessResponse('OK', [], new WarehouseViewModel($resource));
+            return new SuccessResponse('OK', ResponseConst::OK, new WarehouseViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }
@@ -74,7 +75,7 @@ class WarehouseController extends Controller
         try {
             $resource = $request->getResource();
 
-            return new SuccessResponse('OK', [], new WarehouseViewModel($resource));
+            return new SuccessResponse('OK', ResponseConst::OK, new WarehouseViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }
@@ -90,7 +91,7 @@ class WarehouseController extends Controller
         try {
             $resource = $request->getResource();
 
-            return new SuccessResponse('OK', [], new WarehouseViewModel($resource));
+            return new SuccessResponse('OK', ResponseConst::OK, new WarehouseViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }

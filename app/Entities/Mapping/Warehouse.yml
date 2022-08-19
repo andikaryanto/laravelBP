@@ -10,10 +10,12 @@ App\Entities\Warehouse:
         type: string
         isEntity: false
         field: name
+        rule: "required|max:255"
     description: 
         type: string
         isEntity: false
         field: description
+        rule: "max:255"
     createdAt: 
         type: DateTime
         isEntity: false

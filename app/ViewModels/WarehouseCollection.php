@@ -2,10 +2,10 @@
 
 namespace App\ViewModels;
 
-use LaravelCommon\ViewModels\AbstractCollection;
+use LaravelCommon\ViewModels\PaggedCollection;
 use LaravelOrm\Interfaces\IEntity;
 
-class WarehouseCollection extends AbstractCollection
+class WarehouseCollection extends PaggedCollection
 {
     /**
      * @inheritdoc
