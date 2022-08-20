@@ -10,6 +10,6 @@ return [
         'expired_in_days' => 90
     ],
     'collection_paging' => [
-        'size' => 100
+        'size' => 25
     ]
 ];

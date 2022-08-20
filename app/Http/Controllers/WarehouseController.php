@@ -7,6 +7,7 @@ use App\ViewModels\WarehouseViewModel;
 use Exception;
 use Illuminate\Http\Request;
 use LaravelCommon\App\Consts\ResponseConst;
+use LaravelCommon\Responses\NoDataFoundResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
 
@@ -40,6 +41,9 @@ class WarehouseController extends Controller
     public function getAll()
     {
         $warehouses = $this->warehouseRepository->gather();
+        if($warehouses->count() == 0){
+            return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
+        }
         return (new SuccessResponse('OK', ResponseConst::OK, $warehouses));
     }
 

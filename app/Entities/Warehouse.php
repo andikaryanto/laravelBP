@@ -1,7 +1,9 @@
 <?php
 namespace App\Entities;
 
+use App\Repositories\WarehouseRepository;
 use LaravelCommon\App\Entities\BaseEntity;
+use LaravelOrm\Exception\EntityException;
 
 class Warehouse extends BaseEntity {
     /**
@@ -65,5 +67,29 @@ class Warehouse extends BaseEntity {
         $this->description = $description;
 
         return $this;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function validate()
+    {
+        parent::validate();
+
+        $params = [
+            'where' => [
+                ['name', '=', $this->getName()]
+            ]
+        ];
+
+        if(!empty($this->getId())){
+            $params['where'][] = ['id', '<>', $this->getId()];
+        }
+
+        $repo = new WarehouseRepository();
+        $result = $repo->findOne($params);
+        if(!empty($result)){
+            throw new EntityException('data with the name "' . $this->getName() . '" exists');
+        }
     }
 }
