@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\JustTest;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\WarehouseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use LaravelCommon\Http\Request\Request as RequestRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,5 +46,32 @@ Route::prefix('warehouse')->group(function () {
             ]
         );
         Route::delete('/{id}', [WarehouseController::class, 'delete'])->middleware(['hydrator.warehouse', 'entity-unit']);
+    });
+}); 
+
+
+Route::prefix('shop')->group(function () {
+    Route::middleware(['check-token', 'check-scope:warehouser'])->group(function () {
+        Route::get('/list', [ShopController::class, 'getAll']);
+
+        Route::post('/store', [ShopController::class, 'store'])
+            ->middleware(
+                [
+                    'hydrator.shop', 
+                    'resource-validation', 
+                    'entity-unit'
+                ]
+            );
+
+        Route::get('/{id}', [ShopController::class, 'get'])->middleware('hydrator.shop');
+        Route::patch('/{id}', [ShopController::class, 'patch'])
+        ->middleware(
+            [
+                'hydrator.shop', 
+                'resource-validation', 
+                'entity-unit'
+            ]
+        );
+        Route::delete('/{id}', [ShopController::class, 'delete'])->middleware(['hydrator.shop', 'entity-unit']);
     });
 }); 

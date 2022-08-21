@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Hydrators\ShopHydrator;
 use App\Http\Middleware\Hydrators\WarehouseHydrator;
 use LaravelCommon\App\Http\Kernel as AppHttpKernel;
 use LaravelCommon\App\Http\Middleware\ControllerReturn;
@@ -69,7 +70,8 @@ class Kernel extends AppHttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         // 'controller-return' => ControllerReturn::class,
-        'hydrator.warehouse' => WarehouseHydrator::class
+        'hydrator.warehouse' => WarehouseHydrator::class,
+        'hydrator.shop' => ShopHydrator::class
         
     ];
 }
