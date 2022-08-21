@@ -40,6 +40,7 @@ class WarehouseController extends Controller
      */
     public function getAll()
     {
+       
         $warehouses = $this->warehouseRepository->gather();
         if($warehouses->count() == 0){
             return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
