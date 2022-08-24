@@ -2,11 +2,15 @@
 
 namespace App\Providers;
 
+use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
+use LaravelCommon\App\Services\UserService;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public $bindings = [];
+    public $bindings = [
+        UserService::class => UserRepository::class
+    ];
 
     /**
      * Register any application services.

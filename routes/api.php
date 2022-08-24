@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\Product\CategoryController;
-use App\Http\Controllers\JustTest;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\UserController;
+
+;
 use App\Http\Controllers\WarehouseController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,12 +18,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('/justtest', [JustTest::class, 'test']);
 
 Route::prefix('warehouse')->group(function () {
     Route::middleware(['check-token', 'check-scope:warehouser'])->group(function () {
@@ -115,4 +110,8 @@ Route::prefix('product-category')->group(function () {
             ]
         );
     });
+});
+
+Route::prefix('user')->group(function () {
+    Route::post('/register', [UserController::class, 'register']);
 });

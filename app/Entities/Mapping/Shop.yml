@@ -6,6 +6,12 @@ App\Entities\Shop:
         type: int
         isEntity: false
         field: id
+    users: 
+        type: App\Entities\User
+        isEntity: true
+        relationType: many_to_one
+        mappedBy: shop
+        field: users
     name: 
         type: string
         isEntity: false
