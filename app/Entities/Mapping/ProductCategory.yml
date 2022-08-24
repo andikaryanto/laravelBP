@@ -1,0 +1,36 @@
+App\Entities\Product\Category:
+  table: product_categories
+  primaryKey: id
+  props:
+    id:
+      field: id
+      isEntity: false
+      type: int
+    name:
+      field: name
+      isEntity: false
+      type: string
+      rule: 'required|max:255'
+    description:
+      field: description
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    createdBy:
+      field: created_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    updatedBy:
+      field: updated_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    createdAt:
+      field: created_at
+      isEntity: false
+      type: DateTime
+    updatedAt:
+      field: updated_at
+      isEntity: false
+      type: DateTime

@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Http\Request;
 use LaravelCommon\App\Consts\ResponseConst;
 use LaravelCommon\Responses\NoDataFoundResponse;
+use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
 
@@ -55,7 +56,7 @@ class WarehouseController extends Controller
     }
 
     /**
-     * Save new ware house, see unit-test middleware, persistence happens there
+     * Save new ware house, see entity-unit middleware, persistence happens there
      *
      * @return SuccessResponse|ServerErrorResponse
      */
@@ -64,7 +65,7 @@ class WarehouseController extends Controller
         try {
             $resource = $request->getResource();
 
-            return new SuccessResponse('OK', ResponseConst::OK, new WarehouseViewModel($resource));
+            return new ResourceCreatedResponse('OK', ResponseConst::OK, new WarehouseViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }

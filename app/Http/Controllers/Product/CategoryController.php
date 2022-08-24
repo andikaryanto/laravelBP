@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Product;
 
-use App\Repositories\ShopRepository;
-use App\ViewModels\ShopViewModel;
+use App\Http\Controllers\Controller;
+use App\Repositories\Product\CategoryRepository;
+use App\ViewModels\Product\CategoryViewModel;
 use Exception;
 use Illuminate\Http\Request;
 use LaravelCommon\App\Consts\ResponseConst;
@@ -12,47 +13,47 @@ use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
 
-class ShopController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Undocumented variable
      *
-     * @var ShopRepository
+     * @var CategoryRepository
      */
-    protected ShopRepository $shopRepository;
+    protected CategoryRepository $CategoryRepository;
 
 
     /**
      * Undocumented function
      *
-     * @param ShopRepository $shopRepository
+     * @param CategoryRepository $CategoryRepository
      */
     public function __construct(
-        ShopRepository $shopRepository
+        CategoryRepository $CategoryRepository
     ) {
-        $this->shopRepository = $shopRepository;
+        $this->CategoryRepository = $CategoryRepository;
     }
 
 
     /**
-     * Get all paged shop
+     * Get all paged Category
      *
      * @return void
      */
     public function getAll()
     {
        
-        $shops = $this->shopRepository->gather();
-        if($shops->count() == 0){
+        $Categorys = $this->CategoryRepository->gather();
+        if($Categorys->count() == 0){
             return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
         }
-        return (new SuccessResponse('OK', ResponseConst::OK, $shops));
+        return (new SuccessResponse('OK', ResponseConst::OK, $Categorys));
     }
 
     public function get(Request $request)
     {
         $resource = $request->getResource();
-        return new SuccessResponse('OK', ResponseConst::OK, new ShopViewModel($resource));
+        return new SuccessResponse('OK', ResponseConst::OK, new CategoryViewModel($resource));
     }
 
     /**
@@ -65,7 +66,7 @@ class ShopController extends Controller
         try {
             $resource = $request->getResource();
 
-            return new ResourceCreatedResponse('OK', ResponseConst::OK, new ShopViewModel($resource));
+            return new ResourceCreatedResponse('OK', ResponseConst::OK, new CategoryViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }
@@ -81,7 +82,7 @@ class ShopController extends Controller
         try {
             $resource = $request->getResource();
 
-            return new SuccessResponse('OK', ResponseConst::OK, new ShopViewModel($resource));
+            return new SuccessResponse('OK', ResponseConst::OK, new CategoryViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }
@@ -97,7 +98,7 @@ class ShopController extends Controller
         try {
             $resource = $request->getResource();
 
-            return new SuccessResponse('OK', ResponseConst::OK, new ShopViewModel($resource));
+            return new SuccessResponse('OK', ResponseConst::OK, new CategoryViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }
