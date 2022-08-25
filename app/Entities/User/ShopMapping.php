@@ -4,6 +4,8 @@ namespace App\Entities\User;
 use App\Entities\Shop;
 use LaravelCommon\App\Entities\BaseEntity;
 use LaravelCommon\App\Entities\User;
+use LaravelOrm\Exception\DatabaseException;
+use LaravelOrm\Repository\Repository;
 
 class ShopMapping extends BaseEntity
 {
@@ -48,6 +50,32 @@ class ShopMapping extends BaseEntity
 		$this->user = $user;
 
 		return $this;
+	}
+
+	public function validate()
+	{
+		parent::validate();
+
+		$params = [
+			'where' => [
+				['user_shop_mappings.shop_id', '=', $this->getShop()->getId()],
+				['users.username', '=', $this->getUser()->getUsername()]
+			],
+			'join' => [
+				'users' => [
+					[
+						'key' => ['user_shop_mappings.user_id', '=',  'users.id']
+					]
+				]
+			]
+		];
+
+		$shopMappingRepo = new Repository(ShopMapping::class);
+		$result = $shopMappingRepo->findOne($params);
+		if(!is_null($result)){
+			throw new DatabaseException('username "'. $this->getUser()->getUsername() .'" exists');
+		}
+
 	}
 }
         

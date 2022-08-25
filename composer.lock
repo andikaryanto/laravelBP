@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "61fb563d96cb823834fe25951d49b6b6",
+    "content-hash": "8bc77b412fda0f3661e4e75705cf364b",
     "packages": [
         {
             "name": "andikaryanto11/laravelcommon",
@@ -12,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelcommon.git",
-                "reference": "14276f5b86566d32f66948c1325015871dfb0446"
+                "reference": "ead167628a79c7ca6eee8c4e4243c9bd26f9f8ae"
             },
             "require": {
                 "php": ">=7.4"
@@ -48,7 +48,7 @@
                 }
             ],
             "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
-            "time": "2022-08-24T07:39:27+00:00"
+            "time": "2022-08-25T14:48:02+00:00"
         },
         {
             "name": "andikaryanto11/laravelgraphql",
@@ -96,7 +96,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelorm.git",
-                "reference": "6ae0b4b75369f34c4cd90b4828bd7981c8246011"
+                "reference": "d631200f14a1605af2c7d099ed2c127001888131"
             },
             "require": {
                 "php": "^7.4",
@@ -127,7 +127,7 @@
                 "laravel",
                 "laravelorm"
             ],
-            "time": "2022-08-20T16:00:52+00:00"
+            "time": "2022-08-25T13:09:08+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -1884,16 +1884,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.59.1",
+            "version": "2.61.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "a9000603ea337c8df16cc41f8b6be95a65f4d0f5"
+                "reference": "bdf4f4fe3a3eac4de84dbec0738082a862c68ba6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/a9000603ea337c8df16cc41f8b6be95a65f4d0f5",
-                "reference": "a9000603ea337c8df16cc41f8b6be95a65f4d0f5",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bdf4f4fe3a3eac4de84dbec0738082a862c68ba6",
+                "reference": "bdf4f4fe3a3eac4de84dbec0738082a862c68ba6",
                 "shasum": ""
             },
             "require": {
@@ -1982,7 +1982,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-29T21:43:55+00:00"
+            "time": "2022-08-06T12:41:24+00:00"
         },
         {
             "name": "nette/schema",

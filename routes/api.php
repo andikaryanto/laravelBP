@@ -3,6 +3,7 @@
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\JustTest;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\User\ShopMappingController;
 use App\Http\Controllers\WarehouseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -114,5 +115,19 @@ Route::prefix('product-category')->group(function () {
                 'entity-unit'
             ]
         );
+    });
+});
+
+Route::prefix('user-shop')->group(function () {
+    Route::middleware([])->group(function () {
+        Route::post('/register', [ShopMappingController::class, 'register']);
+        Route::delete('/{id}', [ShopMappingController::class, 'delete'])
+            ->middleware([
+                'common.hydrator.user'
+            ]);
+        Route::get('/{id}', [ShopMappingController::class, 'get'])
+            ->middleware([
+                'common.hydrator.user'
+            ]);
     });
 });
