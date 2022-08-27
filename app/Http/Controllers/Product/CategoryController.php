@@ -42,9 +42,9 @@ class CategoryController extends Controller
      */
     public function getAll()
     {
-       
+
         $Categorys = $this->CategoryRepository->gather();
-        if($Categorys->count() == 0){
+        if ($Categorys->count() == 0) {
             return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
         }
         return (new SuccessResponse('OK', ResponseConst::OK, $Categorys));

@@ -40,10 +40,10 @@ class ShopViewModel extends AbstractViewModel
             'longitude' => $this->entity->getLongitude(),
             'latitude' => $this->entity->getLatitude(),
             'description' => $this->entity->getDescription(),
-            'created_at' => !is_null($this->entity->getCreatedAt()) 
-                ? $this->entity->getCreatedAt()->format('Y-m-d H:i:s') 
+            'created_at' => !is_null($this->entity->getCreatedAt())
+                ? $this->entity->getCreatedAt()->format('Y-m-d H:i:s')
                 : null,
-            'updated_at' => !is_null($this->entity->getUpdatedAt()) 
+            'updated_at' => !is_null($this->entity->getUpdatedAt())
                 ? $this->entity->getUpdatedAt()->format('Y-m-d H:i:s')
                 : null
         ];

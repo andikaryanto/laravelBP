@@ -1,11 +1,13 @@
 <?php
+
 namespace App\Entities;
 
 use App\Repositories\ShopRepository;
 use LaravelCommon\App\Entities\BaseEntity;
 use LaravelOrm\Exception\EntityException;
 
-class Shop extends BaseEntity {
+class Shop extends BaseEntity
+{
     /**
      * Undocumented variable
      *
@@ -60,7 +62,7 @@ class Shop extends BaseEntity {
      * Get undocumented variable
      *
      * @return  string
-     */ 
+     */
     protected function getName(): ?string
     {
         return $this->name;
@@ -69,10 +71,10 @@ class Shop extends BaseEntity {
     /**
      * Set undocumented variable
      *
-     * @param  string  $name 
+     * @param  string  $name
      *
      * @return  Shop
-     */ 
+     */
     protected function setName(string $name): Shop
     {
         $this->name = $name;
@@ -84,7 +86,7 @@ class Shop extends BaseEntity {
      * Get undocumented variable
      *
      * @return  string|null
-     */ 
+     */
     protected function getDescription(): ?string
     {
         return $this->description;
@@ -93,17 +95,17 @@ class Shop extends BaseEntity {
     /**
      * Set undocumented variable
      *
-     * @param  string|null 
+     * @param  string|null
      *
      * @return  self
-     */ 
+     */
     protected function setDescription(?string $description): Shop
     {
         $this->description = $description;
 
         return $this;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -117,13 +119,13 @@ class Shop extends BaseEntity {
             ]
         ];
 
-        if(!empty($this->getId())){
+        if (!empty($this->getId())) {
             $params['where'][] = ['id', '<>', $this->getId()];
         }
 
         $repo = new ShopRepository();
         $result = $repo->findOne($params);
-        if(!empty($result)){
+        if (!empty($result)) {
             throw new EntityException('data with the name "' . $this->getName() . '" exists');
         }
     }
@@ -132,7 +134,7 @@ class Shop extends BaseEntity {
      * Get undocumented variable
      *
      * @return  string|null
-     */ 
+     */
     public function getAddress(): string
     {
         return $this->address;
@@ -144,7 +146,7 @@ class Shop extends BaseEntity {
      * @param  string|null  $address  Undocumented variable
      *
      * @return  self
-     */ 
+     */
     public function setAddress(string $address): self
     {
         $this->address = $address;
@@ -156,7 +158,7 @@ class Shop extends BaseEntity {
      * Get undocumented variable
      *
      * @return  string|null
-     */ 
+     */
     public function getPhone(): string
     {
         return $this->phone;
@@ -168,7 +170,7 @@ class Shop extends BaseEntity {
      * @param  string|null  $phone  Undocumented variable
      *
      * @return  self
-     */ 
+     */
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
@@ -180,7 +182,7 @@ class Shop extends BaseEntity {
      * Get undocumented variable
      *
      * @return  string|null
-     */ 
+     */
     public function getPersonalInformation(): ?string
     {
         return $this->personalInformation;
@@ -192,7 +194,7 @@ class Shop extends BaseEntity {
      * @param  string|null  $personalInformation  Undocumented variable
      *
      * @return  self
-     */ 
+     */
     public function setPersonalInformation(?string $personalInformation): self
     {
         $this->personalInformation = $personalInformation;
@@ -204,7 +206,7 @@ class Shop extends BaseEntity {
      * Get undocumented variable
      *
      * @return  string|null
-     */ 
+     */
     public function getLongitude(): string
     {
         return $this->longitude;
@@ -216,7 +218,7 @@ class Shop extends BaseEntity {
      * @param  string|null  $longitude  Undocumented variable
      *
      * @return  self
-     */ 
+     */
     public function setLongitude($longitude): self
     {
         $this->longitude = $longitude;
@@ -228,7 +230,7 @@ class Shop extends BaseEntity {
      * Get undocumented variable
      *
      * @return  string|null
-     */ 
+     */
     public function getLatitude(): string
     {
         return $this->latitude;
@@ -240,7 +242,7 @@ class Shop extends BaseEntity {
      * @param  string|null  $latitude  Undocumented variable
      *
      * @return  self
-     */ 
+     */
     public function setLatitude($latitude): self
     {
         $this->latitude = $latitude;

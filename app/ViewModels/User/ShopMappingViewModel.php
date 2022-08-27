@@ -1,11 +1,13 @@
 <?php
 
-namespace App\ViewModels;
+namespace App\ViewModels\User;
 
-use App\Entities\Warehouse;
+use App\Entities\Product\ShopMapping;
+use App\ViewModels\ShopViewModel;
+use LaravelCommon\App\ViewModels\UserViewModel;
 use LaravelCommon\ViewModels\AbstractViewModel;
 
-class WarehouseViewModel extends AbstractViewModel
+class ShopMappingViewModel extends AbstractViewModel
 {
     /**
      * @var bool $autoAddResource;
@@ -13,7 +15,7 @@ class WarehouseViewModel extends AbstractViewModel
     protected $isAutoAddResource = true;
 
     /**
-     * @var Warehouse
+     * @var ShopMapping
      */
     protected $entity;
 
@@ -22,7 +24,15 @@ class WarehouseViewModel extends AbstractViewModel
      */
     public function addResource(array &$element)
     {
+        $user = $this->entity->getUser();
+        if ($user) {
+            $element['user'] = (new UserViewModel($user))->toArray();
+        }
 
+        $shop = $this->entity->getShop();
+        if ($shop) {
+            $element['shop'] = (new ShopViewModel($shop))->toArray();
+        }
         return $this;
     }
 
@@ -33,8 +43,6 @@ class WarehouseViewModel extends AbstractViewModel
     {
         return [
             'id' => $this->entity->getId(),
-            'name' => $this->entity->getName(),
-            'description' => $this->entity->getDescription(),
             'created_at' => !is_null($this->entity->getCreatedAt())
                 ? $this->entity->getCreatedAt()->format('Y-m-d H:i:s')
                 : null,

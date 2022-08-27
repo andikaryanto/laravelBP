@@ -3,6 +3,7 @@
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\JustTest;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\User\ShopMappingController;
 use App\Http\Controllers\WarehouseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/justtest', [JustTest::class, 'test']);
 
 Route::prefix('warehouse')->group(function () {
-    Route::middleware(['check-token', 'check-scope:warehouser'])->group(function () {
+    Route::middleware(['check-token'])->group(function () {
         Route::get('/list', [WarehouseController::class, 'getAll']);
 
         Route::post('/store', [WarehouseController::class, 'store'])
@@ -56,7 +57,7 @@ Route::prefix('warehouse')->group(function () {
 });
 
 Route::prefix('shop')->group(function () {
-    Route::middleware(['check-token', 'check-scope:warehouser'])->group(function () {
+    Route::middleware(['check-token'])->group(function () {
         Route::get('/list', [ShopController::class, 'getAll']);
 
         Route::post('/store', [ShopController::class, 'store'])
@@ -87,7 +88,7 @@ Route::prefix('shop')->group(function () {
 });
 
 Route::prefix('product-category')->group(function () {
-    Route::middleware(['check-token', 'check-scope:warehouser'])->group(function () {
+    Route::middleware(['check-token'])->group(function () {
         Route::get('/list', [CategoryController::class, 'getAll']);
 
         Route::post('/store', [CategoryController::class, 'store'])
@@ -114,5 +115,19 @@ Route::prefix('product-category')->group(function () {
                 'entity-unit'
             ]
         );
+    });
+});
+
+Route::prefix('user-shop')->group(function () {
+    Route::middleware([])->group(function () {
+        Route::post('/register', [ShopMappingController::class, 'register']);
+        Route::delete('/{id}', [ShopMappingController::class, 'delete'])
+            ->middleware([
+                'common.hydrator.user'
+            ]);
+        Route::get('/{id}', [ShopMappingController::class, 'get'])
+            ->middleware([
+                'common.hydrator.user'
+            ]);
     });
 });

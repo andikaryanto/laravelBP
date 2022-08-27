@@ -3,6 +3,8 @@
 namespace App\ViewModels\Product;
 
 use App\Entities\Product\Category;
+use App\ViewModels\ShopViewModel;
+use LaravelCommon\App\ViewModels\UserViewModel;
 use LaravelCommon\ViewModels\AbstractViewModel;
 
 class CategoryViewModel extends AbstractViewModel
@@ -22,7 +24,6 @@ class CategoryViewModel extends AbstractViewModel
      */
     public function addResource(array &$element)
     {
-
         return $this;
     }
 
@@ -35,10 +36,10 @@ class CategoryViewModel extends AbstractViewModel
             'id' => $this->entity->getId(),
             'name' => $this->entity->getName(),
             'description' => $this->entity->getDescription(),
-            'created_at' => !is_null($this->entity->getCreatedAt()) 
-                ? $this->entity->getCreatedAt()->format('Y-m-d H:i:s') 
+            'created_at' => !is_null($this->entity->getCreatedAt())
+                ? $this->entity->getCreatedAt()->format('Y-m-d H:i:s')
                 : null,
-            'updated_at' => !is_null($this->entity->getUpdatedAt()) 
+            'updated_at' => !is_null($this->entity->getUpdatedAt())
                 ? $this->entity->getUpdatedAt()->format('Y-m-d H:i:s')
                 : null
         ];

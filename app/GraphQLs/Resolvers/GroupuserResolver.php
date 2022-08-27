@@ -13,7 +13,6 @@ use LaravelOrm\Entities\EntityManager;
 
 class GroupuserResolver extends AbstractResolver
 {
-
     /**
      * Undocumented function
      *
@@ -44,7 +43,7 @@ class GroupuserResolver extends AbstractResolver
     }
 
     /**
-     * 
+     *
      * #query
      * #desc Get all groupuser data
      * #args

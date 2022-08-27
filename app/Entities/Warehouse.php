@@ -1,11 +1,13 @@
 <?php
+
 namespace App\Entities;
 
 use App\Repositories\WarehouseRepository;
 use LaravelCommon\App\Entities\BaseEntity;
 use LaravelOrm\Exception\EntityException;
 
-class Warehouse extends BaseEntity {
+class Warehouse extends BaseEntity
+{
     /**
      * Undocumented variable
      *
@@ -25,7 +27,7 @@ class Warehouse extends BaseEntity {
      * Get undocumented variable
      *
      * @return  string
-     */ 
+     */
     protected function getName(): ?string
     {
         return $this->name;
@@ -34,10 +36,10 @@ class Warehouse extends BaseEntity {
     /**
      * Set undocumented variable
      *
-     * @param  string  $name 
+     * @param  string  $name
      *
      * @return  Warehouse
-     */ 
+     */
     protected function setName(string $name): Warehouse
     {
         $this->name = $name;
@@ -49,7 +51,7 @@ class Warehouse extends BaseEntity {
      * Get undocumented variable
      *
      * @return  string|null
-     */ 
+     */
     protected function getDescription(): ?string
     {
         return $this->description;
@@ -58,17 +60,17 @@ class Warehouse extends BaseEntity {
     /**
      * Set undocumented variable
      *
-     * @param  string|null 
+     * @param  string|null
      *
      * @return  self
-     */ 
+     */
     protected function setDescription(?string $description): Warehouse
     {
         $this->description = $description;
 
         return $this;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -82,13 +84,13 @@ class Warehouse extends BaseEntity {
             ]
         ];
 
-        if(!empty($this->getId())){
+        if (!empty($this->getId())) {
             $params['where'][] = ['id', '<>', $this->getId()];
         }
 
         $repo = new WarehouseRepository();
         $result = $repo->findOne($params);
-        if(!empty($result)){
+        if (!empty($result)) {
             throw new EntityException('data with the name "' . $this->getName() . '" exists');
         }
     }

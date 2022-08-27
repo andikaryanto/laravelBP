@@ -16,7 +16,9 @@ use LaravelCommon\Responses\SuccessResponse;
 
 class JustTest extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     /**
      *
@@ -57,7 +59,7 @@ class JustTest extends BaseController
     ) {
         // $token = $request->getToken();
         $g = $this->groupuserRepository->find(1);
-        $users = $g->getUsers(); 
+        $users = $g->getUsers();
         return (new SuccessResponse('ok', [], new UserCollection($users)));
     }
 }

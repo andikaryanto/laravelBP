@@ -41,9 +41,9 @@ class ShopController extends Controller
      */
     public function getAll()
     {
-       
+
         $shops = $this->shopRepository->gather();
-        if($shops->count() == 0){
+        if ($shops->count() == 0) {
             return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
         }
         return (new SuccessResponse('OK', ResponseConst::OK, $shops));
