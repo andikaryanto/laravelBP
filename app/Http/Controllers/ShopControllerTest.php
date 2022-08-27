@@ -71,7 +71,7 @@ class ShopControllerTest extends TestCase
         });
 
         $this->describe('->store()', function () {
-            $this->describe('wil return SuccessResponse', function () {
+            $this->describe('will return SuccessResponse', function () {
 
                 $shop = (new Shop())
                     ->setId(1)
@@ -85,7 +85,7 @@ class ShopControllerTest extends TestCase
         });
 
         $this->describe('->patch()', function () {
-            $this->describe('wil return SuccessResponse', function () {
+            $this->describe('will return SuccessResponse', function () {
 
                 $shop = (new Shop())
                     ->setId(1)
@@ -99,7 +99,7 @@ class ShopControllerTest extends TestCase
         });
 
         $this->describe('->delete()', function () {
-            $this->describe('wil return SuccessResponse', function () {
+            $this->describe('will return SuccessResponse', function () {
 
                 $shop = (new Shop())
                     ->setId(1)

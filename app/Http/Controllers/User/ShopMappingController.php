@@ -19,6 +19,7 @@ use LaravelCommon\App\ViewModels\UserViewModel;
 use LaravelCommon\Exceptions\DbQueryException;
 use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
+use LaravelCommon\Responses\SuccessResponse;
 use LaravelOrm\Exception\DatabaseException;
 use LaravelOrm\Exception\ValidationException;
 
@@ -68,7 +69,7 @@ class ShopMappingController extends Controller
      * Undocumented function
      *
      * @param Request $request
-     * @return void
+     * @return ResourceCreatedResponse|BadRequestResponse
      */
     public function register(Request $request)
     {
@@ -80,8 +81,6 @@ class ShopMappingController extends Controller
         try {
             $user = $this->userRepository->newEntity();
             $shop = $this->shopRepository->findOrFail($shopId);
-
-
 
             $user->setUsername($username);
             $user->setPassword($password);
@@ -114,7 +113,7 @@ class ShopMappingController extends Controller
     {
         try {
             $user = $request->getResource();
-            return new ResourceCreatedResponse('OK', ResponseConst::OK, new UserViewModel($user));
+            return new SuccessResponse('OK', ResponseConst::OK, new UserViewModel($user));
         } catch (Exception $e) {
             return new BadRequestResponse($e->getMessage(), ResponseConst::INVALID_DATA);
         }
@@ -132,7 +131,7 @@ class ShopMappingController extends Controller
                 $this->entityUnit->preparePersistence($user);
                 $this->entityUnit->flush();
             }
-            return new ResourceCreatedResponse('OK', ResponseConst::OK, new UserViewModel($user));
+            return new SuccessResponse('OK', ResponseConst::OK, new UserViewModel($user));
         } catch (Exception $e) {
             return new BadRequestResponse($e->getMessage(), ResponseConst::INVALID_DATA);
         }

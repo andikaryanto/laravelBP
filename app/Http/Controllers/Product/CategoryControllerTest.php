@@ -1,9 +1,9 @@
 <?php
 
-use App\Entities\Warehouse;
-use App\Http\Controllers\WarehouseController;
-use App\Repositories\WarehouseRepository;
-use App\ViewModels\WarehouseCollection;
+use App\Entities\Product\Category;
+use App\Http\Controllers\Product\CategoryController;
+use App\Repositories\Product\CategoryRepository;
+use App\ViewModels\Product\CategoryCollection;
 use Codeception\Specify;
 use LaravelCommon\Responses\NoDataFoundResponse;
 use LaravelCommon\Responses\SuccessResponse;
@@ -12,40 +12,40 @@ use LaravelOrm\Entities\EntityList;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Tests\TestCase;
 
-class WarehouseControllerTest extends TestCase
+class CategoryControllerTest extends TestCase
 {
     use Specify;
     use ProphecyTrait;
 
 
     /**
-     * @var WarehouseController
+     * @var CategoryController
      */
-    private WarehouseController $controller;
+    private CategoryController $controller;
 
     public function test()
     {
         $this->beforeSpecify(function () {
-            $this->warehouseRepository =
-                $this->prophesize(WarehouseRepository::class);
+            $this->categoryRepository =
+                $this->prophesize(CategoryRepository::class);
 
-            $this->controller = new WarehouseController(
-                $this->warehouseRepository->reveal()
+            $this->controller = new CategoryController(
+                $this->categoryRepository->reveal()
             );
         });
 
         $this->describe('->getAll()', function () {
-            $this->describe('when warehouseRepository has data', function () {
+            $this->describe('when categoryRepository has data', function () {
 
-                $warehouse = (new Warehouse())
+                $category = (new Category())
                     ->setId(1)
-                    ->setName('warehouse1');
+                    ->setName('category1');
 
-                $entityList = new EntityList([$warehouse]);
-                $collection = new WarehouseCollection($entityList);
+                $entityList = new EntityList([$category]);
+                $collection = new CategoryCollection($entityList);
 
 
-                $this->warehouseRepository->gather()
+                $this->categoryRepository->gather()
                     ->shouldBeCalled()
                     ->willReturn($collection);
 
@@ -54,13 +54,13 @@ class WarehouseControllerTest extends TestCase
                 verify($result)->instanceOf(SuccessResponse::class);
             });
 
-            $this->describe('when warehouseRepository has no data', function () {
+            $this->describe('when categoryRepository has no data', function () {
 
                 $entityList = new EntityList([]);
-                $collection = new WarehouseCollection($entityList);
+                $collection = new CategoryCollection($entityList);
 
 
-                $this->warehouseRepository->gather()
+                $this->categoryRepository->gather()
                     ->shouldBeCalled()
                     ->willReturn($collection);
 
@@ -73,11 +73,11 @@ class WarehouseControllerTest extends TestCase
         $this->describe('->store()', function () {
             $this->describe('will return SuccessResponse', function () {
 
-                $warehouse = (new Warehouse())
+                $category = (new Category())
                     ->setId(1)
-                    ->setName('warehouse1');
+                    ->setName('category1');
 
-                $request = (new Request())->setResource($warehouse);
+                $request = (new Request())->setResource($category);
 
                 $result = $this->controller->get($request);
                 verify($result)->instanceOf(SuccessResponse::class);
@@ -87,11 +87,11 @@ class WarehouseControllerTest extends TestCase
         $this->describe('->patch()', function () {
             $this->describe('will return SuccessResponse', function () {
 
-                $warehouse = (new Warehouse())
+                $category = (new Category())
                     ->setId(1)
-                    ->setName('warehouse1');
+                    ->setName('category1');
 
-                $request = (new Request())->setResource($warehouse);
+                $request = (new Request())->setResource($category);
 
                 $result = $this->controller->patch($request);
                 verify($result)->instanceOf(SuccessResponse::class);
@@ -101,11 +101,11 @@ class WarehouseControllerTest extends TestCase
         $this->describe('->delete()', function () {
             $this->describe('will return SuccessResponse', function () {
 
-                $warehouse = (new Warehouse())
+                $category = (new Category())
                     ->setId(1)
-                    ->setName('warehouse1');
+                    ->setName('category1');
 
-                $request = (new Request())->setResource($warehouse);
+                $request = (new Request())->setResource($category);
 
                 $result = $this->controller->delete($request);
                 verify($result)->instanceOf(SuccessResponse::class);
