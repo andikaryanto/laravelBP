@@ -13,6 +13,8 @@ use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\SuccessResponse;
 use LaravelCommon\System\Http\Request;
+use LaravelOrm\Exception\DatabaseException;
+use LaravelOrm\Exception\EntityException;
 use LaravelOrm\Exception\ValidationException;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Tests\TestCase;
@@ -59,6 +61,26 @@ class ShopMappingControllerTest extends TestCase
         });
 
         $this->describe('->register()', function () {
+            $this->describe('shop not found', function () {
+                $this->describe('should throw Database Exeption', function () {
+
+                    $user = new User();
+                    $this->userRepository->newEntity()
+                        ->shouldBeCalled()
+                        ->willReturn($user);
+
+                    $this->shopRepository->findOrFail($this->request->shop_id)
+                        ->shouldBeCalled()
+                        ->willThrow(new EntityException('Data with id 1 not found'));
+
+                    $result = $this->controller->register($this->request);
+
+                    verify($result)->instanceOf(BadRequestResponse::class);
+                    verify($result->getMessage())->equals('Data with id 1 not found');
+                    verify($result->getStatusCode())->equals(400);
+                });
+            });
+
             $this->describe('when email is not valid', function () {
 
                 $user = new User();
