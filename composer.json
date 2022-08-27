@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "andikaryanto11/laravelcommon": "dev-development",
+        "andikaryanto11/laravelcommon": "dev-main",
         "andikaryanto11/laravelgraphql": "dev-main",
         "andikaryanto11/laravelorm": "dev-main",
         "firebase/php-jwt": "^6.2",

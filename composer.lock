@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "352f50cdb297e16e9bfb0ed40596e27d",
+    "content-hash": "da36ea345897d42eb2714d5b0f0188c0",
     "packages": [
         {
             "name": "andikaryanto11/laravelcommon",
-            "version": "dev-development",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelcommon.git",
-                "reference": "8318df0cd7e7a2117e35814ec5bf25adbf0535fc"
+                "reference": "2f4263dec58f5b02f633fd46734be1dbe26de9e2"
             },
             "require": {
                 "php": ">=7.4"
@@ -20,6 +20,7 @@
             "require-dev": {
                 "squizlabs/php_codesniffer": "4.0.x-dev"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -47,7 +48,7 @@
                 }
             ],
             "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
-            "time": "2022-08-27T15:01:02+00:00"
+            "time": "2022-08-27T16:09:12+00:00"
         },
         {
             "name": "andikaryanto11/laravelgraphql",
@@ -95,10 +96,11 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelorm.git",
-                "reference": "4ea98592c081b8ce0d065eac73700795ba09d0df"
+                "reference": "2e53206096ec13947c2e5a0b9047613512d6bda3"
             },
             "require": {
                 "php": "^7.4",
+                "squizlabs/php_codesniffer": "^3.7",
                 "symfony/yaml": "^5.4"
             },
             "require-dev": {
@@ -126,7 +128,7 @@
                 "laravel",
                 "laravelorm"
             ],
-            "time": "2022-08-27T06:36:02+00:00"
+            "time": "2022-08-27T16:09:47+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -2977,6 +2979,62 @@
                 }
             ],
             "time": "2021-09-25T23:10:38+00:00"
+        },
+        {
+            "name": "squizlabs/php_codesniffer",
+            "version": "3.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "1359e176e9307e906dc3d890bcc9603ff6d90619"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/1359e176e9307e906dc3d890bcc9603ff6d90619",
+                "reference": "1359e176e9307e906dc3d890bcc9603ff6d90619",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "bin": [
+                "bin/phpcs",
+                "bin/phpcbf"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Sherwood",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "homepage": "https://github.com/squizlabs/PHP_CodeSniffer",
+            "keywords": [
+                "phpcs",
+                "standards"
+            ],
+            "support": {
+                "issues": "https://github.com/squizlabs/PHP_CodeSniffer/issues",
+                "source": "https://github.com/squizlabs/PHP_CodeSniffer",
+                "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
+            },
+            "time": "2022-06-18T07:21:10+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -8269,62 +8327,6 @@
                 }
             ],
             "time": "2020-09-28T06:39:44+00:00"
-        },
-        {
-            "name": "squizlabs/php_codesniffer",
-            "version": "3.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "1359e176e9307e906dc3d890bcc9603ff6d90619"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/1359e176e9307e906dc3d890bcc9603ff6d90619",
-                "reference": "1359e176e9307e906dc3d890bcc9603ff6d90619",
-                "shasum": ""
-            },
-            "require": {
-                "ext-simplexml": "*",
-                "ext-tokenizer": "*",
-                "ext-xmlwriter": "*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
-            },
-            "bin": [
-                "bin/phpcs",
-                "bin/phpcbf"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Greg Sherwood",
-                    "role": "lead"
-                }
-            ],
-            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
-            "homepage": "https://github.com/squizlabs/PHP_CodeSniffer",
-            "keywords": [
-                "phpcs",
-                "standards"
-            ],
-            "support": {
-                "issues": "https://github.com/squizlabs/PHP_CodeSniffer/issues",
-                "source": "https://github.com/squizlabs/PHP_CodeSniffer",
-                "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
-            },
-            "time": "2022-06-18T07:21:10+00:00"
         },
         {
             "name": "theseer/tokenizer",
