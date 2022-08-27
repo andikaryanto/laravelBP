@@ -85,15 +85,12 @@ class ShopMappingController extends Controller
             $user->setUsername($username);
             $user->setPassword($password);
             $user->setEmail($email);
-            $user->validate();
-            $user->setPassword(Hash::make($password));
             $this->entityUnit->preparePersistence($user);
+            $user->setPassword(Hash::make($password));
 
             $userShopMapping = $this->shopMappingRepository->newEntity();
             $userShopMapping->setUser($user);
             $userShopMapping->setShop($shop);
-            $userShopMapping->validate();
-            // return new ResourceCreatedResponse('OK', ResponseConst::OK, new UserViewModel($userShopMapping->getUser()));
             $this->entityUnit->preparePersistence($userShopMapping);
 
             $this->entityUnit->flush();

@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da36ea345897d42eb2714d5b0f0188c0",
+    "content-hash": "352f50cdb297e16e9bfb0ed40596e27d",
     "packages": [
         {
             "name": "andikaryanto11/laravelcommon",
-            "version": "dev-main",
+            "version": "dev-development",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelcommon.git",
-                "reference": "de4b47e5892d2d1d6ff6991ba0fe846b4e4a8d4d"
+                "reference": "8318df0cd7e7a2117e35814ec5bf25adbf0535fc"
             },
             "require": {
                 "php": ">=7.4"
@@ -20,7 +20,6 @@
             "require-dev": {
                 "squizlabs/php_codesniffer": "4.0.x-dev"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -48,7 +47,7 @@
                 }
             ],
             "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
-            "time": "2022-08-27T14:47:21+00:00"
+            "time": "2022-08-27T15:01:02+00:00"
         },
         {
             "name": "andikaryanto11/laravelgraphql",

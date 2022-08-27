@@ -13,6 +13,7 @@ use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\SuccessResponse;
 use LaravelCommon\System\Http\Request;
+use LaravelOrm\Exception\ValidationException;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Tests\TestCase;
 
@@ -59,13 +60,19 @@ class ShopMappingControllerTest extends TestCase
 
         $this->describe('->register()', function () {
             $this->describe('when email is not valid', function () {
+
+                $user = new User();
                 $this->userRepository->newEntity()
                     ->shouldBeCalled()
-                    ->willReturn(new User());
+                    ->willReturn($user);
 
                 $this->shopRepository->findOrFail($this->request->shop_id)
                     ->shouldBeCalled()
                     ->willReturn($this->shop1);
+
+                $this->entityUnit->preparePersistence($user)
+                    ->shouldBeCalled()
+                    ->willThrow(new ValidationException('The email must be a valid email address.'));
 
                 $result = $this->controller->register($this->request);
 
@@ -103,6 +110,7 @@ class ShopMappingControllerTest extends TestCase
                 verify($result->getStatusCode())->equals(201);
             });
         });
+
 
         $this->describe('->get()', function () {
             $this->describe('will return SuccessResponse', function () {
