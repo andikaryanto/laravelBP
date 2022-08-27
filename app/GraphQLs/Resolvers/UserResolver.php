@@ -13,7 +13,6 @@ use LaravelGraphQL\GraphQLException;
 
 class UserResolver extends AbstractResolver
 {
-
     /**
      *
      * @param UserRepository $userRepository
@@ -40,7 +39,7 @@ class UserResolver extends AbstractResolver
 
     /**
      * Get all users
-     * 
+     *
      * #query
      * #args
      * #type [User]
@@ -57,12 +56,14 @@ class UserResolver extends AbstractResolver
      * #args Int id
      * #type User
      * #desc Get a user data by id
-     * 
+     *
      */
-    final public function user($id){
+    final public function user($id)
+    {
         $user = $this->userRepository->find($id);
-        if(empty($user))
+        if (empty($user)) {
             return null;
+        }
         return (new UserViewModel($user));
     }
 
@@ -72,13 +73,15 @@ class UserResolver extends AbstractResolver
      * #args String username, String password
      * #type Token
      * #desc Generate user token
-     * 
+     *
      */
-    final public function generateToken($username, $password){
+    final public function generateToken($username, $password)
+    {
 
         $userToken = $this->userService->generateToken($username, $password);
-        if(is_null($userToken))
+        if (is_null($userToken)) {
             throw new GraphQLException('Failed to generate token');
+        }
 
         return (new TokenViewModel($userToken));
     }

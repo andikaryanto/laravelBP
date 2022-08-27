@@ -74,6 +74,6 @@ class Kernel extends AppHttpKernel
         'hydrator.warehouse' => WarehouseHydrator::class,
         'hydrator.shop' => ShopHydrator::class,
         'hydrator.product-category' => CategoryHydrator::class
-        
+
     ];
 }

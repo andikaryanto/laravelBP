@@ -9,7 +9,7 @@ use LaravelCommon\App\Repositories\UserRepository;
 
 class UserShopService
 {
-    public function getUserShop(User $user){
-
+    public function getUserShop(User $user)
+    {
     }
 }

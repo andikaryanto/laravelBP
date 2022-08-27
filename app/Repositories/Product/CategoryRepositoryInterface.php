@@ -6,5 +6,4 @@ use LaravelOrm\Interfaces\IRepository;
 
 interface CategoryRepositoryInterface extends IRepository
 {
-
 }

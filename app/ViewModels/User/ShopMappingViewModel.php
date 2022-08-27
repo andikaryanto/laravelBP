@@ -25,12 +25,12 @@ class ShopMappingViewModel extends AbstractViewModel
     public function addResource(array &$element)
     {
         $user = $this->entity->getUser();
-        if($user){
+        if ($user) {
             $element['user'] = (new UserViewModel($user))->toArray();
         }
 
         $shop = $this->entity->getShop();
-        if($shop){
+        if ($shop) {
             $element['shop'] = (new ShopViewModel($shop))->toArray();
         }
         return $this;
@@ -43,10 +43,10 @@ class ShopMappingViewModel extends AbstractViewModel
     {
         return [
             'id' => $this->entity->getId(),
-            'created_at' => !is_null($this->entity->getCreatedAt()) 
-                ? $this->entity->getCreatedAt()->format('Y-m-d H:i:s') 
+            'created_at' => !is_null($this->entity->getCreatedAt())
+                ? $this->entity->getCreatedAt()->format('Y-m-d H:i:s')
                 : null,
-            'updated_at' => !is_null($this->entity->getUpdatedAt()) 
+            'updated_at' => !is_null($this->entity->getUpdatedAt())
                 ? $this->entity->getUpdatedAt()->format('Y-m-d H:i:s')
                 : null
         ];
