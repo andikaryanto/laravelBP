@@ -80,7 +80,7 @@ class ShopMappingControllerTest extends TestCase
                 verify($result->getMessage())->equals('The email must be a valid email address.');
                 verify($result->getStatusCode())->equals(400);
             });
-            
+
             $this->describe('when email is valid', function () {
                 $this->request->email = 'andik.aryanto@gmail.com';
 
@@ -137,6 +137,5 @@ class ShopMappingControllerTest extends TestCase
                 verify($result)->instanceOf(SuccessResponse::class);
             });
         });
-            
     }
 }
