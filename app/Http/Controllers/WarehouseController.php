@@ -49,6 +49,12 @@ class WarehouseController extends Controller
         return (new SuccessResponse('OK', ResponseConst::OK, $warehouses));
     }
 
+    /**
+     * Get warehouse by id
+     *
+     * @param Request $request
+     * @return void
+     */
     public function get(Request $request)
     {
         $resource = $request->getResource();

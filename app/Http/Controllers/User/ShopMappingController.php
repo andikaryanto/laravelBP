@@ -5,11 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Repositories\ShopRepository;
 use App\Repositories\User\ShopMappingRepository;
-use App\ViewModels\ShopViewModel;
 use App\ViewModels\User\ShopMappingViewModel;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use LaravelCommon\App\Consts\ResponseConst;
@@ -20,7 +18,7 @@ use LaravelCommon\Exceptions\DbQueryException;
 use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\SuccessResponse;
-use LaravelOrm\Exception\DatabaseException;
+use LaravelOrm\Exception\EntityException;
 use LaravelOrm\Exception\ValidationException;
 
 class ShopMappingController extends Controller
@@ -96,10 +94,9 @@ class ShopMappingController extends Controller
             $this->entityUnit->flush();
 
             return new ResourceCreatedResponse('OK', ResponseConst::OK, new ShopMappingViewModel($userShopMapping));
-        } catch (DatabaseException $e) {
+        } catch (EntityException $e) {
             return new BadRequestResponse($e->getMessage(), ResponseConst::INVALID_DATA);
         } catch (DbQueryException $e) {
-            // $e->g
             return new BadRequestResponse($e->getMessage(), ResponseConst::INVALID_DATA);
         } catch (ValidationException $e) {
             return new BadRequestResponse($e->getMessage(), ResponseConst::INVALID_DATA);
