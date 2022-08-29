@@ -1,0 +1,42 @@
+App\Entities\Partner:
+  table: partners
+  primaryKey: id
+  props:
+    id:
+      field: id
+      isEntity: false
+      type: int
+    user: 
+      type: LaravelCommon\App\Entities\User
+      isEntity: true
+      foreignKey: user_id
+      relationType: one_to_many
+      inversedBy: shopMappings
+      field: user_id
+      rule: 'required'
+    partnerShops: 
+      type: App\Entities\Partner\Shop
+      isEntity: true
+      foreignKey: partner_id
+      relationType: many_to_many
+      inversedBy: partner
+      field: pertner_id
+      rule: 'required'
+    createdBy:
+      field: created_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    updatedBy:
+      field: updated_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    createdAt:
+      field: created_at
+      isEntity: false
+      type: DateTime
+    updatedAt:
+      field: updated_at
+      isEntity: false
+      type: DateTime

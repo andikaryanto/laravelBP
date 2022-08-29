@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use App\Repositories\ShopRepository;
 use LaravelCommon\App\Entities\BaseEntity;
+use LaravelOrm\Entities\EntityList;
 use LaravelOrm\Exception\EntityException;
 
 class Shop extends BaseEntity
@@ -57,6 +58,7 @@ class Shop extends BaseEntity
      */
     private ?string $latitude = null;
 
+    protected ?EntityList $partnerShops;
 
     /**
      * Get undocumented variable
@@ -246,6 +248,26 @@ class Shop extends BaseEntity
     public function setLatitude($latitude): self
     {
         $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of partnerShops
+     */
+    public function getPartnerShops(): EntityList
+    {
+        return $this->partnerShops;
+    }
+
+    /**
+     * Set the value of partnerShops
+     *
+     * @return  self
+     */
+    public function setPartnerShops(EntityList $partnerShops): self
+    {
+        $this->partnerShops = $partnerShops;
 
         return $this;
     }

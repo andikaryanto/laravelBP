@@ -1,9 +1,10 @@
 <?php
 
+use App\Repositories\PartnerRepository;
 use App\Routes\Product\CategoryRoute;
 use App\Routes\ShopRoute;
-use App\Routes\User\ShopMappingRoute;
 use App\Routes\WarehouseRoute;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,15 @@ use App\Routes\WarehouseRoute;
 |
 */
 
+Route::get('/test', function(){
+    $repo = new PartnerRepository();
+    $partner = $repo->find(2);
+    $partnerShops = $partner->getPartnerShops();
+    foreach($partnerShops as $partnerShop){
+        echo $partnerShop->getShop()->getId();
+    }
+});
+
 WarehouseRoute::register();
 ShopRoute::register();
 CategoryRoute::register();
-ShopMappingRoute::register();

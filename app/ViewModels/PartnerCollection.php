@@ -1,17 +1,17 @@
 <?php
 
-namespace App\ViewModels\User;
+namespace App\ViewModels;
 
 use LaravelCommon\ViewModels\PaggedCollection;
 use LaravelOrm\Interfaces\IEntity;
 
-class ShopMappingCollection extends PaggedCollection
+class PartnerCollection extends PaggedCollection
 {
     /**
      * @inheritdoc
      */
     public function shape(IEntity $entity)
     {
-        $this->addItem(new ShopMappingViewModel($entity));
+        $this->addItem(new PartnerViewModel($entity));
     }
 }
