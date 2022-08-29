@@ -6,13 +6,14 @@ use App\Entities\Partner;
 use App\Repositories\PartnerRepositoryInterface;
 use App\ViewModels\PartnerCollection;
 use App\ViewModels\PartnerViewModel;
+use LaravelCommon\App\Entities\User;
 use LaravelCommon\App\Repositories\BaseRepository;
 
 class PartnerRepository extends BaseRepository implements PartnerRepositoryInterface
 {
     /**
-    * Constrcutor
-    */
+     * Constrcutor
+     */
     public function __construct()
     {
         parent::__construct(Partner::class);
@@ -36,5 +37,20 @@ class PartnerRepository extends BaseRepository implements PartnerRepositoryInter
     public function viewModelClass(): string
     {
         return PartnerViewModel::class;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param User $user
+     * @return ?Partner
+     */
+    public function getPartnerByUser(User $user): ?Partner
+    {
+        return $this->findOne([
+            'where' => [
+                ['user_id', '=', $user->getId()]
+            ]
+        ]);
     }
 }

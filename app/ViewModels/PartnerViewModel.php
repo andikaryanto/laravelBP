@@ -3,6 +3,7 @@
 namespace App\ViewModels;
 
 use App\Entities\Partner;
+use LaravelCommon\App\ViewModels\UserViewModel;
 use LaravelCommon\ViewModels\AbstractViewModel;
 
 class PartnerViewModel extends AbstractViewModel
@@ -25,7 +26,7 @@ class PartnerViewModel extends AbstractViewModel
 
         $user = $this->entity->getUser();
         if ($user) {
-            $element['user'] = $user;
+            $element['user'] = (new UserViewModel($user))->toArray();
         }
 
         return $this;

@@ -15,8 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            DefaultUserSeeder::class,
-            SeedMarketOrganizerScope::class
+            DefaultUserSeeder::class
         ]);
     }
 }

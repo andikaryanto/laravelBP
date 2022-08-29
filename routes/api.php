@@ -1,9 +1,9 @@
 <?php
 
 use App\Repositories\PartnerRepository;
+use App\Routes\PartnerRoute;
 use App\Routes\Product\CategoryRoute;
 use App\Routes\ShopRoute;
-use App\Routes\UserRoute;
 use App\Routes\WarehouseRoute;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +30,4 @@ Route::get('/test', function(){
 WarehouseRoute::register();
 ShopRoute::register();
 CategoryRoute::register();
-UserRoute::register();
+PartnerRoute::register();
