@@ -15,7 +15,7 @@ use LaravelOrm\Exception\ValidationException;
 class CreateUserMarketOrganizer extends Command
 {
 
-    public const MARKET_ORGANIZER_SCOPE_ID = 4;
+    public const MARKET_ORGANIZER_SCOPE_NAME = 'marketOrganizer';
 
     /**
      * The name and signature of the console command.
@@ -106,7 +106,11 @@ class CreateUserMarketOrganizer extends Command
             $this->entityUnit->preparePersistence($user);
             $user->setPassword(Hash::make($password));
 
-            $scope = $this->scopeRepository->findOrFail(self::MARKET_ORGANIZER_SCOPE_ID); 
+            $scope = $this->scopeRepository->findOneOrFail([
+                'where' => [
+                    ['name', '=', self::MARKET_ORGANIZER_SCOPE_NAME]
+                ]
+            ]); 
 
             $userScopeMapping = $this->scopeMappingRepository->newEntity();
             $userScopeMapping->setUser($user);

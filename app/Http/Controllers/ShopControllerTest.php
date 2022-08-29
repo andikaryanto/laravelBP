@@ -59,7 +59,6 @@ class ShopControllerTest extends TestCase
                 $entityList = new EntityList([]);
                 $collection = new ShopCollection($entityList);
 
-
                 $this->shopRepository->gather()
                     ->shouldBeCalled()
                     ->willReturn($collection);
