@@ -16,15 +16,13 @@ class ShopRoute extends CommonRoute
     public static function register()
     {
         return Route::prefix('shop')->group(function () {
-            Route::middleware(['check-token', 'check-scope:marketOrganizer,'])->group(function () {
+            Route::middleware(['check-token', 'check-scope:marketOrganizer, partner'])->group(function () {
                 Route::get('/list', [ShopController::class, 'getAll']);
 
                 Route::post('/store', [ShopController::class, 'store'])
                     ->middleware(
                         [
-                            'hydrator.shop',
-                            'resource-validation',
-                            'entity-unit'
+                            'hydrator.shop'
                         ]
                     );
 

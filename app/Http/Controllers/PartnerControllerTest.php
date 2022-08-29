@@ -1,10 +1,11 @@
 <?php
 
 use App\Entities\Partner;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\PartnerController;
 use App\Repositories\PartnerRepository;
 use Codeception\Specify;
 use LaravelCommon\App\Entities\User;
+use LaravelCommon\App\Repositories\User\ScopeMappingRepository;
 use LaravelCommon\App\Repositories\UserRepository;
 use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\ResourceCreatedResponse;
@@ -13,25 +14,29 @@ use LaravelCommon\System\Http\Request;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Tests\TestCase;
 
-class UserControllerTest extends TestCase
+class PartnerControllerTest extends TestCase
 {
     use Specify;
     use ProphecyTrait;
 
 
     /**
-     * @var UserController
+     * @var PartnerController
      */
-    private UserController $controller;
+    private PartnerController $controller;
 
     public function test()
     {
         $this->beforeSpecify(function () {
+            $this->scopeRepository = $this->prophesize(ScopeRepository::class);
+            $this->scopeMappingRepository = $this->prophesize(ScopeMappingRepository::class);
             $this->userRepository = $this->prophesize(UserRepository::class);
             $this->partnerRepository = $this->prophesize(PartnerRepository::class);
             $this->entityUnit = $this->prophesize(EntityUnit::class);
 
-            $this->controller = new UserController(
+            $this->controller = new PartnerController(
+                $this->scopeRepository->reveal(),
+                $this->scopeMappingRepository->reveal(),
                 $this->userRepository->reveal(),
                 $this->partnerRepository->reveal(),
                 $this->entityUnit->reveal()

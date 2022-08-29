@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Partner\ShopRepository as PartnerShopRepository;
+use App\Repositories\PartnerRepository;
 use App\Repositories\ShopRepository;
 use App\ViewModels\ShopViewModel;
 use Exception;
 use Illuminate\Http\Request;
 use LaravelCommon\App\Consts\ResponseConst;
+use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\NoDataFoundResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
@@ -21,16 +24,45 @@ class ShopController extends Controller
      */
     protected ShopRepository $shopRepository;
 
+    /**
+     * Undocumented variable
+     *
+     * @var PartnerRepository
+     */
+    protected PartnerRepository $partnerRepository;
+
+    /**
+     * Undocumented variable
+     *
+     * @var PartnerShopRepository
+     */
+    protected PartnerShopRepository $partnerShopRepository;
+
+    /**
+     * Undocumented variable
+     *
+     * @var EntityUnit
+     */
+    protected EntityUnit $entityUnit;
 
     /**
      * Undocumented function
      *
      * @param ShopRepository $shopRepository
+     * @param PartnerRepository $partnerRepository
+     * @param PartnerShopRepository $partnerShopRepository
+     * @param EntityUnit $entityUnit
      */
     public function __construct(
-        ShopRepository $shopRepository
+        ShopRepository $shopRepository,
+        PartnerRepository $partnerRepository,
+        PartnerShopRepository $partnerShopRepository,
+        EntityUnit $entityUnit
     ) {
         $this->shopRepository = $shopRepository;
+        $this->partnerRepository = $partnerRepository;
+        $this->partnerShopRepository = $partnerShopRepository;
+        $this->entityUnit = $entityUnit;
     }
 
 
@@ -64,6 +96,19 @@ class ShopController extends Controller
     {
         try {
             $resource = $request->getResource();
+            $user = $request->getUserToken()->getUser();
+ 
+            
+            $partner = $this->partnerRepository->getPartnerByUser($user);
+
+            $partnerShop = $this->partnerShopRepository->newEntity();
+            $partnerShop->setShop($resource);
+            $partnerShop->setPartner($partner);
+
+            $this->entityUnit->preparePersistence($resource);
+            $this->entityUnit->preparePersistence($partnerShop);
+
+            $this->entityUnit->flush();
 
             return new ResourceCreatedResponse('OK', ResponseConst::OK, new ShopViewModel($resource));
         } catch (Exception $e) {

@@ -2,12 +2,11 @@
 
 namespace App\Routes;
 
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\PartnerController;
 use Illuminate\Support\Facades\Route;
 use LaravelCommon\App\Routes\CommonRoute;
 
-class UserRoute extends CommonRoute
+class PartnerRoute extends CommonRoute
 {
     /**
      * register warehouse route
@@ -16,8 +15,8 @@ class UserRoute extends CommonRoute
      */
     public static function register()
     {
-        return Route::prefix('user')->group(function () {
-            Route::post('/register', [UserController::class, 'register']);
+        return Route::prefix('partner')->group(function () {
+            Route::post('/register', [PartnerController::class, 'register']);
         });
     }
 }
