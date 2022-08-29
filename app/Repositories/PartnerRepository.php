@@ -39,7 +39,13 @@ class PartnerRepository extends BaseRepository implements PartnerRepositoryInter
         return PartnerViewModel::class;
     }
 
-    public function getPartnerByUser(User $user)
+    /**
+     * Undocumented function
+     *
+     * @param User $user
+     * @return ?Partner
+     */
+    public function getPartnerByUser(User $user): ?Partner
     {
         return $this->findOne([
             'where' => [

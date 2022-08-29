@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use LaravelCommon\App\Consts\ResponseConst;
 use LaravelCommon\App\Utilities\EntityUnit;
+use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\NoDataFoundResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
@@ -97,9 +98,12 @@ class ShopController extends Controller
         try {
             $resource = $request->getResource();
             $user = $request->getUserToken()->getUser();
- 
-            
+
             $partner = $this->partnerRepository->getPartnerByUser($user);
+
+            if(is_null($partner)){
+                return new BadRequestResponse('User is not a partner', ResponseConst::INVALID_CREDENTIAL);
+            }
 
             $partnerShop = $this->partnerShopRepository->newEntity();
             $partnerShop->setShop($resource);
