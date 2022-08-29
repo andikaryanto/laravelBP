@@ -18,7 +18,7 @@ class CategoryRoute extends CommonRoute
         return Route::prefix('product-category')->group(function () {
             Route::middleware(['check-token'])->group(function () {
                 Route::get('/list', [CategoryController::class, 'getAll']);
-        
+
                 Route::post('/store', [CategoryController::class, 'store'])
                     ->middleware(
                         [
@@ -27,7 +27,7 @@ class CategoryRoute extends CommonRoute
                             'entity-unit'
                         ]
                     );
-        
+
                 Route::get('/{id}', [CategoryController::class, 'get'])->middleware('hydrator.product-category');
                 Route::patch('/{id}', [CategoryController::class, 'patch'])
                     ->middleware(
@@ -45,6 +45,5 @@ class CategoryRoute extends CommonRoute
                 );
             });
         });
-        
     }
 }

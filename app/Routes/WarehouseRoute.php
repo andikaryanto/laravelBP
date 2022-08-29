@@ -44,6 +44,5 @@ class WarehouseRoute extends CommonRoute
                 );
             });
         });
-        
     }
 }

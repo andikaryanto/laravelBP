@@ -14,7 +14,6 @@ use LaravelOrm\Exception\ValidationException;
 
 class CreateUserMarketOrganizer extends Command
 {
-
     public const MARKET_ORGANIZER_SCOPE_NAME = 'marketOrganizer';
 
     /**
@@ -76,9 +75,7 @@ class CreateUserMarketOrganizer extends Command
         ScopeMappingRepository $scopeMappingRepository,
         ScopeRepository $scopeRepository,
         EntityUnit $entityUnit
-
-    )
-    {
+    ) {
         $this->userRepository = $userRepository;
         $this->scopeMappingRepository = $scopeMappingRepository;
         $this->scopeRepository = $scopeRepository;
@@ -110,13 +107,13 @@ class CreateUserMarketOrganizer extends Command
                 'where' => [
                     ['name', '=', self::MARKET_ORGANIZER_SCOPE_NAME]
                 ]
-            ]); 
+            ]);
 
             $userScopeMapping = $this->scopeMappingRepository->newEntity();
             $userScopeMapping->setUser($user);
             $userScopeMapping->setScope($scope);
             $this->entityUnit->preparePersistence($userScopeMapping);
-            
+
             $this->entityUnit->flush();
 
             $this->info('Username ' . $username . ' created');
@@ -124,7 +121,7 @@ class CreateUserMarketOrganizer extends Command
             $this->info('Failed to create user : ' . $e->getMessage());
         } catch (ValidationException $e) {
             $this->info('Failed to create user : ' . $e->getMessage());
-        } 
+        }
 
         return 0;
     }

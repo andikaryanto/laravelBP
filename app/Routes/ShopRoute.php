@@ -18,7 +18,7 @@ class ShopRoute extends CommonRoute
         return Route::prefix('shop')->group(function () {
             Route::middleware(['check-token'])->group(function () {
                 Route::get('/list', [ShopController::class, 'getAll']);
-        
+
                 Route::post('/store', [ShopController::class, 'store'])
                     ->middleware(
                         [
@@ -27,7 +27,7 @@ class ShopRoute extends CommonRoute
                             'entity-unit'
                         ]
                     );
-        
+
                 Route::get('/{id}', [ShopController::class, 'get'])->middleware('hydrator.shop');
                 Route::patch('/{id}', [ShopController::class, 'patch'])
                     ->middleware(
