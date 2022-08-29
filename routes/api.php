@@ -19,9 +19,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function(){
     $repo = new PartnerRepository();
-    $partners = $repo->collect();
-    foreach($partners as $partner){
-        echo $partner->getUser()->getId();
+    $partner = $repo->find(2);
+    $partnerShops = $partner->getPartnerShops();
+    foreach($partnerShops as $partnerShop){
+        echo $partnerShop->getShop()->getId();
     }
 });
 

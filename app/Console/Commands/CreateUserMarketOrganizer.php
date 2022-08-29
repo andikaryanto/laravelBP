@@ -103,11 +103,13 @@ class CreateUserMarketOrganizer extends Command
             $this->entityUnit->preparePersistence($user);
             $user->setPassword(Hash::make($password));
 
-            $scope = $this->scopeRepository->findOneOrFail([
+            $param = [
                 'where' => [
                     ['name', '=', self::MARKET_ORGANIZER_SCOPE_NAME]
                 ]
-            ]);
+            ];
+            
+            $scope = $this->scopeRepository->findOneOrFail($param);
 
             $userScopeMapping = $this->scopeMappingRepository->newEntity();
             $userScopeMapping->setUser($user);

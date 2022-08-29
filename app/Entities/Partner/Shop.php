@@ -14,7 +14,7 @@ class Shop extends BaseEntity
 	/**
 	 * Get the value of partner
 	 */ 
-	public function getPartner(): Partner
+	protected function getPartner(): ?Partner
 	{
 		return $this->partner;
 	}
@@ -24,7 +24,7 @@ class Shop extends BaseEntity
 	 *
 	 * @return  self
 	 */ 
-	public function setPartner(Partner $partner): self
+	protected function setPartner(Partner $partner): self
 	{
 		$this->partner = $partner;
 
@@ -34,7 +34,7 @@ class Shop extends BaseEntity
 	/**
 	 * Get the value of shop
 	 */ 
-	public function getShop(): EntitiesShop
+	protected function getShop(): ?EntitiesShop
 	{
 		return $this->shop;
 	}
@@ -44,7 +44,7 @@ class Shop extends BaseEntity
 	 *
 	 * @return  self
 	 */ 
-	public function setShop(EntitiesShop $shop): self
+	protected function setShop(EntitiesShop $shop): self
 	{
 		$this->shop = $shop;
 
