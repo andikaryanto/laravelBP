@@ -58,7 +58,7 @@ class Shop extends BaseEntity
      */
     private ?string $latitude = null;
 
-	protected ?EntityList $partnerShops;
+    protected ?EntityList $partnerShops;
 
     /**
      * Get undocumented variable
@@ -252,23 +252,23 @@ class Shop extends BaseEntity
         return $this;
     }
 
-	/**
-	 * Get the value of partnerShops
-	 */ 
-	public function getPartnerShops(): EntityList
-	{
-		return $this->partnerShops;
-	}
+    /**
+     * Get the value of partnerShops
+     */
+    public function getPartnerShops(): EntityList
+    {
+        return $this->partnerShops;
+    }
 
-	/**
-	 * Set the value of partnerShops
-	 *
-	 * @return  self
-	 */ 
-	public function setPartnerShops(EntityList $partnerShops): self
-	{
-		$this->partnerShops = $partnerShops;
+    /**
+     * Set the value of partnerShops
+     *
+     * @return  self
+     */
+    public function setPartnerShops(EntityList $partnerShops): self
+    {
+        $this->partnerShops = $partnerShops;
 
-		return $this;
-	}
+        return $this;
+    }
 }

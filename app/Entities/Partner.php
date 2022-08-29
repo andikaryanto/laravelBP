@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entities;
 
 use App\Entities\Partner\Shop as PartnerShop;
@@ -8,49 +9,48 @@ use LaravelOrm\Entities\EntityList;
 
 class Partner extends BaseEntity
 {
-	protected ?User $user = null;
-	protected ?EntityList $partnerShops = null;
+    protected ?User $user = null;
+    protected ?EntityList $partnerShops = null;
 
-	/**
-	 * Get the value of user
-	 * @return User
-	 */ 
-	protected function getUser(): ?User
-	{
-		return $this->user;
-	}
+    /**
+     * Get the value of user
+     * @return User
+     */
+    protected function getUser(): ?User
+    {
+        return $this->user;
+    }
 
-	/**
-	 * Set the value of user
-	 *
-	 * @param User $user
-	 * @return  self
-	 */ 
-	protected function setUser(User $user): self
-	{
-		$this->user = $user;
+    /**
+     * Set the value of user
+     *
+     * @param User $user
+     * @return  self
+     */
+    protected function setUser(User $user): self
+    {
+        $this->user = $user;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get the value of partnerShops
-	 */ 
-	protected function getPartnerShops(): ?EntityList
-	{
-		return $this->partnerShops;
-	}
+    /**
+     * Get the value of partnerShops
+     */
+    protected function getPartnerShops(): ?EntityList
+    {
+        return $this->partnerShops;
+    }
 
-	/**
-	 * Set the value of partnerShops
-	 *
-	 * @return  self
-	 */ 
-	protected function setPartnerShops(EntityList $partnerShops): self
-	{
-		$this->partnerShops = $partnerShops;
+    /**
+     * Set the value of partnerShops
+     *
+     * @return  self
+     */
+    protected function setPartnerShops(EntityList $partnerShops): self
+    {
+        $this->partnerShops = $partnerShops;
 
-		return $this;
-	}
+        return $this;
+    }
 }
-        

@@ -24,8 +24,8 @@ class PartnerViewModel extends AbstractViewModel
     {
 
         $user = $this->entity->getUser();
-        if($user){
-            $element['user'] = $user;    
+        if ($user) {
+            $element['user'] = $user;
         }
 
         return $this;

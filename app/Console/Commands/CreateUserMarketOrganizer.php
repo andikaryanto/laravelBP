@@ -108,7 +108,7 @@ class CreateUserMarketOrganizer extends Command
                     ['name', '=', self::MARKET_ORGANIZER_SCOPE_NAME]
                 ]
             ];
-            
+
             $scope = $this->scopeRepository->findOneOrFail($param);
 
             $userScopeMapping = $this->scopeMappingRepository->newEntity();
