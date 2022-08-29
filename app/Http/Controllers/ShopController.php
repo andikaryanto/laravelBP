@@ -101,8 +101,8 @@ class ShopController extends Controller
 
             $partner = $this->partnerRepository->getPartnerByUser($user);
 
-            if(is_null($partner)){
-                return new BadRequestResponse('User is not a partner', ResponseConst::INVALID_CREDENTIAL);
+            if (is_null($partner)) {
+                return new BadRequestResponse('User is not a partner.', ResponseConst::INVALID_CREDENTIAL);
             }
 
             $partnerShop = $this->partnerShopRepository->newEntity();

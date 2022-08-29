@@ -22,7 +22,8 @@ class ShopRoute extends CommonRoute
                         [
                             'check-scope:marketOrganizer,customer'
                         ]
-                    );;
+                    );
+                ;
 
                 Route::post('/store', [ShopController::class, 'store'])
                     ->middleware(

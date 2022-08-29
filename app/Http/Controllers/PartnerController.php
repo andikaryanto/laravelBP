@@ -20,7 +20,6 @@ use LaravelOrm\Exception\ValidationException;
 
 class PartnerController extends Controller
 {
-
     public const PARTNER_SCOPE_NAME = 'partner';
 
     /**
@@ -100,7 +99,7 @@ class PartnerController extends Controller
             $userScopeMapping->setUser($user);
             $userScopeMapping->setScope($scope);
             $this->entityUnit->preparePersistence($userScopeMapping);
-            
+
             $this->entityUnit->flush();
 
             return new ResourceCreatedResponse('OK', ResponseConst::OK, new PartnerViewModel($partner));

@@ -46,8 +46,7 @@ class CreateScope extends Command
     public function __construct(
         ScopeRepository $scopeRepository,
         EntityManager $entityManager
-    )
-    {
+    ) {
         $this->scopeRepository = $scopeRepository;
         $this->entityManager = $entityManager;
         parent::__construct();
