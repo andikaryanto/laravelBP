@@ -22,6 +22,7 @@ class CreateShops extends Migration
             $table->string('longitude');
             $table->string('latitude');
             $table->string('description')->nullable();
+            $table->softDelete();
             $table->auditable();
             $table->timestamps();
         });

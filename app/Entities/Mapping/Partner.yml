@@ -1,19 +1,11 @@
-App\Entities\User\ShopMapping:
-  table: user_shop_mappings
+App\Entities\Partner:
+  table: partners
   primaryKey: id
   props:
     id:
       field: id
       isEntity: false
       type: int
-    shop: 
-      type: App\Entities\Shop
-      isEntity: true
-      foreignKey: shop_id
-      relationType: one_to_many
-      inversedBy: shopMappings
-      field: shop_id
-      rule: 'required'
     user: 
       type: LaravelCommon\App\Entities\User
       isEntity: true
@@ -22,6 +14,14 @@ App\Entities\User\ShopMapping:
       inversedBy: shopMappings
       field: user_id
       rule: 'required'
+    # partnerShops: 
+    #   type: App\Entities\Partner\Shop
+    #   isEntity: true
+    #   foreignKey: user_id
+    #   relationType: one_to_many
+    #   inversedBy: partner
+    #   field: user_id
+    #   rule: 'required'
     createdBy:
       field: created_by
       isEntity: false

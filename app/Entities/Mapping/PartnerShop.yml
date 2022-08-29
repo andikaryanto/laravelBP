@@ -1,0 +1,42 @@
+App\Entities\Partner\Shop:
+  table: partner_shops
+  primaryKey: id
+  props:
+    id:
+      field: id
+      isEntity: false
+      type: int
+    partner: 
+      type: App\Entities\Partner
+      isEntity: true
+      foreignKey: partner_id
+      relationType: one_to_many
+      inversedBy: partnerShops
+      field: partner_id
+      rule: 'required'
+    shop: 
+      type: App\Entities\Shop
+      isEntity: true
+      foreignKey: shop_id
+      relationType: one_to_many
+      inversedBy: partnerShops
+      field: shop_id
+      rule: 'required'
+    createdBy:
+      field: created_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    updatedBy:
+      field: updated_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    createdAt:
+      field: created_at
+      isEntity: false
+      type: DateTime
+    updatedAt:
+      field: updated_at
+      isEntity: false
+      type: DateTime
