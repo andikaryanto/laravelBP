@@ -6,7 +6,7 @@ use App\Entities\Partner;
 use App\Entities\Shop as EntitiesShop;
 use LaravelCommon\App\Entities\BaseEntity;
 
-class Shop extends BaseEntity
+class ShopMapping extends BaseEntity
 {
     protected ?Partner $partner = null;
     protected ?EntitiesShop $shop = null;

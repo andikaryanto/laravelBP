@@ -1,12 +1,12 @@
-App\Entities\Partner\Shop:
-  table: partner_shops
+App\Entities\Partner\ShopMapping:
+  table: partner_shop_mappings
   primaryKey: id
   props:
     id:
       field: id
       isEntity: false
       type: int
-    partner: 
+    partner:
       type: App\Entities\Partner
       isEntity: true
       foreignKey: partner_id
@@ -14,7 +14,7 @@ App\Entities\Partner\Shop:
       inversedBy: partnerShops
       field: partner_id
       rule: 'required'
-    shop: 
+    shop:
       type: App\Entities\Shop
       isEntity: true
       foreignKey: shop_id

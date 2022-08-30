@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Partner\ShopRepository as PartnerShopRepository;
+use App\Repositories\Partner\ShopMappingRepository;
 use App\Repositories\PartnerRepository;
 use App\Repositories\ShopRepository;
 use App\ViewModels\ShopViewModel;
@@ -35,9 +35,9 @@ class ShopController extends Controller
     /**
      * Undocumented variable
      *
-     * @var PartnerShopRepository
+     * @var ShopMappingRepository
      */
-    protected PartnerShopRepository $partnerShopRepository;
+    protected ShopMappingRepository $shopMappingRepository;
 
     /**
      * Undocumented variable
@@ -51,18 +51,18 @@ class ShopController extends Controller
      *
      * @param ShopRepository $shopRepository
      * @param PartnerRepository $partnerRepository
-     * @param PartnerShopRepository $partnerShopRepository
+     * @param ShopMappingRepository $shopMappingRepository
      * @param EntityUnit $entityUnit
      */
     public function __construct(
         ShopRepository $shopRepository,
         PartnerRepository $partnerRepository,
-        PartnerShopRepository $partnerShopRepository,
+        ShopMappingRepository $shopMappingRepository,
         EntityUnit $entityUnit
     ) {
         $this->shopRepository = $shopRepository;
         $this->partnerRepository = $partnerRepository;
-        $this->partnerShopRepository = $partnerShopRepository;
+        $this->shopMappingRepository = $shopMappingRepository;
         $this->entityUnit = $entityUnit;
     }
 
@@ -105,7 +105,7 @@ class ShopController extends Controller
                 return new BadRequestResponse('User is not a partner.', ResponseConst::INVALID_CREDENTIAL);
             }
 
-            $partnerShop = $this->partnerShopRepository->newEntity();
+            $partnerShop = $this->shopMappingRepository->newEntity();
             $partnerShop->setShop($resource);
             $partnerShop->setPartner($partner);
 

@@ -2,19 +2,19 @@
 
 namespace App\Repositories\Partner;
 
-use App\Entities\Partner\Shop;
-use App\ViewModels\Partner\ShopCollection;
-use App\ViewModels\Partner\ShopViewModel;
+use App\Entities\Partner\ShopMapping;
+use App\ViewModels\Partner\ShopMappingCollection;
+use App\ViewModels\Partner\ShopMappingViewModel;
 use LaravelCommon\App\Repositories\BaseRepository;
 
-class ShopRepository extends BaseRepository implements ShopRepositoryInterface
+class ShopMappingRepository extends BaseRepository implements ShopMappingRepositoryInterface
 {
     /**
     * Constrcutor
     */
     public function __construct()
     {
-        parent::__construct(Shop::class);
+        parent::__construct(ShopMapping::class);
     }
 
     /**
@@ -24,7 +24,7 @@ class ShopRepository extends BaseRepository implements ShopRepositoryInterface
      */
     public function collectionClass(): string
     {
-        return ShopCollection::class;
+        return ShopMappingCollection::class;
     }
 
     /**
@@ -34,6 +34,6 @@ class ShopRepository extends BaseRepository implements ShopRepositoryInterface
      */
     public function viewModelClass(): string
     {
-        return ShopViewModel::class;
+        return ShopMappingViewModel::class;
     }
 }

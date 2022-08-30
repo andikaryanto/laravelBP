@@ -13,7 +13,7 @@ class CreatePartnerShops extends Migration
      */
     public function up()
     {
-        Schema::create('partner_shops', function (Blueprint $table) {
+        Schema::create('partner_shop_mappings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('partner_id');
             $table->unsignedBigInteger('shop_id');
@@ -22,7 +22,7 @@ class CreatePartnerShops extends Migration
 
             $table->foreign('partner_id')
                 ->references('id')->on('partners');
-                
+
             $table->foreign('shop_id')
                 ->references('id')->on('shops');
         });

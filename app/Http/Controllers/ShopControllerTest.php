@@ -1,10 +1,10 @@
 <?php
 
 use App\Entities\Partner;
-use App\Entities\Partner\Shop as PartnerShop;
+use App\Entities\Partner\ShopMapping;
 use App\Entities\Shop;
 use App\Http\Controllers\ShopController;
-use App\Repositories\Partner\ShopRepository as PartnerShopRepository;
+use App\Repositories\Partner\ShopMappingRepository;
 use App\Repositories\PartnerRepository;
 use App\Repositories\ShopRepository;
 use App\ViewModels\ShopCollection;
@@ -37,13 +37,13 @@ class ShopControllerTest extends TestCase
         $this->beforeSpecify(function () {
             $this->shopRepository = $this->prophesize(ShopRepository::class);
             $this->partnerRepository = $this->prophesize(PartnerRepository::class);
-            $this->partnerShopRepository = $this->prophesize(PartnerShopRepository::class);
+            $this->shopMappingRepository = $this->prophesize(ShopMappingRepository::class);
             $this->entityUnit = $this->prophesize(EntityUnit::class);
 
             $this->controller = new ShopController(
                 $this->shopRepository->reveal(),
                 $this->partnerRepository->reveal(),
-                $this->partnerShopRepository->reveal(),
+                $this->shopMappingRepository->reveal(),
                 $this->entityUnit->reveal()
             );
         });
@@ -140,10 +140,10 @@ class ShopControllerTest extends TestCase
                         ->shouldBeCalled()
                         ->willReturn($partner);
 
-                    $partnerShop = (new PartnerShop())
+                    $partnerShop = (new ShopMapping())
                         ->setId(1);
 
-                    $this->partnerShopRepository->newEntity()
+                    $this->shopMappingRepository->newEntity()
                         ->shouldBeCalled()
                         ->willReturn($partnerShop);
 

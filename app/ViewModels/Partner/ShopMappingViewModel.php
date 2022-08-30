@@ -2,10 +2,11 @@
 
 namespace App\ViewModels\Partner;
 
-use App\Entities\Partner\Shop;
+use App\Entities\Partner\ShopMapping;
+use App\ViewModels\ShopViewModel;
 use LaravelCommon\ViewModels\AbstractViewModel;
 
-class ShopViewModel extends AbstractViewModel
+class ShopMappingViewModel extends AbstractViewModel
 {
     /**
      * @var bool $autoAddResource;
@@ -13,7 +14,7 @@ class ShopViewModel extends AbstractViewModel
     protected $isAutoAddResource = true;
 
     /**
-     * @var Shop
+     * @var ShopMapping
      */
     protected $entity;
 
@@ -22,6 +23,10 @@ class ShopViewModel extends AbstractViewModel
      */
     public function addResource(array &$element)
     {
+        $shop = $this->entity->getShop();
+        if ($shop) {
+            $element['shop'] = (new ShopViewModel($shop))->toArray();
+        }
         return $this;
     }
 
@@ -32,8 +37,6 @@ class ShopViewModel extends AbstractViewModel
     {
         return [
             'id' => $this->entity->getId(),
-            'name' => $this->entity->getName(),
-            'description' => $this->entity->getDescription(),
             'created_at' => !is_null($this->entity->getCreatedAt())
                 ? $this->entity->getCreatedAt()->format('Y-m-d H:i:s')
                 : null,
