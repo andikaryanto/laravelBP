@@ -6,7 +6,7 @@ App\Entities\Partner:
       field: id
       isEntity: false
       type: int
-    user: 
+    user:
       type: LaravelCommon\App\Entities\User
       isEntity: true
       foreignKey: user_id
@@ -14,8 +14,8 @@ App\Entities\Partner:
       inversedBy: shopMappings
       field: user_id
       rule: 'required'
-    partnerShops: 
-      type: App\Entities\Partner\Shop
+    partnerShops:
+      type: App\Entities\Partner\ShopMapping
       isEntity: true
       foreignKey: partner_id
       relationType: many_to_many

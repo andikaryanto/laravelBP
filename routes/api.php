@@ -3,6 +3,7 @@
 use App\Repositories\PartnerRepository;
 use App\Routes\PartnerRoute;
 use App\Routes\Product\CategoryRoute;
+use App\Routes\ProductRoute;
 use App\Routes\ShopRoute;
 use App\Routes\WarehouseRoute;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +32,4 @@ WarehouseRoute::register();
 ShopRoute::register();
 CategoryRoute::register();
 PartnerRoute::register();
+ProductRoute::register();

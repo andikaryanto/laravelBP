@@ -3,8 +3,10 @@
 namespace App\Http;
 
 use App\Http\Middleware\Hydrators\Product\CategoryHydrator;
+use App\Http\Middleware\Hydrators\ProductHydrator;
 use App\Http\Middleware\Hydrators\ShopHydrator;
 use App\Http\Middleware\Hydrators\WarehouseHydrator;
+use App\Http\Middleware\SetPartnerToUser;
 use LaravelCommon\App\Http\Kernel as AppHttpKernel;
 use LaravelCommon\App\Http\Middleware\ControllerReturn;
 
@@ -73,7 +75,9 @@ class Kernel extends AppHttpKernel
         // 'controller-return' => ControllerReturn::class,
         'hydrator.warehouse' => WarehouseHydrator::class,
         'hydrator.shop' => ShopHydrator::class,
-        'hydrator.product-category' => CategoryHydrator::class
+        'hydrator.product-category' => CategoryHydrator::class,
+        'hydrator.product' => ProductHydrator::class,
+        'set-partner-to-user' => SetPartnerToUser::class
 
     ];
 }

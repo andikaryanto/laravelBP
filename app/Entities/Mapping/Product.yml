@@ -1,0 +1,69 @@
+App\Entities\Product:
+  table: products
+  primaryKey: id
+  props:
+    id:
+      field: id
+      isEntity: false
+      type: int
+    name:
+      field: name
+      isEntity: false
+      type: string
+      rule: 'required|max:255'
+    description:
+      field: description
+      isEntity: false
+      type: string
+      rule: 'required|max:255'
+    shop:
+      type: App\Entities\Shop
+      isEntity: true
+      foreignKey: shop_id
+      relationType: one_to_many
+      inversedBy: products
+      field: shop_id
+      rule: 'required'
+    rating:
+      field: rating
+      isEntity: false
+      type: int
+      rule: required
+    isActive:
+      field: is_active
+      isEntity: false
+      type: int
+      rule: required
+    isDeleted:
+      field: is_deleted
+      isEntity: false
+      type: int
+      rule: required
+    deletedAt:
+      field: deleted_at
+      isEntity: false
+      type: DateTime
+      rule: required
+    mustShow:
+      field: must_show
+      isEntity: false
+      type: int
+      rule: required
+    createdBy:
+      field: created_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    updatedBy:
+      field: updated_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    createdAt:
+      field: created_at
+      isEntity: false
+      type: DateTime
+    updatedAt:
+      field: updated_at
+      isEntity: false
+      type: DateTime
