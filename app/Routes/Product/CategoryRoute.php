@@ -22,9 +22,9 @@ class CategoryRoute extends CommonRoute
                 Route::post('/store', [CategoryController::class, 'store'])
                     ->middleware(
                         [
-                            'hydrator.product-category',
-                            'resource-validation',
-                            'entity-unit'
+                            'check-scope:partner',
+                            'set-partner-to-user',
+                            'hydrator.product-category'
                         ]
                     );
 

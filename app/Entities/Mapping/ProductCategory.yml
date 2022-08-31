@@ -16,6 +16,14 @@ App\Entities\Product\Category:
       isEntity: false
       type: string
       rule: 'max:255'
+    shop:
+      type: App\Entities\Shop
+      isEntity: true
+      foreignKey: shop_id
+      relationType: one_to_many
+      inversedBy: products
+      field: shop_id
+      rule: 'required'
     createdBy:
       field: created_by
       isEntity: false

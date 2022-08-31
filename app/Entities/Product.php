@@ -121,21 +121,6 @@ class Product extends BaseEntity
     {
         parent::validate();
 
-        $params = [
-            'where' => [
-                ['name', '=', $this->getName()]
-            ]
-        ];
-
-        if (!empty($this->getId())) {
-            $params['where'][] = ['id', '<>', $this->getId()];
-        }
-
-        $repo = new ProductRepository();
-        $result = $repo->findOne($params);
-        if (!empty($result)) {
-            throw new EntityException('data with the name "' . $this->getName() . '" exists');
-        }
     }
 
     /**
