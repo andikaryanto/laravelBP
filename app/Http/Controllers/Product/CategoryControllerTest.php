@@ -100,21 +100,22 @@ class CategoryControllerTest extends TestCase
                 $partner = (new Partner())
                     ->setId(1)
                     ->setUser($user)
-                    ->setPartnerShops(new EntityList($shopMapping));
+                    ->setPartnerShops(new EntityList([$shopMapping]));
 
                 $user->partner = $partner;
 
                 $token = (new Token())
                     ->setId(1)
                     ->setUser($user);
+
                 $this->entityUnit->preparePersistence($category)->shouldBeCalled();
                 $this->entityUnit->flush()->shouldBeCalled();
 
                 $request = (new Request())->setResource($category);
                 $request->setUserToken($token);
-                
 
-                $result = $this->controller->get($request);
+
+                $result = $this->controller->store($request);
                 verify($result)->instanceOf(ResourceCreatedResponse::class);
             });
         });

@@ -81,7 +81,7 @@ class CategoryController extends Controller
             $resource->setShop($shop);
 
             $this->entityUnit->preparePersistence($resource);
-            $this->entityUnit->flush($resource);
+            $this->entityUnit->flush();
 
             return new ResourceCreatedResponse('OK', ResponseConst::OK, new CategoryViewModel($resource));
         } catch (Exception $e) {

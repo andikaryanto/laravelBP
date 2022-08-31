@@ -120,7 +120,6 @@ class Product extends BaseEntity
     public function validate()
     {
         parent::validate();
-
     }
 
     /**
