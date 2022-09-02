@@ -7,6 +7,7 @@ use App\Http\Controllers\ShopController;
 use App\Repositories\Partner\ShopMappingRepository;
 use App\Repositories\PartnerRepository;
 use App\Repositories\ShopRepository;
+use App\System\Http\Request;
 use App\ViewModels\ShopCollection;
 use Codeception\Specify;
 use LaravelCommon\App\Entities\User;
@@ -16,7 +17,6 @@ use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\NoDataFoundResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\SuccessResponse;
-use LaravelCommon\System\Http\Request;
 use LaravelOrm\Entities\EntityList;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Tests\TestCase;
@@ -36,13 +36,11 @@ class ShopControllerTest extends TestCase
     {
         $this->beforeSpecify(function () {
             $this->shopRepository = $this->prophesize(ShopRepository::class);
-            $this->partnerRepository = $this->prophesize(PartnerRepository::class);
             $this->shopMappingRepository = $this->prophesize(ShopMappingRepository::class);
             $this->entityUnit = $this->prophesize(EntityUnit::class);
 
             $this->controller = new ShopController(
                 $this->shopRepository->reveal(),
-                $this->partnerRepository->reveal(),
                 $this->shopMappingRepository->reveal(),
                 $this->entityUnit->reveal()
             );
@@ -98,16 +96,8 @@ class ShopControllerTest extends TestCase
                         ->setId(1)
                         ->setName('shop1');
 
-                    $partner = (new Partner())
-                        ->setId(1)
-                        ->setUser($user);
-
                     $request = (new Request())->setResource($shop);
                     $request->setUserToken($token);
-
-                    $this->partnerRepository->getPartnerByUser($user)
-                        ->shouldBeCalled()
-                        ->willReturn(null);
 
                     $result = $this->controller->store($request);
                     verify($result)->instanceOf(BadRequestResponse::class);
@@ -135,10 +125,7 @@ class ShopControllerTest extends TestCase
 
                     $request = (new Request())->setResource($shop);
                     $request->setUserToken($token);
-
-                    $this->partnerRepository->getPartnerByUser($user)
-                        ->shouldBeCalled()
-                        ->willReturn($partner);
+                    $request->setPartner($partner);
 
                     $partnerShop = (new ShopMapping())
                         ->setId(1);

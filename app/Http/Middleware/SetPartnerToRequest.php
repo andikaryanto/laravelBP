@@ -33,7 +33,9 @@ class SetPartnerToRequest
     {
         $user = $request->getUserToken()->getUser();
         $partner = $this->partnerRepository->getPartnerByUser($user);
-        $request->setPartner($partner);
+        if (!is_null($partner)) {
+            $request->setPartner($partner);
+        }
 
         return $next($request);
     }

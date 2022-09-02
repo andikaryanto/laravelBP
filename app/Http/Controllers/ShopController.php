@@ -29,13 +29,6 @@ class ShopController extends Controller
     /**
      * Undocumented variable
      *
-     * @var PartnerRepository
-     */
-    protected PartnerRepository $partnerRepository;
-
-    /**
-     * Undocumented variable
-     *
      * @var ShopMappingRepository
      */
     protected ShopMappingRepository $shopMappingRepository;
@@ -51,18 +44,15 @@ class ShopController extends Controller
      * Undocumented function
      *
      * @param ShopRepository $shopRepository
-     * @param PartnerRepository $partnerRepository
      * @param ShopMappingRepository $shopMappingRepository
      * @param EntityUnit $entityUnit
      */
     public function __construct(
         ShopRepository $shopRepository,
-        PartnerRepository $partnerRepository,
         ShopMappingRepository $shopMappingRepository,
         EntityUnit $entityUnit
     ) {
         $this->shopRepository = $shopRepository;
-        $this->partnerRepository = $partnerRepository;
         $this->shopMappingRepository = $shopMappingRepository;
         $this->entityUnit = $entityUnit;
     }
@@ -98,9 +88,7 @@ class ShopController extends Controller
     {
         try {
             $resource = $request->getResource();
-            $user = $request->getUserToken()->getUser();
-
-            $partner = $this->partnerRepository->getPartnerByUser($user);
+            $partner = $request->getPartner();
 
             if (is_null($partner)) {
                 return new BadRequestResponse('User is not a partner.', ResponseConst::INVALID_CREDENTIAL);
@@ -110,7 +98,7 @@ class ShopController extends Controller
             $partnerShop->setShop($resource);
             $partnerShop->setPartner($partner);
 
-            $this->entityUnit->preparePersistence($resource);
+             $this->entityUnit->preparePersistence($resource);
             $this->entityUnit->preparePersistence($partnerShop);
 
             $this->entityUnit->flush();

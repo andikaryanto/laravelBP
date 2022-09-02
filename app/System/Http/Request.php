@@ -19,9 +19,9 @@ class Request extends HttpRequest
     /**
      * Get partner of user
      *
-     * @return Partner
+     * @return ?Partner
      */
-    public function getPartner(): Partner
+    public function getPartner(): ?Partner
     {
         return $this->partner;
     }
