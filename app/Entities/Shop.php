@@ -109,30 +109,6 @@ class Shop extends BaseEntity
     }
 
     /**
-     * @inheritDoc
-     */
-    public function validate()
-    {
-        parent::validate();
-
-        $params = [
-            'where' => [
-                ['name', '=', $this->getName()]
-            ]
-        ];
-
-        if (!empty($this->getId())) {
-            $params['where'][] = ['id', '<>', $this->getId()];
-        }
-
-        $repo = new ShopRepository();
-        $result = $repo->findOne($params);
-        if (!empty($result)) {
-            throw new EntityException('data with the name "' . $this->getName() . '" exists');
-        }
-    }
-
-    /**
      * Get undocumented variable
      *
      * @return  string|null
