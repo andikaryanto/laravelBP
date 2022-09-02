@@ -6,6 +6,7 @@ use App\Entities\Product\Category;
 use App\Entities\Shop;
 use App\Http\Controllers\Product\CategoryController;
 use App\Repositories\Product\CategoryRepository;
+use App\System\Http\Request;
 use App\ViewModels\Product\CategoryCollection;
 use Codeception\Specify;
 use LaravelCommon\App\Entities\User;
@@ -14,7 +15,6 @@ use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\NoDataFoundResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\SuccessResponse;
-use LaravelCommon\System\Http\Request;
 use LaravelOrm\Entities\EntityList;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Tests\TestCase;
@@ -83,9 +83,6 @@ class CategoryControllerTest extends TestCase
         $this->describe('->store()', function () {
             $this->describe('will return ResourceCreatedResponse', function () {
 
-                $category = (new Category())
-                    ->setId(1)
-                    ->setName('category1');
 
                 $user = (new User())
                     ->setId(1);
@@ -102,17 +99,21 @@ class CategoryControllerTest extends TestCase
                     ->setUser($user)
                     ->setPartnerShops(new EntityList([$shopMapping]));
 
-                $user->partner = $partner;
-
                 $token = (new Token())
                     ->setId(1)
                     ->setUser($user);
+
+                $category = (new Category())
+                    ->setId(1)
+                    ->setName('category1')
+                    ->setShop($shop);
 
                 $this->entityUnit->preparePersistence($category)->shouldBeCalled();
                 $this->entityUnit->flush()->shouldBeCalled();
 
                 $request = (new Request())->setResource($category);
                 $request->setUserToken($token);
+                $request->setPartner($partner);
 
 
                 $result = $this->controller->store($request);

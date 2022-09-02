@@ -6,9 +6,10 @@ use App\Http\Middleware\Hydrators\Product\CategoryHydrator;
 use App\Http\Middleware\Hydrators\ProductHydrator;
 use App\Http\Middleware\Hydrators\ShopHydrator;
 use App\Http\Middleware\Hydrators\WarehouseHydrator;
-use App\Http\Middleware\SetPartnerToUser;
+use App\Http\Middleware\SetPartnerToRequest;
+use App\Http\Middleware\SetShopToResource;
+use App\System\Http\Request;
 use LaravelCommon\App\Http\Kernel as AppHttpKernel;
-use LaravelCommon\App\Http\Middleware\ControllerReturn;
 
 class Kernel extends AppHttpKernel
 {
@@ -77,7 +78,19 @@ class Kernel extends AppHttpKernel
         'hydrator.shop' => ShopHydrator::class,
         'hydrator.product-category' => CategoryHydrator::class,
         'hydrator.product' => ProductHydrator::class,
-        'set-partner-to-user' => SetPartnerToUser::class
+        'set-partner-to-request' => SetPartnerToRequest::class,
+        'set-shop-to-resource' => SetShopToResource::class
 
     ];
+
+    /**
+     * Handle an incoming HTTP request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function handle($request)
+    {
+        return parent::handleRequest(Request::class, $request);
+    }
 }

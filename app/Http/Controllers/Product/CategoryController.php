@@ -75,10 +75,6 @@ class CategoryController extends Controller
     {
         try {
             $resource = $request->getResource();
-            $partner = $request->getUserToken()->getUser()->partner;
-            echo $partner->getId();
-            $shop = $partner->getPartnerShops()->first()->getShop();
-            $resource->setShop($shop);
 
             $this->entityUnit->preparePersistence($resource);
             $this->entityUnit->flush();

@@ -23,8 +23,9 @@ class CategoryRoute extends CommonRoute
                     ->middleware(
                         [
                             'check-scope:partner',
-                            'set-partner-to-user',
-                            'hydrator.product-category'
+                            'set-partner-to-request',
+                            'hydrator.product-category',
+                            'set-shop-to-resource'
                         ]
                     );
 
