@@ -72,8 +72,13 @@ class CategoryControllerTest extends TestCase
                 $request = (new Request())
                     ->setPartner($partner);
 
+                $filter = [
+                    'where' => [
+                        ['shop_id', '=', $shop->getId()]
+                    ] 
+                ];
 
-                $this->categoryRepository->gather()
+                $this->categoryRepository->gather($filter)
                     ->shouldBeCalled()
                     ->willReturn($collection);
 
@@ -104,11 +109,16 @@ class CategoryControllerTest extends TestCase
 
                 $entityList = new EntityList([]);
                 $collection = new CategoryCollection($entityList);
+                $filter = [
+                    'where' => [
+                        ['shop_id', '=', $shop->getId()]
+                    ] 
+                ];
 
-                $this->categoryRepository->gather()
+                $this->categoryRepository->gather($filter)
                     ->shouldBeCalled()
                     ->willReturn($collection);
-                    
+
                 $result = $this->controller->getAll($request);
 
                 verify($result)->instanceOf(NoDataFoundResponse::class);
