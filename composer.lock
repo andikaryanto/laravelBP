@@ -96,7 +96,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelorm.git",
-                "reference": "0b8146c28d69b08e98b47d3bb32cad975f71029f"
+                "reference": "d1575f45cfa6c3b7e824afb06f0ca000861772e2"
             },
             "require": {
                 "php": "^7.4|^8.0",
@@ -128,7 +128,7 @@
                 "laravel",
                 "laravelorm"
             ],
-            "time": "2022-09-02T06:00:26+00:00"
+            "time": "2022-09-02T10:02:49+00:00"
         },
         {
             "name": "asm89/stack-cors",

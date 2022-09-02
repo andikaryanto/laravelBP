@@ -118,7 +118,7 @@ class ShopController extends Controller
             return new ResourceCreatedResponse('OK', ResponseConst::OK, new ShopViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
-        }catch (ValidationException $e) {
+        } catch (ValidationException $e) {
             return new ServerErrorResponse($e->getMessage());
         }
     }

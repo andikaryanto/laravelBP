@@ -56,7 +56,7 @@ class CategoryController extends Controller
         $filter = [
             'where' => [
                 ['shop_id', '=', $shop->getId()]
-            ] 
+            ]
         ];
         $categories = $this->categoryRepository->gather($filter);
         if ($categories->count() == 0) {

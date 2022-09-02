@@ -75,7 +75,7 @@ class CategoryControllerTest extends TestCase
                 $filter = [
                     'where' => [
                         ['shop_id', '=', $shop->getId()]
-                    ] 
+                    ]
                 ];
 
                 $this->categoryRepository->gather($filter)
@@ -112,7 +112,7 @@ class CategoryControllerTest extends TestCase
                 $filter = [
                     'where' => [
                         ['shop_id', '=', $shop->getId()]
-                    ] 
+                    ]
                 ];
 
                 $this->categoryRepository->gather($filter)
