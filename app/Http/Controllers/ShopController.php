@@ -15,6 +15,7 @@ use LaravelCommon\Responses\NoDataFoundResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
+use LaravelOrm\Exception\ValidationException;
 
 class ShopController extends Controller
 {
@@ -116,6 +117,8 @@ class ShopController extends Controller
 
             return new ResourceCreatedResponse('OK', ResponseConst::OK, new ShopViewModel($resource));
         } catch (Exception $e) {
+            return new ServerErrorResponse($e->getMessage());
+        } catch (ValidationException $e) {
             return new ServerErrorResponse($e->getMessage());
         }
     }

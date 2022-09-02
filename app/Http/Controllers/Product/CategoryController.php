@@ -21,7 +21,7 @@ class CategoryController extends Controller
      *
      * @var CategoryRepository
      */
-    protected CategoryRepository $CategoryRepository;
+    protected CategoryRepository $categoryRepository;
 
     /**
      * Undocumented variable
@@ -33,14 +33,14 @@ class CategoryController extends Controller
     /**
      * Undocumented function
      *
-     * @param CategoryRepository $CategoryRepository
+     * @param CategoryRepository $categoryRepository
      * @param EntityUnit $entityUnit
      */
     public function __construct(
-        CategoryRepository $CategoryRepository,
+        CategoryRepository $categoryRepository,
         EntityUnit $entityUnit
     ) {
-        $this->CategoryRepository = $CategoryRepository;
+        $this->categoryRepository = $categoryRepository;
         $this->entityUnit = $entityUnit;
     }
 
@@ -50,14 +50,19 @@ class CategoryController extends Controller
      *
      * @return void
      */
-    public function getAll()
+    public function getAll(Request $request)
     {
-
-        $Categorys = $this->CategoryRepository->gather();
-        if ($Categorys->count() == 0) {
+        $shop = $request->getPartnerShop();
+        $filter = [
+            'where' => [
+                ['shop_id', '=', $shop->getId()]
+            ]
+        ];
+        $categories = $this->categoryRepository->gather($filter);
+        if ($categories->count() == 0) {
             return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
         }
-        return (new SuccessResponse('OK', ResponseConst::OK, $Categorys));
+        return (new SuccessResponse('OK', ResponseConst::OK, $categories));
     }
 
     public function get(Request $request)

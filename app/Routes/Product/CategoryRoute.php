@@ -17,7 +17,11 @@ class CategoryRoute extends CommonRoute
     {
         return Route::prefix('product-category')->group(function () {
             Route::middleware(['check-token'])->group(function () {
-                Route::get('/list', [CategoryController::class, 'getAll']);
+                Route::get('/list', [CategoryController::class, 'getAll'])
+                    ->middleware([
+                        'check-scope:partner',
+                        'set-partner-to-request',
+                    ]);
 
                 Route::post('/store', [CategoryController::class, 'store'])
                     ->middleware(

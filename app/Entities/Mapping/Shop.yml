@@ -28,7 +28,7 @@ App\Entities\Shop:
         type: string
         isEntity: false
         field: phone
-        rule: "required|max:20"
+        rule: "required|max:20|numeric"
     personalInformation: 
         type: string
         isEntity: false

@@ -30,9 +30,9 @@ class Request extends HttpRequest
      * Undocumented function
      *
      * @param Partner $partner
-     * @return void
+     * @return self
      */
-    public function setPartner(Partner $partner)
+    public function setPartner(Partner $partner): Request
     {
         $this->partner = $partner;
         return $this;

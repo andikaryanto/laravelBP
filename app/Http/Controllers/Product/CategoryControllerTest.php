@@ -54,27 +54,72 @@ class CategoryControllerTest extends TestCase
                 $entityList = new EntityList([$category]);
                 $collection = new CategoryCollection($entityList);
 
+                $user = (new User())
+                    ->setId(1);
 
-                $this->categoryRepository->gather()
+                $shop = (new Shop())
+                    ->setId(1);
+
+                $shopMapping = (new ShopMapping())
+                    ->setId(1)
+                    ->setShop($shop);
+
+                $partner = (new Partner())
+                    ->setId(1)
+                    ->setUser($user)
+                    ->setPartnerShops(new EntityList([$shopMapping]));
+
+                $request = (new Request())
+                    ->setPartner($partner);
+
+                $filter = [
+                    'where' => [
+                        ['shop_id', '=', $shop->getId()]
+                    ]
+                ];
+
+                $this->categoryRepository->gather($filter)
                     ->shouldBeCalled()
                     ->willReturn($collection);
 
-                $result = $this->controller->getAll();
+                $result = $this->controller->getAll($request);
 
                 verify($result)->instanceOf(SuccessResponse::class);
             });
 
             $this->describe('when categoryRepository has no data', function () {
 
+                $user = (new User())
+                    ->setId(1);
+
+                $shop = (new Shop())
+                    ->setId(1);
+
+                $shopMapping = (new ShopMapping())
+                    ->setId(1)
+                    ->setShop($shop);
+
+                $partner = (new Partner())
+                    ->setId(1)
+                    ->setUser($user)
+                    ->setPartnerShops(new EntityList([$shopMapping]));
+
+                $request = (new Request())
+                    ->setPartner($partner);
+
                 $entityList = new EntityList([]);
                 $collection = new CategoryCollection($entityList);
+                $filter = [
+                    'where' => [
+                        ['shop_id', '=', $shop->getId()]
+                    ]
+                ];
 
-
-                $this->categoryRepository->gather()
+                $this->categoryRepository->gather($filter)
                     ->shouldBeCalled()
                     ->willReturn($collection);
 
-                $result = $this->controller->getAll();
+                $result = $this->controller->getAll($request);
 
                 verify($result)->instanceOf(NoDataFoundResponse::class);
             });
