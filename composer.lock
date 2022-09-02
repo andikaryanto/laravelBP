@@ -4,22 +4,23 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3abddd0e236d5e854c16ec5030894f15",
+    "content-hash": "da36ea345897d42eb2714d5b0f0188c0",
     "packages": [
         {
             "name": "andikaryanto11/laravelcommon",
-            "version": "dev-main8",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelcommon.git",
-                "reference": "8a39a654ba1b2a7b6369835bd5930b1c3d1a44ed"
+                "reference": "54725c5922aa90039cb06668bec08a56d9f67914"
             },
             "require": {
-                "php": ">=7.4"
+                "php": "^7.4|^8.0"
             },
             "require-dev": {
                 "squizlabs/php_codesniffer": "4.0.x-dev"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -47,7 +48,7 @@
                 }
             ],
             "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
-            "time": "2022-09-02T03:27:22+00:00"
+            "time": "2022-09-02T05:58:02+00:00"
         },
         {
             "name": "andikaryanto11/laravelgraphql",
@@ -91,11 +92,11 @@
         },
         {
             "name": "andikaryanto11/laravelorm",
-            "version": "dev-main8",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelorm.git",
-                "reference": "c40b37d4413682593bd200b13ce7b27866f84d25"
+                "reference": "0b8146c28d69b08e98b47d3bb32cad975f71029f"
             },
             "require": {
                 "php": "^7.4|^8.0",
@@ -109,6 +110,7 @@
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.5.9"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -126,7 +128,7 @@
                 "laravel",
                 "laravelorm"
             ],
-            "time": "2022-09-02T04:17:01+00:00"
+            "time": "2022-09-02T06:00:26+00:00"
         },
         {
             "name": "asm89/stack-cors",
