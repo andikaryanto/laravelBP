@@ -6,7 +6,7 @@ use App\Repositories\PartnerRepository;
 use Closure;
 use Illuminate\Http\Request;
 
-class SetPartnerToUser
+class SetPartnerToRequest
 {
     /**
      * Undocumented variable
@@ -33,8 +33,7 @@ class SetPartnerToUser
     {
         $user = $request->getUserToken()->getUser();
         $partner = $this->partnerRepository->getPartnerByUser($user);
-
-        $user->partner = $partner;
+        $request->setPartner($partner);
 
         return $next($request);
     }
