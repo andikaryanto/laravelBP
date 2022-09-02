@@ -80,9 +80,6 @@ class ProductController extends Controller
     {
         try {
             $product = $request->getResource();
-            $partner = $request->getUserToken()->getUser()->partner;
-            $shop = $partner->getPartnerShops()->first()->getShop();
-            $product->setShop($shop);
 
             $this->entityUnit->preparePersistence($product);
             $this->entityUnit->flush();
