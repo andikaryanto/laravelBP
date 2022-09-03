@@ -3,7 +3,14 @@
 namespace App\Routes\Product;
 
 use App\Http\Controllers\Product\CategoryController;
+use App\Http\Middleware\Hydrators\Product\CategoryHydrator;
+use App\Http\Middleware\SetPartnerToRequest;
+use App\Http\Middleware\SetShopToResource;
 use Illuminate\Support\Facades\Route;
+use LaravelCommon\App\Http\Middleware\CheckScope;
+use LaravelCommon\App\Http\Middleware\CheckToken;
+use LaravelCommon\App\Http\Middleware\EntityUnit;
+use LaravelCommon\App\Http\Middleware\ResourceValidation;
 use LaravelCommon\App\Routes\CommonRoute;
 
 class CategoryRoute extends CommonRoute
@@ -16,20 +23,22 @@ class CategoryRoute extends CommonRoute
     public static function register()
     {
         return Route::prefix('product-category')->group(function () {
-            Route::middleware(['check-token'])->group(function () {
+            Route::middleware([CheckToken::NAME])->group(function () {
                 Route::get('/list', [CategoryController::class, 'getAll'])
                     ->middleware([
-                        'check-scope:partner',
-                        'set-partner-to-request',
+                        CheckScope::NAME . ':partner',
+                        SetPartnerToRequest::NAME,
                     ]);
 
                 Route::post('/store', [CategoryController::class, 'store'])
                     ->middleware(
                         [
-                            'check-scope:partner',
-                            'set-partner-to-request',
-                            'hydrator.product-category',
-                            'set-shop-to-resource'
+                            CheckScope::NAME . ':partner',
+                            SetPartnerToRequest::NAME,
+                            CategoryHydrator::NAME,
+                            SetShopToResource::NAME,
+                            ResourceValidation::NAME,
+                            EntityUnit::NAME
                         ]
                     );
 
@@ -37,15 +46,15 @@ class CategoryRoute extends CommonRoute
                 Route::patch('/{id}', [CategoryController::class, 'patch'])
                     ->middleware(
                         [
-                            'hydrator.product-category',
-                            'resource-validation',
-                            'entity-unit'
+                            CategoryHydrator::NAME,
+                            ResourceValidation::NAME,
+                            EntityUnit::NAME
                         ]
                     );
                 Route::delete('/{id}', [CategoryController::class, 'delete'])->middleware(
                     [
-                        'hydrator.product-category',
-                        'entity-unit'
+                        CategoryHydrator::NAME,
+                        EntityUnit::NAME
                     ]
                 );
             });

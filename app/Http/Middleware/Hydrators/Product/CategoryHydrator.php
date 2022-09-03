@@ -7,6 +7,9 @@ use LaravelCommon\App\Http\Middleware\Hydrator;
 
 class CategoryHydrator extends Hydrator
 {
+
+    public const NAME = 'hydrator.product-category';
+    
     /**
      *
      * @return string

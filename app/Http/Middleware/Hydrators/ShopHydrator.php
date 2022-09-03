@@ -7,6 +7,9 @@ use LaravelCommon\App\Http\Middleware\Hydrator;
 
 class ShopHydrator extends Hydrator
 {
+    
+    public const NAME = 'hydrator.shop';
+
     /**
      *
      * @return string

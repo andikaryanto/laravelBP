@@ -128,38 +128,15 @@ class CategoryControllerTest extends TestCase
         $this->describe('->store()', function () {
             $this->describe('will return ResourceCreatedResponse', function () {
 
-
-                $user = (new User())
-                    ->setId(1);
-
                 $shop = (new Shop())
                     ->setId(1);
-
-                $shopMapping = (new ShopMapping())
-                    ->setId(1)
-                    ->setShop($shop);
-
-                $partner = (new Partner())
-                    ->setId(1)
-                    ->setUser($user)
-                    ->setPartnerShops(new EntityList([$shopMapping]));
-
-                $token = (new Token())
-                    ->setId(1)
-                    ->setUser($user);
 
                 $category = (new Category())
                     ->setId(1)
                     ->setName('category1')
                     ->setShop($shop);
-
-                $this->entityUnit->preparePersistence($category)->shouldBeCalled();
-                $this->entityUnit->flush()->shouldBeCalled();
-
+                    
                 $request = (new Request())->setResource($category);
-                $request->setUserToken($token);
-                $request->setPartner($partner);
-
 
                 $result = $this->controller->store($request);
                 verify($result)->instanceOf(ResourceCreatedResponse::class);

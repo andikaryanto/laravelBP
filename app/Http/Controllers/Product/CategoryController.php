@@ -24,24 +24,14 @@ class CategoryController extends Controller
     protected CategoryRepository $categoryRepository;
 
     /**
-     * Undocumented variable
-     *
-     * @var EntityUnit
-     */
-    protected EntityUnit $entityUnit;
-
-    /**
      * Undocumented function
      *
      * @param CategoryRepository $categoryRepository
-     * @param EntityUnit $entityUnit
      */
     public function __construct(
-        CategoryRepository $categoryRepository,
-        EntityUnit $entityUnit
+        CategoryRepository $categoryRepository
     ) {
         $this->categoryRepository = $categoryRepository;
-        $this->entityUnit = $entityUnit;
     }
 
 
@@ -80,9 +70,6 @@ class CategoryController extends Controller
     {
         try {
             $resource = $request->getResource();
-
-            $this->entityUnit->preparePersistence($resource);
-            $this->entityUnit->flush();
 
             return new ResourceCreatedResponse('OK', ResponseConst::OK, new CategoryViewModel($resource));
         } catch (Exception $e) {

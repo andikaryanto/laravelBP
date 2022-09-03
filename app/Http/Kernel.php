@@ -74,12 +74,12 @@ class Kernel extends AppHttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         // 'controller-return' => ControllerReturn::class,
-        'hydrator.warehouse' => WarehouseHydrator::class,
-        'hydrator.shop' => ShopHydrator::class,
-        'hydrator.product-category' => CategoryHydrator::class,
-        'hydrator.product' => ProductHydrator::class,
-        'set-partner-to-request' => SetPartnerToRequest::class,
-        'set-shop-to-resource' => SetShopToResource::class
+        WarehouseHydrator::NAME => WarehouseHydrator::class,
+        ShopHydrator::NAME => ShopHydrator::class,
+        CategoryHydrator::NAME => CategoryHydrator::class,
+        ProductHydrator::NAME => ProductHydrator::class,
+        SetPartnerToRequest::NAME => SetPartnerToRequest::class,
+        SetShopToResource::NAME => SetShopToResource::class
 
     ];
 

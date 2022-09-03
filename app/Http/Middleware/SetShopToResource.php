@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class SetShopToResource
 {
+    public const NAME = 'set-shop-to-resource';
     /**
      * Undocumented variable
      *
