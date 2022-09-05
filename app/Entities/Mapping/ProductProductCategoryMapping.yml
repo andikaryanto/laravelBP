@@ -1,0 +1,42 @@
+App\Entities\Product\ProductCategoryMapping:
+  table: product_product_category_mappings
+  primaryKey: id
+  props:
+    id:
+      field: id
+      isEntity: false
+      type: int
+    product:
+      type: App\Entities\Product
+      isEntity: true
+      foreignKey: product_id
+      relationType: one_to_many
+      inversedBy: productCategoryMappings
+      field: product_id
+      rule: 'required'
+    productCategory:
+      type: App\Entities\Product\Category
+      isEntity: true
+      foreignKey: product_category_id
+      relationType: one_to_many
+      inversedBy: productCategoryMappings
+      field: product_category_id
+      rule: 'required'
+    createdBy:
+      field: created_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    updatedBy:
+      field: updated_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    createdAt:
+      field: created_at
+      isEntity: false
+      type: DateTime
+    updatedAt:
+      field: updated_at
+      isEntity: false
+      type: DateTime

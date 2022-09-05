@@ -2,9 +2,11 @@
 
 namespace App\Entities;
 
+use App\Entities\Product\ProductCategoryMapping;
 use App\Repositories\ProductRepository;
 use DateTime;
 use LaravelCommon\App\Entities\BaseEntity;
+use LaravelOrm\Entities\EntityList;
 use LaravelOrm\Exception\EntityException;
 
 class Product extends BaseEntity
@@ -65,6 +67,12 @@ class Product extends BaseEntity
      */
     private bool $mustShow = true;
 
+    /**
+     * Undocumented variable
+     *
+     * @var EntityList|null
+     */
+    private ?EntityList $productCategotryMappings = null;
 
     /**
      * Get undocumented variable
@@ -259,6 +267,30 @@ class Product extends BaseEntity
     public function setMustShow(bool $mustShow): self
     {
         $this->mustShow = $mustShow;
+
+        return $this;
+    }
+
+    /**
+     * Get undocumented variable
+     *
+     * @return  EntityList|null
+     */ 
+    public function getProductCategotryMappings(): ?EntityList
+    {
+        return $this->productCategotryMappings;
+    }
+
+    /**
+     * Set undocumented variable
+     *
+     * @param  EntityList|null  $productCategotryMappings  Undocumented variable
+     *
+     * @return  self
+     */ 
+    public function setProductCategotryMappings(EntityList $productCategotryMappings)
+    {
+        $this->productCategotryMappings = $productCategotryMappings;
 
         return $this;
     }

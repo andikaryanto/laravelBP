@@ -5,7 +5,7 @@ namespace App\Routes\Product;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Middleware\Hydrators\Product\CategoryHydrator;
 use App\Http\Middleware\SetPartnerToRequest;
-use App\Http\Middleware\SetShopToResource;
+use App\Http\Middleware\SetPartnerShopToResource;
 use Illuminate\Support\Facades\Route;
 use LaravelCommon\App\Http\Middleware\CheckScope;
 use LaravelCommon\App\Http\Middleware\CheckToken;
@@ -36,7 +36,7 @@ class CategoryRoute extends CommonRoute
                             CheckScope::NAME . ':partner',
                             SetPartnerToRequest::NAME,
                             CategoryHydrator::NAME,
-                            SetShopToResource::NAME,
+                            SetPartnerShopToResource::NAME,
                             ResourceValidation::NAME,
                             EntityUnit::NAME
                         ]

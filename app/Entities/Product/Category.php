@@ -4,11 +4,30 @@ namespace App\Entities\Product;
 
 use App\Entities\Shop;
 use LaravelCommon\App\Entities\BaseEntity;
+use LaravelOrm\Entities\EntityList;
 
 class Category extends BaseEntity
 {
+    /**
+     * Undocumented variable
+     *
+     * @var string|null
+     */
     protected ?string $name = null;
+
+    /**
+     * Undocumented variable
+     *
+     * @var string|null
+     */
     protected ?string $description = null;
+
+    /**
+     * Undocumented variable
+     *
+     * @var EntityList|null
+     */
+    private ?EntityList $productCategotryMappings = null;
 
     /**
      * Undocumented variable
@@ -79,6 +98,30 @@ class Category extends BaseEntity
     public function setShop(Shop $shop): self
     {
         $this->shop = $shop;
+
+        return $this;
+    }
+
+    /**
+     * Get undocumented variable
+     *
+     * @return  EntityList|null
+     */ 
+    public function getProductCategotryMappings(): ?EntityList
+    {
+        return $this->productCategotryMappings;
+    }
+
+    /**
+     * Set undocumented variable
+     *
+     * @param  EntityList|null  $productCategotryMappings  Undocumented variable
+     *
+     * @return  self
+     */ 
+    public function setProductCategotryMappings(EntityList $productCategotryMappings)
+    {
+        $this->productCategotryMappings = $productCategotryMappings;
 
         return $this;
     }

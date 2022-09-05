@@ -43,7 +43,6 @@ App\Entities\Product:
       field: deleted_at
       isEntity: false
       type: DateTime
-      rule: required
     mustShow:
       field: must_show
       isEntity: false
@@ -67,3 +66,11 @@ App\Entities\Product:
       field: updated_at
       isEntity: false
       type: DateTime
+    productCategoryMappings: 
+      type: App\Entities\Product\ProductCategoryMapping
+      isEntity: true
+      foreignKey: prodyuct_category_id
+      relationType: many_to_many
+      inversedBy: productCategory
+      field: produuct_category_id
+      rule: 'required'

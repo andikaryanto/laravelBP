@@ -7,7 +7,7 @@ use App\Http\Middleware\Hydrators\ProductHydrator;
 use App\Http\Middleware\Hydrators\ShopHydrator;
 use App\Http\Middleware\Hydrators\WarehouseHydrator;
 use App\Http\Middleware\SetPartnerToRequest;
-use App\Http\Middleware\SetShopToResource;
+use App\Http\Middleware\SetPartnerShopToResource;
 use App\System\Http\Request;
 use LaravelCommon\App\Http\Kernel as AppHttpKernel;
 
@@ -79,7 +79,7 @@ class Kernel extends AppHttpKernel
         CategoryHydrator::NAME => CategoryHydrator::class,
         ProductHydrator::NAME => ProductHydrator::class,
         SetPartnerToRequest::NAME => SetPartnerToRequest::class,
-        SetShopToResource::NAME => SetShopToResource::class
+        SetPartnerShopToResource::NAME => SetPartnerShopToResource::class
 
     ];
 

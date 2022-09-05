@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Product\CategoryRepository;
+use App\Repositories\Product\ProductCategoryMappingRepository;
 use App\Repositories\ProductRepository;
 use App\ViewModels\ProductViewModel;
 use Exception;
 use Illuminate\Http\Request;
 use LaravelCommon\App\Consts\ResponseConst;
 use LaravelCommon\App\Utilities\EntityUnit;
+use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\NoDataFoundResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
+use LaravelOrm\Exception\DatabaseException;
+use LaravelOrm\Exception\EntityException;
 
 class ProductController extends Controller
 {
@@ -25,6 +30,20 @@ class ProductController extends Controller
     /**
      * Undocumented variable
      *
+     * @var CategoryRepository
+     */
+    protected CategoryRepository $categoryRepository;
+
+    /**
+     * Undocumented variable
+     *
+     * @var ProductCategoryMappingRepository
+     */
+    protected ProductCategoryMappingRepository $productCategoryMappingRepository;
+
+    /**
+     * Undocumented variable
+     *
      * @var EntityUnit
      */
     protected EntityUnit $entityUnit;
@@ -33,16 +52,21 @@ class ProductController extends Controller
      * Undocumented function
      *
      * @param ProductRepository $productRepository
+     * @param CategoryRepository $categoryRepository
+     * @param ProductCategoryMappingRepository $productCategoryMappingRepository
      * @param EntityUnit $entityUnit
      */
     public function __construct(
         ProductRepository $productRepository,
+        CategoryRepository $categoryRepository,
+        ProductCategoryMappingRepository $productCategoryMappingRepository,
         EntityUnit $entityUnit
     ) {
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->productCategoryMappingRepository = $productCategoryMappingRepository;
         $this->entityUnit = $entityUnit;
     }
-
 
     /**
      * Get all paged product
@@ -79,12 +103,35 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
-            $product = $request->getResource();
+            $categoryIds = $request->category_ids;
+            $shop = $request->getPartnerShop();
 
+            $product = $request->getResource();
+            $product->setShop($shop);
             $this->entityUnit->preparePersistence($product);
+
+            foreach($categoryIds as $categoryId){
+
+                $category = $this->categoryRepository->findOneOrFail(
+                    [
+                        'where' => [
+                            ['shop_id', '=', $shop->getId()],   
+                            ['id', '=', $categoryId]
+                        ]
+                    ]
+                );
+
+                $productProductCategoryMapping = $this->productCategoryMappingRepository->newEntity();
+                $productProductCategoryMapping->setProduct($product);
+                $productProductCategoryMapping->setProductCategory($category);
+                $this->entityUnit->preparePersistence($productProductCategoryMapping);
+            }
+
             $this->entityUnit->flush();
 
             return new ResourceCreatedResponse('OK', ResponseConst::OK, new ProductViewModel($product));
+        } catch (EntityException $e) {
+            return new BadRequestResponse($e->getMessage(), ResponseConst::INVALID_DATA);
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }

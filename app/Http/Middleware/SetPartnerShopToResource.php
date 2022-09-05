@@ -6,9 +6,13 @@ use App\Repositories\PartnerRepository;
 use Closure;
 use Illuminate\Http\Request;
 
-class SetShopToResource
+/**
+ * Set partner shop to request if request come from user token who is partner
+ * 
+ */
+class SetPartnerShopToResource
 {
-    public const NAME = 'set-shop-to-resource';
+    public const NAME = 'set-partner-shop-to-resource';
     /**
      * Undocumented variable
      *

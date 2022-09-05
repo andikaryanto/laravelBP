@@ -6,6 +6,14 @@ App\Entities\Product\Category:
       field: id
       isEntity: false
       type: int
+    productCategoryMappings: 
+      type: App\Entities\Product\ProductCategoryMapping
+      isEntity: true
+      foreignKey: prodyuct_category_id
+      relationType: many_to_many
+      inversedBy: productCategory
+      field: produuct_category_id
+      rule: 'required'
     name:
       field: name
       isEntity: false

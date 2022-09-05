@@ -23,8 +23,7 @@ class ProductRoute extends CommonRoute
                         [
                             'check-scope:partner',
                             'set-partner-to-request',
-                            'hydrator.product',
-                            'set-shop-to-resource'
+                            'hydrator.product'
                         ]
                     );
                 // Route::get('/{id}', [ProductController::class, 'get'])->middleware('hydrator.product');

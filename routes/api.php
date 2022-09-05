@@ -6,7 +6,9 @@ use App\Routes\Product\CategoryRoute;
 use App\Routes\ProductRoute;
 use App\Routes\ShopRoute;
 use App\Routes\WarehouseRoute;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Route;
+use LaravelCommon\Responses\SuccessResponse;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function(){
-    $repo = new PartnerRepository();
-    $partner = $repo->find(2);
-    $partnerShops = $partner->getPartnerShops();
-    foreach($partnerShops as $partnerShop){
-        echo $partnerShop->getShop()->getId();
-    }
+    return new SuccessResponse('OKE', [], 'oke');
 });
 
 WarehouseRoute::register();
