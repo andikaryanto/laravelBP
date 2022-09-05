@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 /**
  * Set partner shop to request if request come from user token who is partner
- * 
+ *
  */
 class SetPartnerShopToResource
 {

@@ -110,12 +110,11 @@ class ProductController extends Controller
             $product->setShop($shop);
             $this->entityUnit->preparePersistence($product);
 
-            foreach($categoryIds as $categoryId){
-
+            foreach ($categoryIds as $categoryId) {
                 $category = $this->categoryRepository->findOneOrFail(
                     [
                         'where' => [
-                            ['shop_id', '=', $shop->getId()],   
+                            ['shop_id', '=', $shop->getId()],
                             ['id', '=', $categoryId]
                         ]
                     ]

@@ -135,7 +135,7 @@ class CategoryControllerTest extends TestCase
                     ->setId(1)
                     ->setName('category1')
                     ->setShop($shop);
-                    
+
                 $request = (new Request())->setResource($category);
 
                 $result = $this->controller->store($request);

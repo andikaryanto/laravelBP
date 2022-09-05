@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class SetPartnerToRequest
 {
-
     public const NAME = 'set-partner-to-request';
 
     /**
@@ -40,6 +39,6 @@ class SetPartnerToRequest
             $request->setPartner($partner);
         }
 
-        return $next($request);  
+        return $next($request);
     }
 }

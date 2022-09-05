@@ -3,8 +3,12 @@
 use App\Entities\Partner;
 use App\Entities\Partner\ShopMapping;
 use App\Entities\Product;
+use App\Entities\Product\Category;
+use App\Entities\Product\ProductCategoryMapping;
 use App\Entities\Shop;
 use App\Http\Controllers\ProductController;
+use App\Repositories\Product\CategoryRepository;
+use App\Repositories\Product\ProductCategoryMappingRepository;
 use App\Repositories\ProductRepository;
 use App\System\Http\Request;
 use App\ViewModels\ProductCollection;
@@ -35,11 +39,17 @@ class ProductControllerTest extends TestCase
         $this->beforeSpecify(function () {
             $this->productRepository =
                 $this->prophesize(ProductRepository::class);
+            $this->categoryRepository =
+                $this->prophesize(CategoryRepository::class);
+            $this->productCategoryMappingRepository =
+                $this->prophesize(ProductCategoryMappingRepository::class);
             $this->entityUnit =
                 $this->prophesize(EntityUnit::class);
 
             $this->controller = new ProductController(
                 $this->productRepository->reveal(),
+                $this->categoryRepository->reveal(),
+                $this->productCategoryMappingRepository->reveal(),
                 $this->entityUnit->reveal()
             );
         });
@@ -108,12 +118,35 @@ class ProductControllerTest extends TestCase
                     ->setName('product1')
                     ->setShop($shop);
 
+                $category = (new Category())
+                    ->setId(1)
+                    ->setName('product1')
+                    ->setShop($shop);
+
                 $this->entityUnit->preparePersistence($product)->shouldBeCalled();
+
+                $this->categoryRepository->findOneOrFail([
+                    'where' => [
+                        ['shop_id', '=', $shop->getId()],
+                        ['id', '=', 1]
+                    ]
+                ])->shouldBeCalled()->willReturn($category);
+
+                $productCategoryMapping = new ProductCategoryMapping();
+
+                $this->productCategoryMappingRepository->newEntity()
+                    ->shouldBeCalled()
+                    ->willReturn($productCategoryMapping);
+
+                $this->entityUnit->preparePersistence($productCategoryMapping)
+                    ->shouldBeCalled();
+
                 $this->entityUnit->flush()->shouldBeCalled();
 
                 $request = (new Request())->setResource($product);
                 $request->setUserToken($token);
                 $request->setPartner($partner);
+                $request->category_ids = [1];
 
 
                 $result = $this->controller->store($request);

@@ -275,7 +275,7 @@ class Product extends BaseEntity
      * Get undocumented variable
      *
      * @return  EntityList|null
-     */ 
+     */
     public function getProductCategotryMappings(): ?EntityList
     {
         return $this->productCategotryMappings;
@@ -287,7 +287,7 @@ class Product extends BaseEntity
      * @param  EntityList|null  $productCategotryMappings  Undocumented variable
      *
      * @return  self
-     */ 
+     */
     public function setProductCategotryMappings(EntityList $productCategotryMappings)
     {
         $this->productCategotryMappings = $productCategotryMappings;
