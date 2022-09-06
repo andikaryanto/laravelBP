@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Queries\Product\CategoryQuery;
 use App\Repositories\Product\CategoryRepository;
 use App\Repositories\Product\ProductCategoryMappingRepository;
 use App\Repositories\ProductRepository;
@@ -30,9 +31,9 @@ class ProductController extends Controller
     /**
      * Undocumented variable
      *
-     * @var CategoryRepository
+     * @var CategoryQuery
      */
-    protected CategoryRepository $categoryRepository;
+    protected CategoryQuery $categoryQuery;
 
     /**
      * Undocumented variable
@@ -52,18 +53,18 @@ class ProductController extends Controller
      * Undocumented function
      *
      * @param ProductRepository $productRepository
-     * @param CategoryRepository $categoryRepository
+     * @param CategoryQuery $categoryQuery
      * @param ProductCategoryMappingRepository $productCategoryMappingRepository
      * @param EntityUnit $entityUnit
      */
     public function __construct(
         ProductRepository $productRepository,
-        CategoryRepository $categoryRepository,
+        CategoryQuery $categoryQuery,
         ProductCategoryMappingRepository $productCategoryMappingRepository,
         EntityUnit $entityUnit
     ) {
         $this->productRepository = $productRepository;
-        $this->categoryRepository = $categoryRepository;
+        $this->categoryQuery = $categoryQuery;
         $this->productCategoryMappingRepository = $productCategoryMappingRepository;
         $this->entityUnit = $entityUnit;
     }
@@ -111,14 +112,10 @@ class ProductController extends Controller
             $this->entityUnit->preparePersistence($product);
 
             foreach ($categoryIds as $categoryId) {
-                $category = $this->categoryRepository->findOneOrFail(
-                    [
-                        'where' => [
-                            ['shop_id', '=', $shop->getId()],
-                            ['id', '=', $categoryId]
-                        ]
-                    ]
-                );
+                $category = $this->categoryQuery
+                    ->whereId($categoryId)
+                    ->whereShop($shop)
+                    ->getFirst();
 
                 $productProductCategoryMapping = $this->productCategoryMappingRepository->newEntity();
                 $productProductCategoryMapping->setProduct($product);
@@ -135,7 +132,7 @@ class ProductController extends Controller
             return new ServerErrorResponse($e->getMessage());
         }
     }
-
+ 
     /**
      * patch a column of entity
      *

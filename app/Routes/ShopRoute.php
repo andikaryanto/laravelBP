@@ -3,7 +3,12 @@
 namespace App\Routes;
 
 use App\Http\Controllers\ShopController;
+use App\Http\Middleware\Hydrators\ShopHydrator;
+use App\Http\Middleware\SetPartnerToRequest;
 use Illuminate\Support\Facades\Route;
+use LaravelCommon\App\Http\Middleware\CheckScope;
+use LaravelCommon\App\Http\Middleware\EntityUnit;
+use LaravelCommon\App\Http\Middleware\ResourceValidation;
 use LaravelCommon\App\Routes\CommonRoute;
 
 class ShopRoute extends CommonRoute
@@ -20,16 +25,16 @@ class ShopRoute extends CommonRoute
                 Route::get('/list', [ShopController::class, 'getAll'])
                     ->middleware(
                         [
-                            'check-scope:marketOrganizer,customer'
+                            CheckScope::NAME . ':marketOrganizer,partner',
                         ]
                     );
-                ;
 
                 Route::post('/store', [ShopController::class, 'store'])
                     ->middleware(
                         [
-                            'check-scope:marketOrganizer,partner',
-                            'hydrator.shop'
+                            CheckScope::NAME . ':marketOrganizer,partner',
+                            SetPartnerToRequest::NAME,
+                            ShopHydrator::NAME,
                         ]
                     );
 
@@ -37,16 +42,16 @@ class ShopRoute extends CommonRoute
                 Route::patch('/{id}', [ShopController::class, 'patch'])
                     ->middleware(
                         [
-                            'check-scope:partner',
-                            'hydrator.shop',
-                            'resource-validation',
-                            'entity-unit'
+                            CheckScope::NAME . ':marketOrganizer,partner',
+                            ShopHydrator::NAME,
+                            ResourceValidation::NAME,
+                            EntityUnit::NAME
                         ]
                     );
                 Route::delete('/{id}', [ShopController::class, 'delete'])->middleware(
                     [
-                        'hydrator.shop',
-                        'entity-unit'
+                        ShopHydrator::NAME,
+                        EntityUnit::NAME
                     ]
                 );
             });
