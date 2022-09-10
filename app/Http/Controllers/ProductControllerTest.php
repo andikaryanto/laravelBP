@@ -7,6 +7,7 @@ use App\Entities\Product\Category;
 use App\Entities\Product\ProductCategoryMapping;
 use App\Entities\Shop;
 use App\Http\Controllers\ProductController;
+use App\Queries\Product\CategoryQuery;
 use App\Repositories\Product\CategoryRepository;
 use App\Repositories\Product\ProductCategoryMappingRepository;
 use App\Repositories\ProductRepository;
@@ -39,8 +40,8 @@ class ProductControllerTest extends TestCase
         $this->beforeSpecify(function () {
             $this->productRepository =
                 $this->prophesize(ProductRepository::class);
-            $this->categoryRepository =
-                $this->prophesize(CategoryRepository::class);
+            $this->categoryQuery =
+                $this->prophesize(CategoryQuery::class);
             $this->productCategoryMappingRepository =
                 $this->prophesize(ProductCategoryMappingRepository::class);
             $this->entityUnit =
@@ -48,7 +49,7 @@ class ProductControllerTest extends TestCase
 
             $this->controller = new ProductController(
                 $this->productRepository->reveal(),
-                $this->categoryRepository->reveal(),
+                $this->categoryQuery->reveal(),
                 $this->productCategoryMappingRepository->reveal(),
                 $this->entityUnit->reveal()
             );
@@ -125,14 +126,11 @@ class ProductControllerTest extends TestCase
 
                 $this->entityUnit->preparePersistence($product)->shouldBeCalled();
 
-                $this->categoryRepository->findOneOrFail([
-                    'where' => [
-                        ['shop_id', '=', $shop->getId()],
-                        ['id', '=', 1]
-                    ]
-                ])->shouldBeCalled()->willReturn($category);
-
                 $productCategoryMapping = new ProductCategoryMapping();
+
+                $this->categoryQuery->whereId(1)->shouldBeCalled()->willReturn($this->categoryQuery);
+                $this->categoryQuery->whereShop($shop)->shouldBeCalled()->willReturn($this->categoryQuery);
+                $this->categoryQuery->getFirstOrError()->shouldBeCalled()->willReturn($category);
 
                 $this->productCategoryMappingRepository->newEntity()
                     ->shouldBeCalled()

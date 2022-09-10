@@ -115,7 +115,7 @@ class ProductController extends Controller
                 $category = $this->categoryQuery
                     ->whereId($categoryId)
                     ->whereShop($shop)
-                    ->getFirst();
+                    ->getFirstOrError();
 
                 $productProductCategoryMapping = $this->productCategoryMappingRepository->newEntity();
                 $productProductCategoryMapping->setProduct($product);
@@ -132,7 +132,7 @@ class ProductController extends Controller
             return new ServerErrorResponse($e->getMessage());
         }
     }
- 
+
     /**
      * patch a column of entity
      *

@@ -8,7 +8,6 @@ use LaravelOrm\Queries\Query;
 
 class CategoryQuery extends Query
 {
-
     public function identity()
     {
         return Category::class;
