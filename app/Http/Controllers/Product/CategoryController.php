@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use LaravelCommon\App\Consts\ResponseConst;
 use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\NoDataFoundResponse;
+use LaravelCommon\Responses\PagedJsonResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
@@ -48,11 +49,11 @@ class CategoryController extends Controller
                 ['shop_id', '=', $shop->getId()]
             ]
         ];
-        $categories = $this->categoryRepository->gather($filter);
+        $categories = $this->categoryRepository->addFilters($filter);
         if ($categories->count() == 0) {
             return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
         }
-        return (new SuccessResponse('OK', ResponseConst::OK, $categories));
+        return (new PagedJsonResponse('OK', ResponseConst::OK, $categories));
     }
 
     public function get(Request $request)

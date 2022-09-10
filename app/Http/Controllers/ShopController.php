@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Queries\ShopQuery;
 use App\Repositories\Partner\ShopMappingRepository;
 use App\Repositories\PartnerRepository;
 use App\Repositories\ShopRepository;
@@ -12,6 +13,7 @@ use LaravelCommon\App\Consts\ResponseConst;
 use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\NoDataFoundResponse;
+use LaravelCommon\Responses\PagedJsonResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
@@ -22,9 +24,9 @@ class ShopController extends Controller
     /**
      * Undocumented variable
      *
-     * @var ShopRepository
+     * @var ShopQuery
      */
-    protected ShopRepository $shopRepository;
+    protected ShopQuery $shopQuery;
 
     /**
      * Undocumented variable
@@ -43,16 +45,16 @@ class ShopController extends Controller
     /**
      * Undocumented function
      *
-     * @param ShopRepository $shopRepository
+     * @param ShopQuery $shopRepository
      * @param ShopMappingRepository $shopMappingRepository
      * @param EntityUnit $entityUnit
      */
     public function __construct(
-        ShopRepository $shopRepository,
+        ShopQuery $shopQuery,
         ShopMappingRepository $shopMappingRepository,
         EntityUnit $entityUnit
     ) {
-        $this->shopRepository = $shopRepository;
+        $this->shopQuery = $shopQuery;
         $this->shopMappingRepository = $shopMappingRepository;
         $this->entityUnit = $entityUnit;
     }
@@ -66,11 +68,11 @@ class ShopController extends Controller
     public function getAll()
     {
 
-        $shops = $this->shopRepository->gather();
-        if ($shops->count() == 0) {
-            return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
-        }
-        return (new SuccessResponse('OK', ResponseConst::OK, $shops));
+        $shops = $this->shopQuery;
+        // if ($shops->count() == 0) {
+        //     return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
+        // }
+        return (new PagedJsonResponse('OK', ResponseConst::OK, $shops));
     }
 
     public function get(Request $request)

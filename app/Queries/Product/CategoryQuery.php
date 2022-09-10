@@ -4,13 +4,19 @@ namespace App\Queries\Product;
 
 use App\Entities\Product\Category;
 use App\Entities\Shop;
-use LaravelOrm\Queries\Query;
+use App\ViewModels\Product\CategoryCollection;
+use LaravelCommon\App\Queries\Query;
 
 class CategoryQuery extends Query
 {
     public function identity()
     {
         return Category::class;
+    }
+
+    public function collectionClass()
+    {
+        return CategoryCollection::class;
     }
 
     /**
