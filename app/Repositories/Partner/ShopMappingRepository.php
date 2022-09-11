@@ -5,9 +5,9 @@ namespace App\Repositories\Partner;
 use App\Entities\Partner\ShopMapping;
 use App\ViewModels\Partner\ShopMappingCollection;
 use App\ViewModels\Partner\ShopMappingViewModel;
-use LaravelCommon\App\Repositories\BaseRepository;
+use LaravelCommon\App\Repositories\Repository;
 
-class ShopMappingRepository extends BaseRepository implements ShopMappingRepositoryInterface
+class ShopMappingRepository extends Repository implements ShopMappingRepositoryInterface
 {
     /**
     * Constrcutor

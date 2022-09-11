@@ -5,9 +5,9 @@ namespace App\Repositories\Product;
 use App\Entities\Product\ProductCategoryMapping;
 use App\ViewModels\Product\ProductCategoryMappingCollection;
 use App\ViewModels\Product\ProductCategoryMappingViewModel;
-use LaravelCommon\App\Repositories\BaseRepository;
+use LaravelCommon\App\Repositories\Repository;
 
-class ProductCategoryMappingRepository extends BaseRepository implements ProductCategoryMappingRepositoryInterface
+class ProductCategoryMappingRepository extends Repository implements ProductCategoryMappingRepositoryInterface
 {
     /**
     * Constrcutor

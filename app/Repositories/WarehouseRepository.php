@@ -7,11 +7,11 @@ use App\Repositories\WarehouseRepositoryInterface;
 use App\ViewModels\WarehouseCollection;
 use App\ViewModels\WarehouseViewModel;
 use Exception;
-use LaravelCommon\App\Repositories\BaseRepository;
+use LaravelCommon\App\Repositories\Repository;
 use LaravelOrm\Exception\EntityException;
 use LaravelOrm\Interfaces\IEntity;
 
-class WarehouseRepository extends BaseRepository implements WarehouseRepositoryInterface
+class WarehouseRepository extends Repository implements WarehouseRepositoryInterface
 {
     /**
     * Constrcutor

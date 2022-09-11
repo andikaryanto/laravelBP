@@ -7,11 +7,11 @@ use App\Repositories\ProductRepositoryInterface;
 use App\ViewModels\ProductCollection;
 use App\ViewModels\ProductViewModel;
 use Exception;
-use LaravelCommon\App\Repositories\BaseRepository;
+use LaravelCommon\App\Repositories\Repository;
 use LaravelOrm\Exception\EntityException;
 use LaravelOrm\Interfaces\IEntity;
 
-class ProductRepository extends BaseRepository implements ProductRepositoryInterface
+class ProductRepository extends Repository implements ProductRepositoryInterface
 {
     /**
     * Constrcutor

@@ -6,9 +6,9 @@ use App\Entities\Shop;
 use App\Repositories\ShopRepositoryInterface;
 use App\ViewModels\ShopCollection;
 use App\ViewModels\ShopViewModel;
-use LaravelCommon\App\Repositories\BaseRepository;
+use LaravelCommon\App\Repositories\Repository;
 
-class ShopRepository extends BaseRepository implements ShopRepositoryInterface
+class ShopRepository extends Repository implements ShopRepositoryInterface
 {
     /**
     * Constrcutor

@@ -5,9 +5,9 @@ namespace App\Repositories\Product;
 use App\Entities\Product\Category;
 use App\ViewModels\Product\CategoryCollection;
 use App\ViewModels\Product\CategoryViewModel;
-use LaravelCommon\App\Repositories\BaseRepository;
+use LaravelCommon\App\Repositories\Repository;
 
-class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
+class CategoryRepository extends Repository implements CategoryRepositoryInterface
 {
     /**
     * Constrcutor

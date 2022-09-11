@@ -7,9 +7,9 @@ use App\Repositories\PartnerRepositoryInterface;
 use App\ViewModels\PartnerCollection;
 use App\ViewModels\PartnerViewModel;
 use LaravelCommon\App\Entities\User;
-use LaravelCommon\App\Repositories\BaseRepository;
+use LaravelCommon\App\Repositories\Repository;
 
-class PartnerRepository extends BaseRepository implements PartnerRepositoryInterface
+class PartnerRepository extends Repository implements PartnerRepositoryInterface
 {
     /**
      * Constrcutor
