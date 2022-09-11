@@ -18,4 +18,12 @@ class WarehouseHydrator extends Hydrator
     {
         return WarehouseRepository::class;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getKey(): string
+    {
+        return 'warehouse';
+    }
 }

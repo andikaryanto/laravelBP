@@ -38,8 +38,8 @@ class ShopRoute extends CommonRoute
                         ]
                     );
 
-                Route::get('/{id}', [ShopController::class, 'get'])->middleware('hydrator.shop');
-                Route::patch('/{id}', [ShopController::class, 'patch'])
+                Route::get('/{shop}', [ShopController::class, 'get'])->middleware('hydrator.shop');
+                Route::patch('/{shop}', [ShopController::class, 'patch'])
                     ->middleware(
                         [
                             CheckScope::NAME . ':marketOrganizer,partner',
@@ -48,7 +48,7 @@ class ShopRoute extends CommonRoute
                             EntityUnit::NAME
                         ]
                     );
-                Route::delete('/{id}', [ShopController::class, 'delete'])->middleware(
+                Route::delete('/{shop}', [ShopController::class, 'delete'])->middleware(
                     [
                         ShopHydrator::NAME,
                         EntityUnit::NAME

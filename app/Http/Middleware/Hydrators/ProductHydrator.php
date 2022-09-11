@@ -17,4 +17,12 @@ class ProductHydrator extends Hydrator
     {
         return ProductRepository::class;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getKey(): string
+    {
+        return 'product';
+    }
 }

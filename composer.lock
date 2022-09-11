@@ -12,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andikaryanto11/laravelcommon.git",
-                "reference": "aa1b629af7405d7b9db12f211c51b8b5a0ba7dbc"
+                "reference": "9645aa7e76f466c647da44ddd1eb35cd19b2fea3"
             },
             "require": {
                 "php": "^7.4|^8.0"
@@ -48,7 +48,7 @@
                 }
             ],
             "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
-            "time": "2022-09-11T15:42:54+00:00"
+            "time": "2022-09-11T16:08:41+00:00"
         },
         {
             "name": "andikaryanto11/laravelgraphql",

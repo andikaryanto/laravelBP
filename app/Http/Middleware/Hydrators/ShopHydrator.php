@@ -17,4 +17,12 @@ class ShopHydrator extends Hydrator
     {
         return ShopRepository::class;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getKey(): string
+    {
+        return 'shop';
+    }
 }

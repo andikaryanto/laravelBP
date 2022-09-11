@@ -17,4 +17,12 @@ class CategoryHydrator extends Hydrator
     {
         return CategoryRepository::class;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getKey(): string
+    {
+        return 'category';
+    }
 }

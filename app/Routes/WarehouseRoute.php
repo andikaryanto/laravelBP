@@ -27,8 +27,8 @@ class WarehouseRoute extends CommonRoute
                             'entity-unit'
                         ]
                     );
-                Route::get('/{id}', [WarehouseController::class, 'get'])->middleware('hydrator.warehouse');
-                Route::patch('/{id}', [WarehouseController::class, 'patch'])
+                Route::get('/{warehouse}', [WarehouseController::class, 'get'])->middleware('hydrator.warehouse');
+                Route::patch('/{warehouse}', [WarehouseController::class, 'patch'])
                     ->middleware(
                         [
                             'hydrator.warehouse',
@@ -36,7 +36,7 @@ class WarehouseRoute extends CommonRoute
                             'entity-unit'
                         ]
                     );
-                Route::delete('/{id}', [WarehouseController::class, 'delete'])->middleware(
+                Route::delete('/{warehouse}', [WarehouseController::class, 'delete'])->middleware(
                     [
                         'hydrator.warehouse',
                         'entity-unit'

@@ -42,8 +42,8 @@ class CategoryRoute extends CommonRoute
                         ]
                     );
 
-                Route::get('/{id}', [CategoryController::class, 'get'])->middleware('hydrator.product-category');
-                Route::patch('/{id}', [CategoryController::class, 'patch'])
+                Route::get('/{category}', [CategoryController::class, 'get'])->middleware('hydrator.product-category');
+                Route::patch('/{category}', [CategoryController::class, 'patch'])
                     ->middleware(
                         [
                             CategoryHydrator::NAME,
@@ -51,7 +51,7 @@ class CategoryRoute extends CommonRoute
                             EntityUnit::NAME
                         ]
                     );
-                Route::delete('/{id}', [CategoryController::class, 'delete'])->middleware(
+                Route::delete('/{category}', [CategoryController::class, 'delete'])->middleware(
                     [
                         CategoryHydrator::NAME,
                         EntityUnit::NAME
