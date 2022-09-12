@@ -5,14 +5,13 @@ use App\Entities\Partner\ShopMapping;
 use App\Entities\Product\Category;
 use App\Entities\Shop;
 use App\Http\Controllers\Product\CategoryController;
-use App\Repositories\Product\CategoryRepository;
+use App\Queries\Product\CategoryQuery;
 use App\System\Http\Request;
 use App\ViewModels\Product\CategoryCollection;
 use Codeception\Specify;
 use LaravelCommon\App\Entities\User;
-use LaravelCommon\App\Entities\User\Token;
-use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\NoDataFoundResponse;
+use LaravelCommon\Responses\PagedJsonResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\SuccessResponse;
 use LaravelOrm\Entities\EntityList;
@@ -33,58 +32,58 @@ class CategoryControllerTest extends TestCase
     public function test()
     {
         $this->beforeSpecify(function () {
-            $this->categoryRepository =
-                $this->prophesize(CategoryRepository::class);
-            $this->entityUnit =
-                $this->prophesize(EntityUnit::class);
+            $this->categoryQuery =
+                $this->prophesize(CategoryQuery::class);
 
             $this->controller = new CategoryController(
-                $this->categoryRepository->reveal(),
-                $this->entityUnit->reveal()
+                $this->categoryQuery->reveal()
             );
         });
 
         $this->describe('->getAll()', function () {
             $this->describe('when categoryRepository has data', function () {
+                $this->describe('should return PagedJsonResponse', function () {
 
-                $category = (new Category())
-                    ->setId(1)
-                    ->setName('category1');
+                    $category = (new Category())
+                        ->setId(1)
+                        ->setName('category1');
 
-                $entityList = new EntityList([$category]);
-                $collection = new CategoryCollection($entityList);
+                    $entityList = new EntityList([$category]);
+                    $collection = new CategoryCollection($entityList);
 
-                $user = (new User())
-                    ->setId(1);
+                    $user = (new User())
+                        ->setId(1);
 
-                $shop = (new Shop())
-                    ->setId(1);
+                    $shop = (new Shop())
+                        ->setId(1);
 
-                $shopMapping = (new ShopMapping())
-                    ->setId(1)
-                    ->setShop($shop);
+                    $shopMapping = (new ShopMapping())
+                        ->setId(1)
+                        ->setShop($shop);
 
-                $partner = (new Partner())
-                    ->setId(1)
-                    ->setUser($user)
-                    ->setPartnerShops(new EntityList([$shopMapping]));
+                    $partner = (new Partner())
+                        ->setId(1)
+                        ->setUser($user)
+                        ->setPartnerShops(new EntityList([$shopMapping]));
 
-                $request = (new Request())
-                    ->setPartner($partner);
+                    $request = (new Request())
+                        ->setPartner($partner);
 
-                $filter = [
-                    'where' => [
-                        ['shop_id', '=', $shop->getId()]
-                    ]
-                ];
+                    $this->categoryQuery->whereShop($shop)
+                        ->shouldBeCalled()
+                        ->willReturn($this->categoryQuery);
 
-                $this->categoryRepository->gather($filter)
-                    ->shouldBeCalled()
-                    ->willReturn($collection);
+                    $this->categoryQuery->getIterator()
+                        ->shouldBeCalled()
+                        ->willReturn($collection);
 
-                $result = $this->controller->getAll($request);
+                    $this->categoryQuery->getPagedCollection()
+                        ->shouldBeCalled();
 
-                verify($result)->instanceOf(SuccessResponse::class);
+                    $result = $this->controller->getAll($request);
+
+                    verify($result)->instanceOf(PagedJsonResponse::class);
+                });
             });
 
             $this->describe('when categoryRepository has no data', function () {
@@ -109,15 +108,16 @@ class CategoryControllerTest extends TestCase
 
                 $entityList = new EntityList([]);
                 $collection = new CategoryCollection($entityList);
-                $filter = [
-                    'where' => [
-                        ['shop_id', '=', $shop->getId()]
-                    ]
-                ];
+                $this->categoryQuery->whereShop($shop)
+                    ->shouldBeCalled()
+                    ->willReturn($this->categoryQuery);
 
-                $this->categoryRepository->gather($filter)
+                $this->categoryQuery->getIterator()
                     ->shouldBeCalled()
                     ->willReturn($collection);
+
+                $this->categoryQuery->getPagedCollection()
+                    ->shouldNotBeCalled();
 
                 $result = $this->controller->getAll($request);
 

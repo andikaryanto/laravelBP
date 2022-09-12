@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Queries\Product\CategoryQuery;
 use App\Repositories\Product\CategoryRepository;
 use App\ViewModels\Product\CategoryViewModel;
 use Exception;
@@ -20,9 +21,9 @@ class CategoryController extends Controller
     /**
      * Undocumented variable
      *
-     * @var CategoryRepository
+     * @var CategoryQuery
      */
-    protected CategoryRepository $categoryRepository;
+    protected CategoryQuery $categoryQuery;
 
     /**
      * Undocumented function
@@ -30,9 +31,9 @@ class CategoryController extends Controller
      * @param CategoryRepository $categoryRepository
      */
     public function __construct(
-        CategoryRepository $categoryRepository
+        CategoryQuery $categoryQuery
     ) {
-        $this->categoryRepository = $categoryRepository;
+        $this->categoryQuery = $categoryQuery;
     }
 
 
@@ -44,13 +45,8 @@ class CategoryController extends Controller
     public function getAll(Request $request)
     {
         $shop = $request->getPartnerShop();
-        $filter = [
-            'where' => [
-                ['shop_id', '=', $shop->getId()]
-            ]
-        ];
-        $categories = $this->categoryRepository->addFilters($filter);
-        if ($categories->count() == 0) {
+        $categories = $this->categoryQuery->whereShop($shop);
+        if ($categories->getIterator()->count() == 0) {
             return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
         }
         return (new PagedJsonResponse('OK', ResponseConst::OK, $categories));
