@@ -4,9 +4,8 @@ use App\Entities\Partner;
 use App\Entities\Partner\ShopMapping;
 use App\Entities\Shop;
 use App\Http\Controllers\ShopController;
+use App\Queries\ShopQuery;
 use App\Repositories\Partner\ShopMappingRepository;
-use App\Repositories\PartnerRepository;
-use App\Repositories\ShopRepository;
 use App\System\Http\Request;
 use App\ViewModels\ShopCollection;
 use Codeception\Specify;
@@ -15,6 +14,7 @@ use LaravelCommon\App\Entities\User\Token;
 use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\NoDataFoundResponse;
+use LaravelCommon\Responses\PagedJsonResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\SuccessResponse;
 use LaravelOrm\Entities\EntityList;
@@ -35,12 +35,12 @@ class ShopControllerTest extends TestCase
     public function test()
     {
         $this->beforeSpecify(function () {
-            $this->shopRepository = $this->prophesize(ShopRepository::class);
+            $this->shopQuery = $this->prophesize(ShopQuery::class);
             $this->shopMappingRepository = $this->prophesize(ShopMappingRepository::class);
             $this->entityUnit = $this->prophesize(EntityUnit::class);
 
             $this->controller = new ShopController(
-                $this->shopRepository->reveal(),
+                $this->shopQuery->reveal(),
                 $this->shopMappingRepository->reveal(),
                 $this->entityUnit->reveal()
             );
@@ -48,36 +48,54 @@ class ShopControllerTest extends TestCase
 
         $this->describe('->getAll()', function () {
             $this->describe('when shopRepository has data', function () {
+                $this->describe('should return PagedJsonResponse', function () {
 
-                $shop = (new Shop())
-                    ->setId(1)
-                    ->setName('shop1');
+                    $shop = (new Shop())
+                        ->setId(1)
+                        ->setAddress('Address')
+                        ->setPhone('098997')
+                        ->setLongitude('110.21312312')
+                        ->setLatitude('-7.5476657');
 
-                $entityList = new EntityList([$shop]);
-                $collection = new ShopCollection($entityList);
+                    $entityList = new EntityList([$shop]);
+                    $collection = new ShopCollection($entityList);
 
+                    $this->shopQuery->getIterator()
+                        ->shouldBeCalled()
+                        ->willReturn($collection);
 
-                $this->shopRepository->gather()
-                    ->shouldBeCalled()
-                    ->willReturn($collection);
+                    $this->shopQuery->getPagedCollection()
+                        ->shouldBeCalled();
 
-                $result = $this->controller->getAll();
+                    $this->shopQuery->getPagedCollection()
+                        ->shouldBeCalled();
 
-                verify($result)->instanceOf(SuccessResponse::class);
+                    $result = $this->controller->getAll();
+
+                    verify($result)->instanceOf(PagedJsonResponse::class);
+                });
             });
 
             $this->describe('when shopRepository has no data', function () {
+                $this->describe('should return NoDataFoundResponse', function () {
 
-                $entityList = new EntityList([]);
-                $collection = new ShopCollection($entityList);
+                    $entityList = new EntityList([]);
+                    $collection = new ShopCollection($entityList);
 
-                $this->shopRepository->gather()
-                    ->shouldBeCalled()
-                    ->willReturn($collection);
+                    $this->shopQuery->getIterator()
+                        ->shouldBeCalled()
+                        ->willReturn($collection);
 
-                $result = $this->controller->getAll();
+                    $this->shopQuery->getPagedCollection()
+                        ->shouldBeCalled();
 
-                verify($result)->instanceOf(NoDataFoundResponse::class);
+                    $this->shopQuery->getPagedCollection()
+                        ->shouldNotBeCalled();
+
+                    $result = $this->controller->getAll();
+
+                    verify($result)->instanceOf(NoDataFoundResponse::class);
+                });
             });
         });
 
@@ -117,7 +135,10 @@ class ShopControllerTest extends TestCase
 
                     $shop = (new Shop())
                         ->setId(1)
-                        ->setName('shop1');
+                        ->setAddress('Address')
+                        ->setPhone('098997')
+                        ->setLongitude('110.21312312')
+                        ->setLatitude('-7.5476657');
 
                     $partner = (new Partner())
                         ->setId(1)
@@ -150,7 +171,10 @@ class ShopControllerTest extends TestCase
 
                 $shop = (new Shop())
                     ->setId(1)
-                    ->setName('shop1');
+                    ->setAddress('Address')
+                    ->setPhone('098997')
+                    ->setLongitude('110.21312312')
+                    ->setLatitude('-7.5476657');
 
                 $request = (new Request())->setResource($shop);
 
@@ -164,7 +188,10 @@ class ShopControllerTest extends TestCase
 
                 $shop = (new Shop())
                     ->setId(1)
-                    ->setName('shop1');
+                    ->setAddress('Address')
+                    ->setPhone('098997')
+                    ->setLongitude('110.21312312')
+                    ->setLatitude('-7.5476657');
 
                 $request = (new Request())->setResource($shop);
 

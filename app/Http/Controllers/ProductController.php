@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Product\File;
 use App\Queries\Product\CategoryQuery;
 use App\Repositories\Product\CategoryRepository;
 use App\Repositories\Product\ProductCategoryMappingRepository;
@@ -10,6 +11,7 @@ use App\ViewModels\ProductViewModel;
 use Exception;
 use Illuminate\Http\Request;
 use LaravelCommon\App\Consts\ResponseConst;
+use LaravelCommon\App\Services\FileService;
 use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\NoDataFoundResponse;
@@ -45,6 +47,13 @@ class ProductController extends Controller
     /**
      * Undocumented variable
      *
+     * @var FileService
+     */
+    protected FileService $fileService;
+
+    /**
+     * Undocumented variable
+     *
      * @var EntityUnit
      */
     protected EntityUnit $entityUnit;
@@ -55,17 +64,20 @@ class ProductController extends Controller
      * @param ProductRepository $productRepository
      * @param CategoryQuery $categoryQuery
      * @param ProductCategoryMappingRepository $productCategoryMappingRepository
+     * @param FileService $fileService
      * @param EntityUnit $entityUnit
      */
     public function __construct(
         ProductRepository $productRepository,
         CategoryQuery $categoryQuery,
         ProductCategoryMappingRepository $productCategoryMappingRepository,
+        FileService $fileService,
         EntityUnit $entityUnit
     ) {
         $this->productRepository = $productRepository;
         $this->categoryQuery = $categoryQuery;
         $this->productCategoryMappingRepository = $productCategoryMappingRepository;
+        $this->fileService = $fileService;
         $this->entityUnit = $entityUnit;
     }
 
@@ -104,6 +116,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
+            if (!$request->hasFile('files')) {
+                return new BadRequestResponse('Files is required.');
+            }
+
             $categoryIds = $request->category_ids;
             $shop = $request->getPartnerShop();
 
@@ -121,6 +137,27 @@ class ProductController extends Controller
                 $productProductCategoryMapping->setProduct($product);
                 $productProductCategoryMapping->setProductCategory($category);
                 $this->entityUnit->preparePersistence($productProductCategoryMapping);
+            }
+
+            /**
+             * @var \Illuminate\Http\UploadedFile[]
+             */
+            $productsFiles = $request->file('files');
+
+            foreach ($productsFiles as $productFile) {
+                $pathName = $this->fileService->upload($productFile, 'product/');
+
+                $extension = $productFile->getClientOriginalExtension();
+                $size = $productFile->getSize();
+                $type = $productFile->getMimeType();
+
+                $productFile = new File();
+                $productFile->setProduct($product);
+                $productFile->setName($pathName);
+                $productFile->setExtension($extension);
+                $productFile->setType($type);
+                $productFile->setSize($size);
+                $this->entityUnit->preparePersistence($productFile);
             }
 
             $this->entityUnit->flush();

@@ -75,11 +75,25 @@ class Product extends BaseEntity
     private ?EntityList $productCategotryMappings = null;
 
     /**
+     * Undocumented variable
+     *
+     * @var EntityList|null
+     */
+    private ?EntityList $files = null;
+
+    public function __construct()
+    {
+        $this->productCategotryMappings = new EntityList();
+        $this->files = new EntityList();
+        parent::__construct();
+    }
+
+    /**
      * Get undocumented variable
      *
      * @return  string
      */
-    protected function getName(): ?string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -91,7 +105,7 @@ class Product extends BaseEntity
      *
      * @return  Product
      */
-    protected function setName(string $name): Product
+    public function setName(string $name): Product
     {
         $this->name = $name;
 
@@ -103,7 +117,7 @@ class Product extends BaseEntity
      *
      * @return  string|null
      */
-    protected function getDescription(): ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -276,7 +290,7 @@ class Product extends BaseEntity
      *
      * @return  EntityList|null
      */
-    public function getProductCategotryMappings(): ?EntityList
+    protected function getProductCategotryMappings(): ?EntityList
     {
         return $this->productCategotryMappings;
     }
@@ -288,9 +302,33 @@ class Product extends BaseEntity
      *
      * @return  self
      */
-    public function setProductCategotryMappings(EntityList $productCategotryMappings)
+    protected function setProductCategotryMappings(EntityList $productCategotryMappings)
     {
         $this->productCategotryMappings = $productCategotryMappings;
+
+        return $this;
+    }
+
+    /**
+     * Get undocumented variable
+     *
+     * @return  EntityList|null
+     */
+    protected function getFiles(): EntityList
+    {
+        return $this->files;
+    }
+
+    /**
+     * Set undocumented variable
+     *
+     * @param  EntityList|null  $files  Undocumented variable
+     *
+     * @return  self
+     */
+    protected function setFiles(EntityList $files)
+    {
+        $this->files = $files;
 
         return $this;
     }

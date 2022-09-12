@@ -99,7 +99,11 @@ class ProductControllerTest extends TestCase
                     ->setId(1);
 
                 $shop = (new Shop())
-                    ->setId(1);
+                    ->setId(1)
+                    ->setAddress('Address')
+                    ->setPhone('098997')
+                    ->setLongitude('110.21312312')
+                    ->setLatitude('-7.5476657');
 
                 $shopMapping = (new ShopMapping())
                     ->setId(1)
@@ -145,7 +149,6 @@ class ProductControllerTest extends TestCase
                 $request->setUserToken($token);
                 $request->setPartner($partner);
                 $request->category_ids = [1];
-
 
                 $result = $this->controller->store($request);
                 verify($result)->instanceOf(ResourceCreatedResponse::class);
