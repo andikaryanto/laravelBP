@@ -10,6 +10,7 @@ use App\Repositories\ProductRepository;
 use App\ViewModels\ProductViewModel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Testing\File as TestingFile;
 use LaravelCommon\App\Consts\ResponseConst;
 use LaravelCommon\App\Services\FileService;
 use LaravelCommon\App\Utilities\EntityUnit;
@@ -139,24 +140,20 @@ class ProductController extends Controller
                 $this->entityUnit->preparePersistence($productProductCategoryMapping);
             }
 
-            /**
-             * @var \Illuminate\Http\UploadedFile[]
-             */
             $productsFiles = $request->file('files');
 
-            foreach ($productsFiles as $productFile) {
-                $pathName = $this->fileService->upload($productFile, 'product/');
+            $files = $this->fileService
+                ->allowedFileTypes(['jpg', 'jpeg', 'png'])
+                ->uploadBatch($productsFiles, 'product/')
+                ->getFiles();
 
-                $extension = $productFile->getClientOriginalExtension();
-                $size = $productFile->getSize();
-                $type = $productFile->getMimeType();
-
+            foreach ($files as $file) {
                 $productFile = new File();
                 $productFile->setProduct($product);
-                $productFile->setName($pathName);
-                $productFile->setExtension($extension);
-                $productFile->setType($type);
-                $productFile->setSize($size);
+                $productFile->setName($file->getName());
+                $productFile->setExtension($file->getExtension());
+                $productFile->setType($file->getMimeType());
+                $productFile->setSize($file->getSize());
                 $this->entityUnit->preparePersistence($productFile);
             }
 
@@ -164,8 +161,10 @@ class ProductController extends Controller
 
             return new ResourceCreatedResponse('OK', ResponseConst::OK, new ProductViewModel($product));
         } catch (EntityException $e) {
+            $this->fileService->unlinkFiles();
             return new BadRequestResponse($e->getMessage(), ResponseConst::INVALID_DATA);
         } catch (Exception $e) {
+            $this->fileService->unlinkFiles();
             return new ServerErrorResponse($e->getMessage());
         }
     }
