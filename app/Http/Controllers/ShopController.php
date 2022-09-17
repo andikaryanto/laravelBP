@@ -69,9 +69,9 @@ class ShopController extends Controller
     {
 
         $shops = $this->shopQuery;
-        // if ($shops->count() == 0) {
-        //     return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
-        // }
+        if ($shops->getIterator()->count() == 0) {
+            return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
+        }
         return (new PagedJsonResponse('OK', ResponseConst::OK, $shops));
     }
 

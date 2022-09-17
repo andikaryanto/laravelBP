@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Product\File;
 use App\Queries\Product\CategoryQuery;
 use App\Repositories\Product\CategoryRepository;
 use App\Repositories\Product\ProductCategoryMappingRepository;
@@ -9,7 +10,9 @@ use App\Repositories\ProductRepository;
 use App\ViewModels\ProductViewModel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Testing\File as TestingFile;
 use LaravelCommon\App\Consts\ResponseConst;
+use LaravelCommon\App\Services\FileService;
 use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\NoDataFoundResponse;
@@ -45,6 +48,13 @@ class ProductController extends Controller
     /**
      * Undocumented variable
      *
+     * @var FileService
+     */
+    protected FileService $fileService;
+
+    /**
+     * Undocumented variable
+     *
      * @var EntityUnit
      */
     protected EntityUnit $entityUnit;
@@ -55,17 +65,20 @@ class ProductController extends Controller
      * @param ProductRepository $productRepository
      * @param CategoryQuery $categoryQuery
      * @param ProductCategoryMappingRepository $productCategoryMappingRepository
+     * @param FileService $fileService
      * @param EntityUnit $entityUnit
      */
     public function __construct(
         ProductRepository $productRepository,
         CategoryQuery $categoryQuery,
         ProductCategoryMappingRepository $productCategoryMappingRepository,
+        FileService $fileService,
         EntityUnit $entityUnit
     ) {
         $this->productRepository = $productRepository;
         $this->categoryQuery = $categoryQuery;
         $this->productCategoryMappingRepository = $productCategoryMappingRepository;
+        $this->fileService = $fileService;
         $this->entityUnit = $entityUnit;
     }
 
@@ -104,6 +117,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
+            if (!$request->hasFile('files')) {
+                return new BadRequestResponse('Files is required.');
+            }
+
             $categoryIds = $request->category_ids;
             $shop = $request->getPartnerShop();
 
@@ -123,12 +140,31 @@ class ProductController extends Controller
                 $this->entityUnit->preparePersistence($productProductCategoryMapping);
             }
 
+            $productsFiles = $request->file('files');
+
+            $files = $this->fileService
+                ->allowedFileTypes(['jpg', 'jpeg', 'png'])
+                ->uploadBatch($productsFiles, 'product/')
+                ->getFiles();
+
+            foreach ($files as $file) {
+                $productFile = new File();
+                $productFile->setProduct($product);
+                $productFile->setName($file->getName());
+                $productFile->setExtension($file->getExtension());
+                $productFile->setType($file->getMimeType());
+                $productFile->setSize($file->getSize());
+                $this->entityUnit->preparePersistence($productFile);
+            }
+
             $this->entityUnit->flush();
 
             return new ResourceCreatedResponse('OK', ResponseConst::OK, new ProductViewModel($product));
         } catch (EntityException $e) {
+            $this->fileService->unlinkFiles();
             return new BadRequestResponse($e->getMessage(), ResponseConst::INVALID_DATA);
         } catch (Exception $e) {
+            $this->fileService->unlinkFiles();
             return new ServerErrorResponse($e->getMessage());
         }
     }
