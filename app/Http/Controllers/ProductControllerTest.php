@@ -43,6 +43,40 @@ class ProductControllerTest extends TestCase
     public function test()
     {
         $this->beforeSpecify(function () {
+
+            $this->user = (new User())
+                ->setId(1);
+
+            $this->shop = (new Shop())
+                ->setId(1)
+                ->setAddress('Address')
+                ->setPhone('098997')
+                ->setLongitude('110.21312312')
+                ->setLatitude('-7.5476657');
+
+            $this->shopMapping = (new ShopMapping())
+                ->setId(1)
+                ->setShop($this->shop);
+
+            $this->partner = (new Partner())
+                ->setId(1)
+                ->setUser($this->user)
+                ->setPartnerShops(new EntityList([$this->shopMapping]));
+
+            $this->token = (new Token())
+                ->setId(1)
+                ->setUser($this->user);
+
+            $this->product = (new Product())
+                ->setId(1)
+                ->setName('product1')
+                ->setShop($this->shop);
+
+            $this->category = (new Category())
+                ->setId(1)
+                ->setName('product1')
+                ->setShop($this->shop);
+
             $this->productRepository =
                 $this->prophesize(ProductRepository::class);
             $this->categoryQuery =
@@ -65,12 +99,7 @@ class ProductControllerTest extends TestCase
 
         $this->describe('->getAll()', function () {
             $this->describe('when productRepository has data', function () {
-
-                $product = (new Product())
-                    ->setId(1)
-                    ->setName('product1');
-
-                $entityList = new EntityList([$product]);
+                $entityList = new EntityList([$this->product]);
                 $collection = new ProductCollection($entityList);
 
 
@@ -102,48 +131,15 @@ class ProductControllerTest extends TestCase
         $this->describe('->store()', function () {
             $this->describe('has uploaded file', function () {
                 $this->describe('should return ResourceCreatedResponse', function () {
-                    $user = (new User())
-                        ->setId(1);
-
-                    $shop = (new Shop())
-                        ->setId(1)
-                        ->setAddress('Address')
-                        ->setPhone('098997')
-                        ->setLongitude('110.21312312')
-                        ->setLatitude('-7.5476657');
-
-                    $shopMapping = (new ShopMapping())
-                        ->setId(1)
-                        ->setShop($shop);
-
-                    $partner = (new Partner())
-                        ->setId(1)
-                        ->setUser($user)
-                        ->setPartnerShops(new EntityList([$shopMapping]));
-
-                    $token = (new Token())
-                        ->setId(1)
-                        ->setUser($user);
-
-                    $product = (new Product())
-                        ->setId(1)
-                        ->setName('product1')
-                        ->setShop($shop);
-
-                    $category = (new Category())
-                        ->setId(1)
-                        ->setName('product1')
-                        ->setShop($shop);
-
                     $uplodedFiles[] = UploadedFile::fake()->image('images');
 
-                    $this->entityUnit->preparePersistence($product)->shouldBeCalled();
+                    $this->entityUnit->preparePersistence($this->product)->shouldBeCalled();
 
                     $productCategoryMapping = new ProductCategoryMapping();
 
                     $this->categoryQuery->whereId(1)->shouldBeCalled()->willReturn($this->categoryQuery);
-                    $this->categoryQuery->whereShop($shop)->shouldBeCalled()->willReturn($this->categoryQuery);
-                    $this->categoryQuery->getFirstOrError()->shouldBeCalled()->willReturn($category);
+                    $this->categoryQuery->whereShop($this->shop)->shouldBeCalled()->willReturn($this->categoryQuery);
+                    $this->categoryQuery->getFirstOrError()->shouldBeCalled()->willReturn($this->category);
 
                     $this->productCategoryMappingRepository->newEntity()
                         ->shouldBeCalled()
@@ -173,9 +169,9 @@ class ProductControllerTest extends TestCase
                     $this->entityUnit->flush()->shouldBeCalled();
 
                     $request = new Request();
-                    $request->setResource($product);
-                    $request->setUserToken($token);
-                    $request->setPartner($partner);
+                    $request->setResource($this->product);
+                    $request->setUserToken($this->token);
+                    $request->setPartner($this->partner);
                     $request->category_ids = [1];
                     $request->files = new FileBag(['files' => $uplodedFiles]);
 
@@ -186,37 +182,9 @@ class ProductControllerTest extends TestCase
 
             $this->describe('has no file upload', function () {
                 $this->describe('will return BadRequestResponse', function () {
-                    $user = (new User())
-                        ->setId(1);
-
-                    $shop = (new Shop())
-                        ->setId(1)
-                        ->setAddress('Address')
-                        ->setPhone('098997')
-                        ->setLongitude('110.21312312')
-                        ->setLatitude('-7.5476657');
-
-                    $shopMapping = (new ShopMapping())
-                        ->setId(1)
-                        ->setShop($shop);
-
-                    $partner = (new Partner())
-                        ->setId(1)
-                        ->setUser($user)
-                        ->setPartnerShops(new EntityList([$shopMapping]));
-
-                    $token = (new Token())
-                        ->setId(1)
-                        ->setUser($user);
-
-                    $product = (new Product())
-                        ->setId(1)
-                        ->setName('product1')
-                        ->setShop($shop);
-
-                    $request = (new Request())->setResource($product);
-                    $request->setUserToken($token);
-                    $request->setPartner($partner);
+                    $request = (new Request())->setResource($this->product);
+                    $request->setUserToken($this->token);
+                    $request->setPartner($this->partner);
                     $request->category_ids = [1];
 
                     $result = $this->controller->store($request);
@@ -227,12 +195,7 @@ class ProductControllerTest extends TestCase
 
         $this->describe('->patch()', function () {
             $this->describe('will return SuccessResponse', function () {
-
-                $product = (new Product())
-                    ->setId(1)
-                    ->setName('product1');
-
-                $request = (new Request())->setResource($product);
+                $request = (new Request())->setResource($this->product);
 
                 $result = $this->controller->patch($request);
                 verify($result)->instanceOf(SuccessResponse::class);
@@ -241,12 +204,7 @@ class ProductControllerTest extends TestCase
 
         $this->describe('->delete()', function () {
             $this->describe('will return SuccessResponse', function () {
-
-                $product = (new Product())
-                    ->setId(1)
-                    ->setName('product1');
-
-                $request = (new Request())->setResource($product);
+                $request = (new Request())->setResource($this->product);
 
                 $result = $this->controller->delete($request);
                 verify($result)->instanceOf(SuccessResponse::class);
