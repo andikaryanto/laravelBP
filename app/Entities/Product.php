@@ -86,28 +86,28 @@ class Product extends BaseEntity
      *
      * @var float
      */
-    private float $weight = 0.00; 
-    
+    private float $weight = 0.00;
+
     /**
      * Undocumented variable
      *
      * @var float
      */
-    private float $height = 0.00; 
-    
+    private float $height = 0.00;
+
     /**
      * Undocumented variable
      *
      * @var float
      */
-    private float $width = 0.00; 
-    
+    private float $width = 0.00;
+
     /**
      * Undocumented variable
      *
      * @var float
      */
-    private float $length = 0.00; 
+    private float $length = 0.00;
 
     /**
      * Product constructor
@@ -366,7 +366,7 @@ class Product extends BaseEntity
 
     /**
      * Get the value of weight
-     */ 
+     */
     public function getWeight(): float
     {
         return $this->weight;
@@ -376,7 +376,7 @@ class Product extends BaseEntity
      * Set the value of weight
      *
      * @return  self
-     */ 
+     */
     public function setWeight(float $weight): Product
     {
         $this->weight = $weight;
@@ -386,7 +386,7 @@ class Product extends BaseEntity
 
     /**
      * Get the value of height
-     */ 
+     */
     public function getHeight(): float
     {
         return $this->height;
@@ -396,7 +396,7 @@ class Product extends BaseEntity
      * Set the value of height
      *
      * @return  self
-     */ 
+     */
     public function setHeight(float $height): Product
     {
         $this->height = $height;
@@ -406,7 +406,7 @@ class Product extends BaseEntity
 
     /**
      * Get the value of width
-     */ 
+     */
     public function getWidth(): float
     {
         return $this->width;
@@ -416,7 +416,7 @@ class Product extends BaseEntity
      * Set the value of width
      *
      * @return  self
-     */ 
+     */
     public function setWidth(float $width): Product
     {
         $this->width = $width;
@@ -426,7 +426,7 @@ class Product extends BaseEntity
 
     /**
      * Get the value of length
-     */ 
+     */
     public function getLength(): float
     {
         return $this->length;
@@ -436,7 +436,7 @@ class Product extends BaseEntity
      * Set the value of length
      *
      * @return  self
-     */ 
+     */
     public function setLength(float $length): Product
     {
         $this->length = $length;

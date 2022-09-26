@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class SetPartnerShopToResource
 {
     public const NAME = 'set-partner-shop-to-resource';
-  
+
     /**
      * Handle an incoming request.
      *

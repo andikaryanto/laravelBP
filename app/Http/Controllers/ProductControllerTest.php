@@ -108,13 +108,13 @@ class ProductControllerTest extends TestCase
                     ->willReturn(1);
 
                 $this->productRepository->getFilters()
-                        ->shouldBeCalled()
-                        ->willReturn([]);
+                    ->shouldBeCalled()
+                    ->willReturn([]);
 
                 $this->productRepository->gather([])
                     ->shouldBeCalled()
                     ->willReturn($collection);
-        
+
 
                 $result = $this->controller->getAll();
 
@@ -145,9 +145,9 @@ class ProductControllerTest extends TestCase
 
                     $productCategoryMapping = new ProductCategoryMapping();
 
-                    $this->categoryQuery->whereId(1)->shouldBeCalled()->willReturn($this->categoryQuery);
+                    $this->categoryQuery->whereIdIn([1])->shouldBeCalled()->willReturn($this->categoryQuery);
                     $this->categoryQuery->whereShop($this->shop)->shouldBeCalled()->willReturn($this->categoryQuery);
-                    $this->categoryQuery->getFirstOrError()->shouldBeCalled()->willReturn($this->category);
+                    $this->categoryQuery->getIterator()->shouldBeCalled()->willReturn(new EntityList([$this->category]));
 
                     $this->productCategoryMappingRepository->newEntity()
                         ->shouldBeCalled()

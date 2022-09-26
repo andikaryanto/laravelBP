@@ -15,7 +15,7 @@ App\Entities\Product\ProductCategoryMapping:
       field: product_id
       rule: 'required'
     productCategory:
-      type: App\Entities\Product\Category
+      type: App\Entities\ProductCategory
       isEntity: true
       foreignKey: product_category_id
       relationType: one_to_many

@@ -19,7 +19,8 @@ class VariantQuery extends Query
         return VariantCollection::class;
     }
 
-    public function whereProduct(Product $product): VariantQuery{
+    public function whereProduct(Product $product): VariantQuery
+    {
         $this->where('product_id', '=', $product->getId());
         return $this;
     }

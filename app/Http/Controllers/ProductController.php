@@ -129,12 +129,12 @@ class ProductController extends Controller
             $product->setShop($shop);
             $this->entityUnit->preparePersistence($product);
 
-            foreach ($categoryIds as $categoryId) {
-                $category = $this->categoryQuery
-                    ->whereId($categoryId)
-                    ->whereShop($shop)
-                    ->getFirstOrError();
+            $categories = $this->categoryQuery
+                ->whereIdIn($categoryIds)
+                ->whereShop($shop)
+                ->getIterator();
 
+            foreach ($categories as $category) {
                 $productProductCategoryMapping = $this->productCategoryMappingRepository->newEntity();
                 $productProductCategoryMapping->setProduct($product);
                 $productProductCategoryMapping->setProductCategory($category);

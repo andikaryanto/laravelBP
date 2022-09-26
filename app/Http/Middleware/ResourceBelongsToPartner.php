@@ -15,7 +15,7 @@ use LaravelCommon\Responses\NoDataFoundResponse;
 class ResourceBelongsToPartner
 {
     public const NAME = 'resource-belongs-to-partner';
-   
+
     /**
      * Handle an incoming request.
      *
@@ -28,7 +28,7 @@ class ResourceBelongsToPartner
     {
         $shop = $request->getPartnerShop();
         $resource = $request->getResource();
-        if($shop->getId() != $resource->getShop()->getId()){
+        if ($shop->getId() != $resource->getShop()->getId()) {
             throw new ResponsableException("Resource doesn't belongs to this partner", new NoDataFoundResponse(""));
         }
         return $next($request);
