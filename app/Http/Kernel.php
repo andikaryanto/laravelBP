@@ -6,6 +6,7 @@ use App\Http\Middleware\Hydrators\Product\CategoryHydrator;
 use App\Http\Middleware\Hydrators\ProductHydrator;
 use App\Http\Middleware\Hydrators\ShopHydrator;
 use App\Http\Middleware\Hydrators\WarehouseHydrator;
+use App\Http\Middleware\ResourceBelongsToPartner;
 use App\Http\Middleware\SetPartnerToRequest;
 use App\Http\Middleware\SetPartnerShopToResource;
 use App\System\Http\Request;
@@ -79,7 +80,8 @@ class Kernel extends AppHttpKernel
         CategoryHydrator::NAME => CategoryHydrator::class,
         ProductHydrator::NAME => ProductHydrator::class,
         SetPartnerToRequest::NAME => SetPartnerToRequest::class,
-        SetPartnerShopToResource::NAME => SetPartnerShopToResource::class
+        SetPartnerShopToResource::NAME => SetPartnerShopToResource::class,
+        ResourceBelongsToPartner::NAME => ResourceBelongsToPartner::class
 
     ];
 

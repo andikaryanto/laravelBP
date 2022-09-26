@@ -1,0 +1,72 @@
+App\Entities\Product\Variant:
+  table: product_variants
+  primaryKey: id
+  props:
+    id:
+      field: id
+      isEntity: false
+      type: int
+    productId:
+      field: product_id
+      isEntity: false
+      type: int
+      rule: required
+    name:
+      field: name
+      isEntity: false
+      type: string
+      rule: 'required|max:100'
+    price:
+      field: price
+      isEntity: false
+      type: float
+      rule: required
+    stock:
+      field: stock
+      isEntity: false
+      type: int
+      rule: required
+    saleableStock:
+      field: saleable_stock
+      isEntity: false
+      type: int
+      rule: required
+    condition:
+      field: condition
+      isEntity: false
+      type: string
+      rule: 'required|max:25'
+    weight:
+      field: weight
+      isEntity: false
+      type: float
+    height:
+      field: height
+      isEntity: false
+      type: float
+    width:
+      field: width
+      isEntity: false
+      type: float
+    length:
+      field: length
+      isEntity: false
+      type: float
+    createdBy:
+      field: created_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    updatedBy:
+      field: updated_by
+      isEntity: false
+      type: string
+      rule: 'max:255'
+    createdAt:
+      field: created_at
+      isEntity: false
+      type: DateTime
+    updatedAt:
+      field: updated_at
+      isEntity: false
+      type: DateTime

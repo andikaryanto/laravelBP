@@ -74,3 +74,19 @@ App\Entities\Product:
       inversedBy: productCategory
       field: produuct_category_id
       rule: 'required'
+    weight:
+      field: weight
+      isEntity: false
+      type: float
+    height:
+      field: height
+      isEntity: false
+      type: float
+    width:
+      field: width
+      isEntity: false
+      type: float
+    length:
+      field: length
+      isEntity: false
+      type: float

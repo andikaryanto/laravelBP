@@ -81,6 +81,37 @@ class Product extends BaseEntity
      */
     private ?EntityList $files = null;
 
+    /**
+     * Undocumented variable
+     *
+     * @var float
+     */
+    private float $weight = 0.00; 
+    
+    /**
+     * Undocumented variable
+     *
+     * @var float
+     */
+    private float $height = 0.00; 
+    
+    /**
+     * Undocumented variable
+     *
+     * @var float
+     */
+    private float $width = 0.00; 
+    
+    /**
+     * Undocumented variable
+     *
+     * @var float
+     */
+    private float $length = 0.00; 
+
+    /**
+     * Product constructor
+     */
     public function __construct()
     {
         $this->productCategotryMappings = new EntityList();
@@ -148,7 +179,7 @@ class Product extends BaseEntity
      * Get the value of shop
      * @return ?Shop
      */
-    public function getShop(): ?Shop
+    protected function getShop(): ?Shop
     {
         return $this->shop;
     }
@@ -158,7 +189,7 @@ class Product extends BaseEntity
      * @param Shop $shop
      * @return  self
      */
-    public function setShop(Shop $shop): self
+    protected function setShop(Shop $shop): self
     {
         $this->shop = $shop;
 
@@ -326,9 +357,89 @@ class Product extends BaseEntity
      *
      * @return  self
      */
-    protected function setFiles(EntityList $files)
+    protected function setFiles(EntityList $files): Product
     {
         $this->files = $files;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of weight
+     */ 
+    public function getWeight(): float
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Set the value of weight
+     *
+     * @return  self
+     */ 
+    public function setWeight(float $weight): Product
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of height
+     */ 
+    public function getHeight(): float
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set the value of height
+     *
+     * @return  self
+     */ 
+    public function setHeight(float $height): Product
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of width
+     */ 
+    public function getWidth(): float
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set the value of width
+     *
+     * @return  self
+     */ 
+    public function setWidth(float $width): Product
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of length
+     */ 
+    public function getLength(): float
+    {
+        return $this->length;
+    }
+
+    /**
+     * Set the value of length
+     *
+     * @return  self
+     */ 
+    public function setLength(float $length): Product
+    {
+        $this->length = $length;
 
         return $this;
     }

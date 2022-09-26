@@ -16,6 +16,7 @@ use LaravelCommon\App\Services\FileService;
 use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\NoDataFoundResponse;
+use LaravelCommon\Responses\PagedJsonResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
@@ -90,11 +91,11 @@ class ProductController extends Controller
     public function getAll()
     {
 
-        $products = $this->productRepository->gather();
+        $products = $this->productRepository;
         if ($products->count() == 0) {
             return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
         }
-        return (new SuccessResponse('OK', ResponseConst::OK, $products));
+        return (new PagedJsonResponse('OK', ResponseConst::OK, $products));
     }
 
     /**

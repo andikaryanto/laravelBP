@@ -2,18 +2,20 @@
 
 namespace App\Http\Middleware;
 
-use App\Repositories\PartnerRepository;
 use Closure;
 use Illuminate\Http\Request;
+use LaravelCommon\Exceptions\ResponsableException;
+use LaravelCommon\Responses\BadRequestResponse;
+use LaravelCommon\Responses\NoDataFoundResponse;
 
 /**
  * Set partner shop to request if request come from user token who is partner
  *
  */
-class SetPartnerShopToResource
+class ResourceBelongsToPartner
 {
-    public const NAME = 'set-partner-shop-to-resource';
-  
+    public const NAME = 'resource-belongs-to-partner';
+   
     /**
      * Handle an incoming request.
      *
@@ -26,7 +28,9 @@ class SetPartnerShopToResource
     {
         $shop = $request->getPartnerShop();
         $resource = $request->getResource();
-        $resource->setShop($shop);
+        if($shop->getId() != $resource->getShop()->getId()){
+            throw new ResponsableException("Resource doesn't belongs to this partner", new NoDataFoundResponse(""));
+        }
         return $next($request);
     }
 }
