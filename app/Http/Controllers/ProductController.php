@@ -16,6 +16,7 @@ use LaravelCommon\App\Services\FileService;
 use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\NoDataFoundResponse;
+use LaravelCommon\Responses\PagedJsonResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
@@ -90,11 +91,11 @@ class ProductController extends Controller
     public function getAll()
     {
 
-        $products = $this->productRepository->gather();
+        $products = $this->productRepository;
         if ($products->count() == 0) {
             return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
         }
-        return (new SuccessResponse('OK', ResponseConst::OK, $products));
+        return (new PagedJsonResponse('OK', ResponseConst::OK, $products));
     }
 
     /**
@@ -128,12 +129,12 @@ class ProductController extends Controller
             $product->setShop($shop);
             $this->entityUnit->preparePersistence($product);
 
-            foreach ($categoryIds as $categoryId) {
-                $category = $this->categoryQuery
-                    ->whereId($categoryId)
-                    ->whereShop($shop)
-                    ->getFirstOrError();
+            $categories = $this->categoryQuery
+                ->whereIdIn($categoryIds)
+                ->whereShop($shop)
+                ->getIterator();
 
+            foreach ($categories as $category) {
                 $productProductCategoryMapping = $this->productCategoryMappingRepository->newEntity();
                 $productProductCategoryMapping->setProduct($product);
                 $productProductCategoryMapping->setProductCategory($category);

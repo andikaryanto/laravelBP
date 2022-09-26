@@ -22,6 +22,7 @@ use LaravelCommon\App\Services\FileService;
 use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\Responses\NoDataFoundResponse;
+use LaravelCommon\Responses\PagedJsonResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\SuccessResponse;
 use LaravelOrm\Entities\EntityList;
@@ -102,14 +103,22 @@ class ProductControllerTest extends TestCase
                 $entityList = new EntityList([$this->product]);
                 $collection = new ProductCollection($entityList);
 
+                $this->productRepository->count()
+                    ->shouldBeCalled()
+                    ->willReturn(1);
 
-                $this->productRepository->gather()
+                $this->productRepository->getFilters()
+                    ->shouldBeCalled()
+                    ->willReturn([]);
+
+                $this->productRepository->gather([])
                     ->shouldBeCalled()
                     ->willReturn($collection);
 
+
                 $result = $this->controller->getAll();
 
-                verify($result)->instanceOf(SuccessResponse::class);
+                verify($result)->instanceOf(PagedJsonResponse::class);
             });
 
             $this->describe('when productRepository has no data', function () {
@@ -117,10 +126,9 @@ class ProductControllerTest extends TestCase
                 $entityList = new EntityList([]);
                 $collection = new ProductCollection($entityList);
 
-
-                $this->productRepository->gather()
+                $this->productRepository->count()
                     ->shouldBeCalled()
-                    ->willReturn($collection);
+                    ->willReturn(0);
 
                 $result = $this->controller->getAll();
 
@@ -137,9 +145,9 @@ class ProductControllerTest extends TestCase
 
                     $productCategoryMapping = new ProductCategoryMapping();
 
-                    $this->categoryQuery->whereId(1)->shouldBeCalled()->willReturn($this->categoryQuery);
+                    $this->categoryQuery->whereIdIn([1])->shouldBeCalled()->willReturn($this->categoryQuery);
                     $this->categoryQuery->whereShop($this->shop)->shouldBeCalled()->willReturn($this->categoryQuery);
-                    $this->categoryQuery->getFirstOrError()->shouldBeCalled()->willReturn($this->category);
+                    $this->categoryQuery->getIterator()->shouldBeCalled()->willReturn(new EntityList([$this->category]));
 
                     $this->productCategoryMappingRepository->newEntity()
                         ->shouldBeCalled()

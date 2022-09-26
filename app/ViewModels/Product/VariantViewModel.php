@@ -1,11 +1,11 @@
 <?php
 
-namespace App\ViewModels;
+namespace App\ViewModels\Product;
 
-use App\Entities\Product;
+use App\Entities\Product\Variant;
 use LaravelCommon\ViewModels\AbstractViewModel;
 
-class ProductViewModel extends AbstractViewModel
+class VariantViewModel extends AbstractViewModel
 {
     /**
      * @var bool $autoAddResource;
@@ -13,7 +13,7 @@ class ProductViewModel extends AbstractViewModel
     protected $isAutoAddResource = true;
 
     /**
-     * @var Product
+     * @var Variant
      */
     protected $entity;
 
@@ -22,10 +22,6 @@ class ProductViewModel extends AbstractViewModel
      */
     public function addResource(array &$element)
     {
-        $shop = $this->entity->getShop();
-        if ($shop) {
-            $element['shop'] = (new ShopViewModel($shop))->toArray();
-        }
         return $this;
     }
 
@@ -37,18 +33,14 @@ class ProductViewModel extends AbstractViewModel
         return [
             'id' => $this->entity->getId(),
             'name' => $this->entity->getName(),
-            'description' => $this->entity->getDescription(),
-            'rating' => $this->entity->getRating(),
-            'is_active' => $this->entity->getIsActive(),
-            'is_deleted' => $this->entity->getIsDeleted(),
+            'price' => $this->entity->getPrice(),
+            'stock' => $this->entity->getStock(),
+            'saleable_stock' => $this->entity->getSaleableStock(),
+            'condition' => $this->entity->getCondition(),
             'weight' => $this->entity->getWeight(),
             'height' => $this->entity->getHeight(),
             'width' => $this->entity->getWidth(),
             'length' => $this->entity->getLength(),
-            'deleted_at' => !is_null($this->entity->getDeletedAt())
-                ? $this->entity->getDeletedAt()->format('Y-m-d H:i:s')
-                : null,
-            'must_show' => $this->entity->getMustShow(),
             'created_at' => !is_null($this->entity->getCreatedAt())
                 ? $this->entity->getCreatedAt()->format('Y-m-d H:i:s')
                 : null,
