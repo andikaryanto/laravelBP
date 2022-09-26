@@ -1,39 +1,37 @@
 <?php
 
-namespace App\Http\Controllers\Product;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Queries\Product\CategoryQuery;
-use App\Repositories\Product\CategoryRepository;
-use App\ViewModels\Product\CategoryViewModel;
+use App\Queries\ProductCategoryQuery;
+use App\ViewModels\ProductCategoryViewModel;
 use Exception;
 use Illuminate\Http\Request;
 use LaravelCommon\App\Consts\ResponseConst;
-use LaravelCommon\App\Utilities\EntityUnit;
 use LaravelCommon\Responses\NoDataFoundResponse;
 use LaravelCommon\Responses\PagedJsonResponse;
 use LaravelCommon\Responses\ResourceCreatedResponse;
 use LaravelCommon\Responses\ServerErrorResponse;
 use LaravelCommon\Responses\SuccessResponse;
 
-class CategoryController extends Controller
+class ProductCategoryController extends Controller
 {
     /**
      * Undocumented variable
      *
-     * @var CategoryQuery
+     * @var ProductCategoryQuery
      */
-    protected CategoryQuery $categoryQuery;
+    protected ProductCategoryQuery $productCategoryQuery;
 
     /**
      * Undocumented function
      *
-     * @param CategoryRepository $categoryRepository
+     * @param ProductCategoryQuery $categoryRepository
      */
     public function __construct(
-        CategoryQuery $categoryQuery
+        ProductCategoryQuery $productCategoryQuery
     ) {
-        $this->categoryQuery = $categoryQuery;
+        $this->productCategoryQuery = $productCategoryQuery;
     }
 
 
@@ -45,7 +43,7 @@ class CategoryController extends Controller
     public function getAll(Request $request)
     {
         $shop = $request->getPartnerShop();
-        $categories = $this->categoryQuery->whereShop($shop);
+        $categories = $this->productCategoryQuery->whereShop($shop);
         if ($categories->getIterator()->count() == 0) {
             return new NoDataFoundResponse('No Data Found', ResponseConst::NO_DATA_FOUND);
         }
@@ -55,7 +53,7 @@ class CategoryController extends Controller
     public function get(Request $request)
     {
         $resource = $request->getResource();
-        return new SuccessResponse('OK', ResponseConst::OK, new CategoryViewModel($resource));
+        return new SuccessResponse('OK', ResponseConst::OK, new ProductCategoryViewModel($resource));
     }
 
     /**
@@ -68,7 +66,7 @@ class CategoryController extends Controller
         try {
             $resource = $request->getResource();
 
-            return new ResourceCreatedResponse('OK', ResponseConst::OK, new CategoryViewModel($resource));
+            return new ResourceCreatedResponse('OK', ResponseConst::OK, new ProductCategoryViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }
@@ -84,7 +82,7 @@ class CategoryController extends Controller
         try {
             $resource = $request->getResource();
 
-            return new SuccessResponse('OK', ResponseConst::OK, new CategoryViewModel($resource));
+            return new SuccessResponse('OK', ResponseConst::OK, new ProductCategoryViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }
@@ -100,7 +98,7 @@ class CategoryController extends Controller
         try {
             $resource = $request->getResource();
 
-            return new SuccessResponse('OK', ResponseConst::OK, new CategoryViewModel($resource));
+            return new SuccessResponse('OK', ResponseConst::OK, new ProductCategoryViewModel($resource));
         } catch (Exception $e) {
             return new ServerErrorResponse($e->getMessage());
         }

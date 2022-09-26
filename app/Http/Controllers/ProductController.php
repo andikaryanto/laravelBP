@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Product\File;
-use App\Queries\Product\CategoryQuery;
+use App\Queries\ProductCategoryQuery;
 use App\Repositories\Product\CategoryRepository;
 use App\Repositories\Product\ProductCategoryMappingRepository;
 use App\Repositories\ProductRepository;
@@ -34,9 +34,9 @@ class ProductController extends Controller
     /**
      * Undocumented variable
      *
-     * @var CategoryQuery
+     * @var ProductCategoryQuery
      */
-    protected CategoryQuery $categoryQuery;
+    protected ProductCategoryQuery $categoryQuery;
 
     /**
      * Undocumented variable
@@ -63,14 +63,14 @@ class ProductController extends Controller
      * Undocumented function
      *
      * @param ProductRepository $productRepository
-     * @param CategoryQuery $categoryQuery
+     * @param ProductCategoryQuery $categoryQuery
      * @param ProductCategoryMappingRepository $productCategoryMappingRepository
      * @param FileService $fileService
      * @param EntityUnit $entityUnit
      */
     public function __construct(
         ProductRepository $productRepository,
-        CategoryQuery $categoryQuery,
+        ProductCategoryQuery $categoryQuery,
         ProductCategoryMappingRepository $productCategoryMappingRepository,
         FileService $fileService,
         EntityUnit $entityUnit

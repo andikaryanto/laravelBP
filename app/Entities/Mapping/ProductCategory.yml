@@ -1,4 +1,4 @@
-App\Entities\Product\Category:
+App\Entities\ProductCategory:
   table: product_categories
   primaryKey: id
   props:
