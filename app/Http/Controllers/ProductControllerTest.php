@@ -3,11 +3,11 @@
 use App\Entities\Partner;
 use App\Entities\Partner\ShopMapping;
 use App\Entities\Product;
-use App\Entities\Product\Category;
+use App\Entities\ProductCategory;
 use App\Entities\Product\ProductCategoryMapping;
 use App\Entities\Shop;
 use App\Http\Controllers\ProductController;
-use App\Queries\Product\CategoryQuery;
+use App\Queries\ProductCategoryQuery;
 use App\Repositories\Product\ProductCategoryMappingRepository;
 use App\Repositories\ProductRepository;
 use App\System\Http\Request;
@@ -72,7 +72,7 @@ class ProductControllerTest extends TestCase
                 ->setName('product1')
                 ->setShop($this->shop);
 
-            $this->category = (new Category())
+            $this->category = (new ProductCategory())
                 ->setId(1)
                 ->setName('product1')
                 ->setShop($this->shop);
@@ -80,7 +80,7 @@ class ProductControllerTest extends TestCase
             $this->productRepository =
                 $this->prophesize(ProductRepository::class);
             $this->categoryQuery =
-                $this->prophesize(CategoryQuery::class);
+                $this->prophesize(ProductCategoryQuery::class);
             $this->productCategoryMappingRepository =
                 $this->prophesize(ProductCategoryMappingRepository::class);
             $this->fileService =

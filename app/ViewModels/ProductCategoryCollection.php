@@ -1,17 +1,17 @@
 <?php
 
-namespace App\ViewModels\Product;
+namespace App\ViewModels;
 
 use LaravelCommon\ViewModels\PaggedCollection;
 use LaravelOrm\Interfaces\IEntity;
 
-class CategoryCollection extends PaggedCollection
+class ProductCategoryCollection extends PaggedCollection
 {
     /**
      * @inheritdoc
      */
     public function shape(IEntity $entity)
     {
-        $this->addItem(new CategoryViewModel($entity));
+        $this->addItem(new ProductCategoryViewModel($entity));
     }
 }

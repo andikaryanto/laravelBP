@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Entities\Product;
+namespace App\Entities;
 
 use App\Entities\Shop;
 use LaravelCommon\App\Entities\BaseEntity;
 use LaravelOrm\Entities\EntityList;
 
-class Category extends BaseEntity
+class ProductCategory extends BaseEntity
 {
     /**
      * Undocumented variable
@@ -43,7 +43,7 @@ class Category extends BaseEntity
      * @param string name
      * @return self
      */
-    protected function setName(string $name): Category
+    protected function setName(string $name): ProductCategory
     {
         $this->name = $name;
         return $this;
@@ -65,7 +65,7 @@ class Category extends BaseEntity
      * @param ?string description
      * @return self
      */
-    protected function setDescription(?string $description): Category
+    protected function setDescription(?string $description): ProductCategory
     {
         $this->description = $description;
         return $this;

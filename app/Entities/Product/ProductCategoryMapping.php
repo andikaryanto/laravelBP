@@ -3,12 +3,13 @@
 namespace App\Entities\Product;
 
 use App\Entities\Product;
+use App\Entities\ProductCategory;
 use LaravelCommon\App\Entities\BaseEntity;
 
 class ProductCategoryMapping extends BaseEntity
 {
     protected ?Product $product = null;
-    protected ?Category $productCategoryId = null;
+    protected ?ProductCategory $productCategory = null;
 
     /**
      * Set product
@@ -38,18 +39,18 @@ class ProductCategoryMapping extends BaseEntity
      * @param Category productCategory
      * @return self
      */
-    protected function setProductCategory(Category $productCategory): ProductCategoryMapping
+    protected function setProductCategory(ProductCategory $productCategory): ProductCategoryMapping
     {
         $this->productCategory = $productCategory;
         return $this;
     }
 
     /**
-     * Get productCategoryId
+     * Get productCategory
      *
-     * @return ?Category
+     * @return ?ProductCategory
      */
-    protected function getProductCategory(): Category
+    protected function getProductCategory(): ProductCategory
     {
         return $this->productCategory;
     }

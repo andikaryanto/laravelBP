@@ -4,7 +4,8 @@ namespace App\System\Http;
 
 use App\Entities\Partner;
 use App\Entities\Shop;
-use App\Repositories\PartnerRepository;
+use LaravelCommon\Exceptions\ResponsableException;
+use LaravelCommon\Responses\BadRequestResponse;
 use LaravelCommon\System\Http\Request as HttpRequest;
 
 class Request extends HttpRequest
@@ -45,6 +46,9 @@ class Request extends HttpRequest
      */
     public function getPartnerShop(): Shop
     {
+        if ($this->getPartner()->getPartnerShops()->count() == 0) {
+            throw new ResponsableException('', new BadRequestResponse('Partner does not have related shop(s)'));
+        }
         return $this->getPartner()->getPartnerShops()->first()->getShop();
     }
 }

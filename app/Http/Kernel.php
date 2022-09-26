@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Hydrators\Product\CategoryHydrator;
+use App\Http\Middleware\Hydrators\ProductCategoryHydrator;
 use App\Http\Middleware\Hydrators\ProductHydrator;
 use App\Http\Middleware\Hydrators\ShopHydrator;
 use App\Http\Middleware\Hydrators\WarehouseHydrator;
@@ -77,7 +77,7 @@ class Kernel extends AppHttpKernel
         // 'controller-return' => ControllerReturn::class,
         WarehouseHydrator::NAME => WarehouseHydrator::class,
         ShopHydrator::NAME => ShopHydrator::class,
-        CategoryHydrator::NAME => CategoryHydrator::class,
+        ProductCategoryHydrator::NAME => ProductCategoryHydrator::class,
         ProductHydrator::NAME => ProductHydrator::class,
         SetPartnerToRequest::NAME => SetPartnerToRequest::class,
         SetPartnerShopToResource::NAME => SetPartnerShopToResource::class,

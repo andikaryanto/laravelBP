@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repositories\Product;
+namespace App\Repositories;
 
 use App\Entities\Product\Category;
 use App\ViewModels\Product\CategoryCollection;
 use App\ViewModels\Product\CategoryViewModel;
 use LaravelCommon\App\Repositories\Repository;
 
-class CategoryRepository extends Repository implements CategoryRepositoryInterface
+class ProductCategoryRepository extends Repository implements ProductCategoryRepositoryInterface
 {
     /**
     * Constrcutor

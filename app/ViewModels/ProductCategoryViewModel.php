@@ -1,13 +1,11 @@
 <?php
 
-namespace App\ViewModels\Product;
+namespace App\ViewModels;
 
-use App\Entities\Product\Category;
-use App\ViewModels\ShopViewModel;
-use LaravelCommon\App\ViewModels\UserViewModel;
+use App\Entities\ProductCategory;
 use LaravelCommon\ViewModels\AbstractViewModel;
 
-class CategoryViewModel extends AbstractViewModel
+class ProductCategoryViewModel extends AbstractViewModel
 {
     /**
      * @var bool $autoAddResource;
@@ -15,7 +13,7 @@ class CategoryViewModel extends AbstractViewModel
     protected $isAutoAddResource = true;
 
     /**
-     * @var Category
+     * @var ProductCategory
      */
     protected $entity;
 

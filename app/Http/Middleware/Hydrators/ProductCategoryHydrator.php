@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Middleware\Hydrators\Product;
+namespace App\Http\Middleware\Hydrators;
 
 use App\Repositories\Product\CategoryRepository;
 use LaravelCommon\App\Http\Middleware\Hydrator;
 
-class CategoryHydrator extends Hydrator
+class ProductCategoryHydrator extends Hydrator
 {
     public const NAME = 'hydrator.product-category';
 
