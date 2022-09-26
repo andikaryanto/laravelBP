@@ -1,12 +1,13 @@
 <?php
 
-use App\Repositories\PartnerRepository;
+use App\Queries\ProductCategoryQuery;
+use App\Repositories\ProductCategoryRepository;
 use App\Routes\PartnerRoute;
-use App\Routes\Product\CategoryRoute;
+use App\Routes\ProductCategoryRoute;
+use App\Routes\Product\VariantRoute;
 use App\Routes\ProductRoute;
 use App\Routes\ShopRoute;
 use App\Routes\WarehouseRoute;
-use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Route;
 use LaravelCommon\Responses\SuccessResponse;
 
@@ -21,12 +22,18 @@ use LaravelCommon\Responses\SuccessResponse;
 |
 */
 
-Route::get('/test', function(){
+Route::get('/test', function(ProductCategoryQuery $categoryQuery, ProductCategoryRepository $categoryRepository){
+    $categories = $categoryQuery->where('shop_id', '=', 1)->getIterator();
+    // $data = $categoryRepository->collect();
+    foreach($categories as $c){
+        echo $c->getId();
+    }
     return new SuccessResponse('OKE', [], 'oke');
 });
 
 WarehouseRoute::register();
 ShopRoute::register();
-CategoryRoute::register();
+ProductCategoryRoute::register();
 PartnerRoute::register();
 ProductRoute::register();
+// VariantRoute::register();

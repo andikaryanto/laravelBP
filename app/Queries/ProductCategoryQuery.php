@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Queries\Product;
+namespace App\Queries;
 
-use App\Entities\Product\Category;
+use App\Entities\ProductCategory;
 use App\Entities\Shop;
-use App\ViewModels\Product\CategoryCollection;
+use App\ViewModels\ProductCategoryCollection;
 use LaravelCommon\App\Queries\Query;
 
-class CategoryQuery extends Query
+class ProductCategoryQuery extends Query
 {
     public function identity()
     {
-        return Category::class;
+        return ProductCategory::class;
     }
 
     public function collectionClass()
     {
-        return CategoryCollection::class;
+        return ProductCategoryCollection::class;
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryQuery extends Query
      * @param Shop $shop
      * @return self
      */
-    public function whereShop(Shop $shop): CategoryQuery
+    public function whereShop(Shop $shop): ProductCategoryQuery
     {
         $table = $this->getIdentityTable();
         $this->where($table . '.shop_id', '=', $shop->getId());
