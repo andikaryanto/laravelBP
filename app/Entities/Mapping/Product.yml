@@ -78,15 +78,19 @@ App\Entities\Product:
       field: weight
       isEntity: false
       type: float
+      rule: required
     height:
       field: height
       isEntity: false
       type: float
+      rule: required
     width:
       field: width
       isEntity: false
       type: float
+      rule: required
     length:
       field: length
       isEntity: false
       type: float
+      rule: required
